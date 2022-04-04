@@ -1,0 +1,141 @@
+{% extends "Home/base.html" %} <!-- hereda formato (header y footer en este caso) de template base.html -->
+{% load static %}
+
+{% block title %} Fruver - Verduras {% endblock title %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'Home/styles/verduras.css' %}"> <!-- referencia a la plantilla .css que corresponda -->
+{% endblock stylesheet %}
+
+{% block content %} <!-- agrega las sgtes. líneas de código dentro del bloque a la plantilla -->
+    <h1>Verduras</h1>
+    <section class="combobox" >
+        <!-- lista desplegable para ordenar los productos-->
+        <label for="ordenar">Elija cómo desea ver los productos:</label><br>
+        <select name="ordenar" id="ordenar">
+            <option value="1">Precio de menor a mayor</option>
+            <option value="2">Precio de mayor a menor</option>
+            <option value="3">Orden alfabético</option>
+            <option value="4">Stock disponible</option>
+        </select><br><br>
+    </section>
+    <section class="productoss" >
+        <div class="producto">
+            <div class="box1">
+                <!-- Producto: nombre, precio, stock, categoría, descripción, botón para agregar al carrito -->
+                <img src="{% static 'Home/images/vegetables/zanahorias.jpg' %}" alt="Zanahorias" width="250" height="250">
+                <h2>Zanahorias - 1kg</h2>
+            </div>
+            <div class="box2">
+                <h3></h3><!-- elemento vacío para centrar bien la columna -->
+                <h3>Precio: $990/kg</h3>
+                <h3>Stock: 23kg</h3>
+                <h3>Categoría: verdura</h3>
+            </div>
+            <div class="box3">
+                <h3>Descripción:</h3>
+                <p>La zanahoria es rica en caroteno, sustancia precursora de la vitamina A, necesaria en el crecimiento, desarrollo de huesos, vista,
+                mantenimiento de los tejidos, reproducción y en el sistema hormonal, aparte de ser un alimento rico en fibra y bajo en calorías.</p>
+                <!-- input para aumentar o disminuir Kg/unidades -->
+                <label class="cantidad" for="Kg/unidad">Indique la cantidad que desea (máx. 20):</label><br>
+                <input type="number" name="Kg/unidad" placeholder="1" min="1" max="20" width="1" ><br>
+                <!-- Botón para agregar al carrito -->
+                <img src="{% static 'Home/images/navbar/cart.png' %}" alt="Carrito de compras" width="80" height="80">
+                <input class="addcart" type="button" name="añadircarrito" value="Añadir al carrito">
+            </div>
+        </div>
+        <div class="producto">
+            <div class="box1">
+                <!-- Producto: nombre, precio, stock, categoría, descripción, botón para agregar al carrito -->
+                <img src="{% static 'Home/images/vegetables/cebollas.jpg' %}" alt="Cebollas" width="250" height="250">
+                <h2>Cebollas - 1kg</h2>
+            </div>
+            <div class="box2">
+                <h3></h3><!-- elemento vacío para centrar bien la columna -->
+                <h3>Precio: $690/kg</h3>
+                <h3>Stock: 35kg</h3>
+                <h3>Categoría: verdura</h3>
+            </div>
+            <div class="box3">
+                <h3>Descripción:</h3>
+                <p>Es uno de los cultivos más antiguos que se conocen, cultivada desde el 6.000 A.C. Se consume cruda, frita, hervida y asada, casi siempre como condimento.</p>
+                <!-- input para aumentar o disminuir Kg/unidades -->
+                <label class="cantidad" for="Kg/unidad">Indique la cantidad que desea (máx. 20):</label><br>
+                <input type="number" name="Kg/unidad" placeholder="1" min="1" max="20" width="1" ><br>
+                <!-- Botón para agregar al carrito -->
+                <img src="{% static 'Home/images/navbar/cart.png' %}" alt="Carrito de compras" width="80" height="80">
+                <input class="addcart" type="button" name="añadircarrito" value="Añadir al carrito">
+            </div>
+        </div>
+        <div class="producto">
+            <div class="box1">
+                <!-- Producto: nombre, precio, stock, categoría, descripción, botón para agregar al carrito -->
+                <img src="{% static 'Home/images/vegetables/choclos.jpg' %}" alt="Choclos" width="250" height="250">
+                <h2>Choclo - 1 Unidad</h2>
+            </div>
+            <div class="box2">
+                <h3></h3><!-- elemento vacío para centrar bien la columna -->
+                <h3>Precio: $590/unid.</h3>
+                <h3>Stock: 50 unid.</h3>
+                <h3>Categoría: verdura</h3>
+            </div>
+            <div class="box3">
+                <h3>Descripción:</h3>
+                <p>El choclo o maíz es un cereal, se caracteriza por sus tallos largos y macizos de los cuales salen espigas con granos comestibles.
+                Es muy popular como fuente alimenticia en nuestro continente, preparado en guisos, como harina o saboreando sus exquisitos granos.</p>
+                <!-- input para aumentar o disminuir Kg/unidades -->
+                <label class="cantidad" for="Kg/unidad">Indique la cantidad que desea (máx. 20):</label><br>
+                <input type="number" name="Kg/unidad" placeholder="1" min="1" max="20" width="1" ><br>
+                <!-- Botón para agregar al carrito -->
+                <img src="{% static 'Home/images/navbar/cart.png' %}" alt="Carrito de compras" width="80" height="80">
+                <input class="addcart" type="button" name="añadircarrito" value="Añadir al carrito">
+            </div>
+        </div>
+        <div class="producto">
+            <div class="box1">
+                <!-- Producto: nombre, precio, stock, categoría, descripción, botón para agregar al carrito -->
+                <img src="{% static 'Home/images/vegetables/pimentonverde.jpg' %}" alt="Pimentón Verde" width="250" height="250">
+                <h2>Pimentón Verde - 1 Unidad</h2>
+            </div>
+            <div class="box2">
+                <h3></h3><!-- elemento vacío para centrar bien la columna -->
+                <h3>Precio: $790/unid.</h3>
+                <h3>Stock: 47 unid.</h3>
+                <h3>Categoría: verdura</h3>
+            </div>
+            <div class="box3">
+                <h3>Descripción:</h3>
+                <p>El pimentón se consume crudo, cocido y asado; como acompañamiento y/o complemento en gran variedad de platos.Puede ser verde, rojo, amarillo, naranja e incluso ¡negro!</p>
+                <!-- input para aumentar o disminuir Kg/unidades -->
+                <label class="cantidad" for="Kg/unidad">Indique la cantidad que desea (máx. 20):</label><br>
+                <input type="number" name="Kg/unidad" placeholder="1" min="1" max="20" width="1" ><br>
+                <!-- Botón para agregar al carrito -->
+                <img src="{% static 'Home/images/navbar/cart.png' %}" alt="Carrito de compras" width="80" height="80">
+                <input class="addcart" type="button" name="añadircarrito" value="Añadir al carrito">
+            </div>
+        </div>
+        <div class="producto">
+            <div class="box1">
+                <!-- Producto: nombre, precio, stock, categoría, descripción, botón para agregar al carrito -->
+                <img src="{% static 'Home/images/vegetables/lechugacostina.jpg' %}" alt="Lechuga Costina" width="250" height="250">
+                <h2>Lechuga Costina - 1 Unidad</h2>
+            </div>
+            <div class="box2">
+                <h3></h3><!-- elemento vacío para centrar bien la columna -->
+                <h3>Precio: $890/unid.</h3>
+                <h3>Stock: 70 unid.</h3>
+                <h3>Categoría: verdura</h3>
+            </div>
+            <div class="box3">
+                <h3>Descripción:</h3>
+                <p>El tipo de lechuga más producido en el mundo, tiene hojas alargadas, crujientes y
+                con una nervadura central ancha y vigorosa. Sus hojas se encuentran separadas entre sí y tiene un sabor suavemente amargo.</p>
+                <!-- input para aumentar o disminuir Kg/unidades -->
+                <label class="cantidad" for="Kg/unidad">Indique la cantidad que desea (máx. 20):</label><br>
+                <input type="number" name="Kg/unidad" placeholder="1" min="1" max="20" width="1" ><br>
+                <!-- Botón para agregar al carrito -->
+                <img src="{% static 'Home/images/navbar/cart.png' %}" alt="Carrito de compras" width="80" height="80">
+                <input class="addcart" type="button" name="añadircarrito" value="Añadir al carrito">
+            </div>
+        </div>
+    </section>
+{% endblock content %}

@@ -1,0 +1,25 @@
+{% extends "Home/base.html" %} <!-- hereda formato (header y footer en este caso) de template base.html -->
+{% load static %}
+
+{% block title %} Fruver - Home Page {% endblock title %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'Home/styles/index.css' %}"> <!-- referencia a la plantilla .css que corresponda -->
+{% endblock stylesheet %}
+
+{% block content %} <!-- agrega las sgtes. líneas de código dentro del bloque a la plantilla -->
+    <h1>¡Bienvenido a Fruver!</h1>
+    <h3>Despacho a domicilio de frutas y verduras.<br><a href="/login">Regístrese</a> o <a href="/login">inicie sesión</a> y ¡comience a comprar de inmediato!</h3>
+    
+    <h2>Cómo comprar en 4 simples pasos:</h2>
+    <container class="container1" >
+        <div class="box1"><h3>1. Elija sus productos</h3><p>Busque en la lista de frutas y verduras el producto que quiera, y agréguelo al carrito de compras.</p></div>
+        <div class="box2"><h3>2. Haga su pedido</h3><p>Al acceder a su carrito de compras, presione el botón "hacer pedido", y luego confirme el medio de pago.</p></div>
+        <div class="box3"><h3>3. Reciba su pedido</h3><p>Las entregas se realizan los días martes y jueves, entre 09:00 a 20:00 hrs. Es posible hacer pedidos 24/7.</p></div>
+        <div class="box4"><h3>4. Pague contra entrega</h3><p>El pago se realiza con el repartidor cuando su pedido llega a destino, en efectivo o con tarjeta de crédito.</p></div>
+    </container><br>
+    <section class="images">
+        <img width="703" height="540" src="{% static 'Home/images/homepage/productos.png' %}" alt="Productos"><!-- imagen -->
+        <img width="704" height="540" src="{% static 'Home/images/homepage/mapa.png' %}" alt="Zonas de Entrega"><br>
+        &emsp;&emsp;&emsp;<img width="1720" height="1000" src="{% static 'Home/images/homepage/detalles.png' %}" alt="Horarios y costo de envío">
+    </section>
+{% endblock content %}

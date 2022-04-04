@@ -1,0 +1,81 @@
+
+main {
+    background-color: lightgoldenrodyellow;
+    border: solid 0.2rem azure;
+    text-align: center;
+    color: black;
+}
+
+/*título Frutas*/
+h1 {
+    background-color: rgb(172, 138, 45);
+    color: white;
+    margin-top: 0rem;
+}
+
+/*etiqueta sobre lista desplegable*/
+label {
+    font-size: 1.5rem;
+}
+
+/*lista desplegable para elegir orden de productos (precio, A-Z, stock)*/
+select {
+    margin: 0.5rem;
+    padding: 0.3rem 0.2rem;
+    font-size: 1.3rem;
+    border-radius: 0.3rem;
+}
+
+select:hover {
+    background: lightgrey;
+}
+
+/*cuerpo de página con listado de productos, ordenados en filas*/
+.productoss {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+/*producto individual, contenido interno ordenado en fila (box1, box, box3)*/
+.producto {
+    background-color: rgb(255, 255, 245);
+    width: 50rem;
+    height: 25rem;
+    margin: 0.5rem;
+    display: flex;
+}
+
+/*3 items internos de .producto, c/u ordenado en columna*/
+.box1 {
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.box2 {
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.box3 {
+    margin: 1rem 1rem;
+    font-size: 1rem;
+}
+
+/*etiqueta sobre el input de cantidad Kg/unidades*/
+.cantidad {
+    font-size: 1.1rem;
+}
+
+/*botón añadir al carrito*/
+.addcart {
+    margin: 1rem;
+    padding: 0.3rem 0.2rem;
+    font-size: 1.3rem;
+    border-radius: 0.3rem;
+}
+
+.addcart:hover {
+    background: lightgrey;
+}

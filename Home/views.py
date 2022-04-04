@@ -4,4 +4,16 @@ from django.http import HttpResponse
 # Create your views here.
 
 def home(request):
-    return HttpResponse("Hello world!")
+    return render(request, 'Home/index.html')
+
+def login(request):
+    return render(request, 'Home/login.html')
+
+def frutas(request):
+    return render(request, 'Home/frutas.html')
+
+def verduras(request):
+    return render(request, 'Home/verduras.html')
+
+def carrito(request):
+    return render(request, 'Home/carrito.html')

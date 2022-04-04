@@ -1,0 +1,22 @@
+
+main {
+    background-color: lightgoldenrodyellow;
+    border: solid 0.2rem azure;
+    text-align: center;
+    color: black;
+}
+
+/*container con los 4 pasos para comprar*/
+.container1 {
+    display: flex;
+    position: relative;
+    left: 9%;
+}
+
+/*divs para los 4 pasos*/
+.box1, .box2, .box3, .box4 {
+    margin: 0.2rem;
+    width: 20%;
+    height: 20%;
+    background-color: rgb(255, 255, 245);
+}
