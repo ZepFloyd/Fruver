@@ -9,6 +9,9 @@ def home(request):
 def login(request):
     return render(request, 'Home/login.html')
 
+def registro(request):
+    return render(request, 'Home/registro.html')
+
 def frutas(request):
     return render(request, 'Home/frutas.html')
 

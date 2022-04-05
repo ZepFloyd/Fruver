@@ -1,0 +1,36 @@
+
+/*cuerpo de la página*/
+main {
+    background-color: lightgoldenrodyellow;
+    border: solid 0.2rem azure;
+    text-align: center;
+    color: black;
+}
+
+/*contenedor para el loginbox, así se lo puede alinear al centro de la página*/
+.mainbox {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+/*contenedor para los inputs y botón de login*/
+.loginbox {
+    background-color: rgb(218, 214, 165);
+    border: solid 0.2rem azure;
+    width: 50rem;
+    height: 20rem;
+}
+
+/*botón acceder al sitio*/
+#submit {
+    margin: 1rem;
+    padding: 0.3rem 0.2rem;
+    font-size: 1rem;
+    border-radius: 0.3rem;
+}
+
+#submit:hover {
+    background: lightgrey;
+}

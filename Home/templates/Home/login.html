@@ -1,1 +1,28 @@
-<h1>in development</h1>
+{% extends "Home/base.html" %} <!-- hereda formato (header y footer en este caso) de template base.html -->
+{% load static %} <!-- carga la carpeta static para acceder a los archivos que estén dentro de ella -->
+
+{% block title %} Fruver - Login {% endblock title %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'Home/styles/login.css' %}"> <!-- referencia a la plantilla .css que corresponda -->
+{% endblock stylesheet %}
+
+{% block content %} <!-- agrega las sgtes. líneas de código dentro del bloque a la plantilla -->
+    <h1>Inicio de Sesión</h1>
+    <div class="mainbox"> <!-- div para centrar el loginbox en la página -->
+        <div class="loginbox"> <!-- div que almacena los inputs y el botón de login -->
+            <h3>Ingrese su E-mail y contraseña para acceder a los servicios de Fruver</h3><br>
+            <form action="index.html">
+                <label for="email">Ingrese su E-mail</label><br>
+                <input type="email" name="email" size="30" maxlength="20" placeholder="micorreo@mail.com"><br><br>
+                <label for="password">Ingrese su contraseña</label><br>
+                <input type="password" name="password" size="30" maxlength="20" minlength="8" placeholder="Contraseña..."><br><br>
+                <button type="submit" id="submit">Acceder</button>
+            </form>
+        </div>
+    </div><br>
+
+    <div class="registro">
+        <h2>¿No posee cuenta de usuario?</h2>
+        <p>Regístrese con sus datos <a href="/registro">aquí</a> para poder acceder a los servicios que ofrece nuestro sitio web.</p>
+    </div>
+{% endblock content %}
