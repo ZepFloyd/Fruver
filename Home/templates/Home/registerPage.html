@@ -1,0 +1,70 @@
+{% extends "Home/base.html" %} <!-- hereda formato (header y footer en este caso) de template base.html -->
+{% load static %} <!-- carga la carpeta static para acceder a los archivos que estén dentro de ella -->
+
+{% block title %} Fruver - Registro {% endblock title %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'Home/styles/registerPage.css' %}"> <!-- referencia a la plantilla .css que corresponda -->
+{% endblock stylesheet %}
+
+{% block content %} <!-- agrega las sgtes. líneas de código dentro del bloque a la plantilla -->
+    <h1>Registro de usuario</h1>
+    <h3>Ingrese sus datos para crear una cuenta de usuario</h3>
+    <p>Debe llenar todos los campos correctamente, ya que esta información será utilizada para la entrega de pedidos en su domicilio.</p>
+    <div class="mainbox"> <!-- div para centrar el loginbox en la página -->
+        <div class="signupbox"> <!-- div que almacena los inputs de datos, lista de comunas y el botón de registro de usuario -->
+            <form action="" method="POST"> <!-- formulario con inputs y etiquetas, para ingresar datos y registrar al usuario en el sistema -->
+                {% csrf_token %} <!-- this is for django to handle the data being submited -->
+                <!-- div que contiene los primeros 4 inputs del formulario -->
+                <div class="box1"> 
+                    <div class="box1-1">
+                        <label for="username">Nombre de Usuario:</label><br>
+                        <label for="email">E-mail:</label><br>
+                        <label for="password1">Contraseña:</label><br>
+                        <label for="password2">Confirme Contraseña:</label><br>
+                    </div>
+                    <div class="box1-2">
+                        <!-- campo para el nombre -->
+                        {{form.username}}
+                        <!-- campo para el correo electrónico -->
+                        {{form.email}}
+                        <!-- campo para la contraseña -->
+                        {{form.password1}}
+                        <!-- campo para confirmar contraseña -->
+                        {{form.password2}}
+                    </div>
+                </div>
+                <div class="box3">
+                    <!-- botón para registrar al usuario en el sistema -->
+                    <button type="submit" id="submit">Crear Cuenta de Usuario</button>
+                </div>
+            </form>
+        </div>
+    </div><br>
+
+    <div class="red">
+        {{form.errors}}
+    </div>
+    
+    <div class="registro">
+        <h2>Importante</h2>
+        <p>Al crear una cuenta de usuario, estará enviando su información para ser administrada con máxima<br>
+           confidencialidad por Fruver. De esta forma, se asegura un servicio eficaz en la entrega de los pedidos que usted realice.</p>
+    </div>
+
+    <script>
+        /* Because i didnt set placeholder values in forms.py they will be set here using vanilla Javascript
+        //We start indexing at one because CSRF_token is considered and input field 
+        */
+
+        //Query All input fields
+        var form_fields = document.getElementsByTagName('input')
+        form_fields[1].placeholder='ej: Juan';
+        form_fields[2].placeholder='ej: micorreo@mail.com';
+        form_fields[3].placeholder='Letras y números';
+        form_fields[4].placeholder='Reingrese contraseña...';
+
+
+        for (var field in form_fields){	
+        form_fields[field].className += ' form-control'}
+    </script>
+{% endblock content %}

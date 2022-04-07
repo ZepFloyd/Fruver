@@ -1,0 +1,142 @@
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #6d9aac;
+}
+
+header {
+    background-color: rgb(3, 68, 112);
+    border: solid 0.2rem azure;
+}
+
+header a {
+    color: white;
+    text-decoration: none;
+    text-shadow: 3px 3px 3px black;
+}
+
+header a:hover {
+    color: #41a7eb;
+}
+
+/*barra de navegación con links ordenados en fila*/
+.navigation {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+/*links de la nav bar ordenados en columnas*/
+.link1, .link2, .link3, .link4, .link5, .link6 {
+    display: flex;
+    flex-flow: column wrap;
+    margin: 1rem 1.5rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.clientes, .pedidos, .productos, .costos, .reportes, .exit {
+    font-size: 2.5rem;
+}
+
+main {
+    background-color: rgba(216, 217, 218, 0.712);
+    border: solid 0.2rem azure;
+    text-align: center;
+    color: black;
+}
+
+/*container con los submenús y botones de cta. bancaria y creación de vendedor*/
+.container1 {
+    display: flex;
+    flex-flow: row wrap;
+    margin: 2rem 4rem;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(184, 184, 184);
+    border: solid 0.2rem azure;
+}
+
+/*divs para los submenús*/
+.box1, .box2, .box3, .box4, .box5 {
+    margin: 1rem;
+    width: 30%;
+    height: 30%;
+    background-color: whitesmoke;
+    border: solid 0.2rem rgb(61, 61, 61);
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+/*divs para la imagen y título de cada submenú, los desplega en fila*/
+.box1-1, .box2-1, .box3-1, .box4-1, .box5-1 {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+/*div para las funciones de gestionar vendedor y datos bancarios, alineados en columna*/
+.box6 {
+    margin: 1rem;
+    width: 30%;
+    height: 30%;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+/*cada div almacena 1 de las funciones de la box6*/
+.box6-1, .box6-2 {
+    margin: 1.2rem 0rem;
+    width: 100%;
+    height: 50%;
+    background-color: whitesmoke;
+    border: solid 0.2rem rgb(61, 61, 61);
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+/*íconos de los módulos*/
+.submenuicon {
+    margin: 0.5rem;
+}
+
+/*links de los módulos*/
+.submenulink {
+    color: black;
+    font-size: 2rem;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 1rem;
+}
+
+/*links de las funciones gestionar vendedor y datos bancarios*/
+.submenulink2 {
+    color: black;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 1rem;
+}
+
+.submenulink:hover {
+    color: #b8b8b8;
+}
+
+.submenulink2:hover {
+    color: #b8b8b8;
+}
+
+footer {
+    background-color: rgb(3, 68, 112);
+    border: solid 0.2rem azure;
+    text-align: center;
+    color: white;
+}

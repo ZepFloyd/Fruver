@@ -1,0 +1,40 @@
+main {
+    background-color: rgba(216, 217, 218, 0.712);
+    border: solid 0.2rem azure;
+    text-align: center;
+    color: black;
+    
+}
+
+/*container con los submenús y botones de cta. bancaria y creación de vendedor*/
+.alignment {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+/*divs para los submenús*/
+.databox {
+    margin: 1rem;
+    width: 40%;
+    height: 40%;
+    background-color: rgb(184, 184, 184);
+    border: solid 0.2rem azure;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+/*botón guardar datos*/
+#submit {
+    margin: 1rem;
+    padding: 0.3rem 0.2rem;
+    font-size: 1rem;
+    border-radius: 0.3rem;
+}
+
+#submit:hover {
+    background: lightgrey;
+}

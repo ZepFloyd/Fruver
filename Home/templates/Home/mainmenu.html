@@ -1,0 +1,118 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="Venta de frutas y verduras a domicilio"> <!-- para los resultados de búsqueda en google, bing, etc. -->
+    <meta name="robots" content="index,follow"> <!-- para indexar con los buscadores -->
+    <title> {% block title %} Fruver - Menú Principal {% endblock title %} </title> <!-- título, aparece en las pestañas y ventanas. Modificable en cada plantilla html -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet"> <!-- la fuente a utilizar -->
+    <link rel="icon" href="{% static 'Home/images/favicon.ico' %}"/> <!-- ícono del sitio web, aparece en favoritos, etc. -->
+    <link rel="stylesheet" href="{% static 'Home/styles/mainmenu.css' %}"> <!-- referencia a la plantilla .css que corresponda -->
+    {% block stylesheet %}{% endblock stylesheet %} <!-- bloque para referenciar los .css de cada plantilla html que herede de esta base -->
+</head>
+<body>
+    <header>
+        <nav>
+            <!-- links de la barra de navegación: frutas, verduras, carrito, login -->
+            <div class="navigation">
+                <div class="link0">
+                    <a class="logo" href="/mainmenu"><img src="{% static 'Home/images/navbar/logo.svg' %}" alt="Fruver logo"></a>
+                </div>
+                <div class="link1">
+                    <img src="{% static 'Home/images/mainmenu/clientes.png' %}" alt="Ver clientes" width="65" height="65"/>
+                    <a class="clientes" href="#">Clientes</a>
+                </div>
+                <div class="link2">
+                    <img src="{% static 'Home/images/mainmenu/pedidos.png' %}" alt="Ver pedidos" width="65" height="65"/>
+                    <a class="pedidos" href="#">Pedidos</a>
+                </div>
+                <div class="link3">
+                    <img src="{% static 'Home/images/mainmenu/productos.png' %}" alt="Ver productos" width="65" height="65"/>
+                    <a class="productos" href="#">Productos</a>
+                </div>
+                <div class="link4">
+                    <img src="{% static 'Home/images/mainmenu/costos.png' %}" alt="Ver gastos" width="65" height="65"/>
+                    <a class="costos" href="#">Gastos</a>
+                </div>
+                <div class="link5">
+                    <img src="{% static 'Home/images/mainmenu/reportes.png' %}" alt="Ver reportes" width="65" height="65"/>
+                    <a class="reportes" href="#">Reportes</a>
+                </div>
+                <div class="link6">
+                    <img src="{% static 'Home/images/mainmenu/exit.png' %}" alt="Cerrar sesión" width="65" height="65"/>
+                    <a class="exit" href="/salir">Cerrar sesión</a>
+                </div>
+            </div>
+        </nav>
+    </header><br>
+
+    <main>
+        {% block content %} <!-- bloque para agregar contenido de cada plantilla html que herede de esta base -->
+        <h1>Bienvenido al menú de vendedor Fruver</h1>
+        <h2>Seleccione el módulo que desea gestionar</h2>
+    
+        <container class="container1" >
+            <div class="box1">
+                <div class="box1-1">
+                    <img class="submenuicon" src="{% static 'Home/images/mainmenu/clientes.png' %}" alt="Ver clientes" width="120" height="120"/>
+                    <a class="submenulink" href="#">Clientes</a>
+                </div>
+                <p>Acceda a la información de los clientes de Fruver. Agregue, modifique o elimine los datos.</p>
+            </div>
+            <div class="box2">
+                <div class="box2-1">
+                    <img class="submenuicon" src="{% static 'Home/images/mainmenu/pedidos.png' %}" alt="Ver pedidos" width="120" height="120"/>
+                    <a class="submenulink" href="#">Pedidos</a>
+                </div>
+                <p>Gestione los pedidos ralizados por los clientes. Actualice sus estado o modifique el registro.</p>
+            </div>
+            <div class="box3">
+                <div class="box3-1">
+                    <img class="submenuicon" src="{% static 'Home/images/mainmenu/productos.png' %}" alt="Ver productos" width="120" height="120"/>
+                    <a class="submenulink" href="#">Productos</a>
+                </div>
+                <p>Gestione los productos puestos a la venta. Agregue o elimine productos. Actualice los datos de cada productos.</p>
+            </div>
+            <div class="box4">
+                <div class="box4-1">
+                    <img class="submenuicon" src="{% static 'Home/images/mainmenu/costos.png' %}" alt="Ver gastos" width="120" height="120"/>
+                    <a class="submenulink" href="#">Gastos</a>
+                </div>
+                <p>Administre los costos de operación de la empresa. Ingrese o actualice gastos, y véalos por semana y mes.</p>
+            </div>
+            <div class="box5">
+                <div class="box5-1">
+                    <img class="submenuicon" src="{% static 'Home/images/mainmenu/reportes.png' %}" alt="Ver reportes" width="120" height="120"/>
+                    <a class="submenulink" href="#">Reportes</a>
+                </div>
+                <p>Genere informes mensuales o semanales de: ventas globales, ventas por cliente, y gastos de la empresa.</p>
+            </div>
+            <div class="box6">
+                <div class="box6-1">
+                    <img class="submenuicon" src="{% static 'Home/images/mainmenu/vendedor.png' %}" alt="Ver reportes" width="60" height="60"/>
+                    <a class="submenulink2" href="#">Gestionar Vendedor</a>
+                </div>
+                <div class="box6-2">
+                    <img class="submenuicon" src="{% static 'Home/images/mainmenu/banco.png' %}" alt="Ver reportes" width="60" height="60"/>
+                    <a class="submenulink2" href="/mainmenu/datosbanco">Datos Bancarios</a>
+                </div>
+            </div>
+        </container><br>
+        {% endblock content %}
+    </main><br>
+
+    <footer>
+        <br>
+        <a>Contacto&emsp;</a>
+        <a>Nosotros&emsp;</a>
+        <a>Reviews</a>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vero natus distinctio repudiandae repellat mollitia laudantium voluptatem eos hic tempora doloribus?</p>
+        <p>Fruver®. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <meta name="description" content="Venta de frutas y verduras a domicilio"> <!-- para los resultados de búsqueda en google, bing, etc. -->
     <meta name="robots" content="index,follow"> <!-- para indexar con los buscadores -->
     <title> {% block title %} Fruver - Home Page {% endblock title %} </title> <!-- título, aparece en las pestañas y ventanas. Modificable en cada plantilla html -->
@@ -21,7 +21,7 @@
             <!-- links de la barra de navegación: frutas, verduras, carrito, login -->
             <div class="navigation">
                 <div class="link0">
-                    <a class="logo" href="/home"><img src="{% static 'Home/images/navbar/logo.svg' %}" alt="Fruver logo"></a>
+                    <a class="logo" href="http://127.0.0.1:8000"><img src="{% static 'Home/images/navbar/logo.svg' %}" alt="Fruver logo"></a>
                 </div>
                 <div class="link1">
                     <img src="{% static 'Home/images/navbar/frutas.png' %}" alt="Ver frutas" width="80" height="80"/>
@@ -37,7 +37,7 @@
                 </div>
                 <div class="link4">
                     <img src="{% static 'Home/images/navbar/user.png' %}" alt="Iniciar sesión" width="80" height="80">
-                    <a class="login"  href="/login">Iniciar Sesión / Registrarse</a>
+                    <a class="login"  href="/acceso">Iniciar Sesión</a>
                 </div> 
             </div>
         </nav>
@@ -46,6 +46,11 @@
     <main>
         {% block content %}{% endblock content %} <!-- bloque para agregar contenido de cada plantilla html que herede de esta base -->
     </main><br>
+
+    <div class="salir">
+        <a class="logout" href="/salir">Salir</a>
+        <img src="{% static 'Home/images/navbar/exit.png' %}" alt="Cerrar sesión" width="80" height="80">
+    </div>
 
     <footer>
         <br>

@@ -1,0 +1,35 @@
+{% extends "Home/mainmenu.html" %} <!-- hereda formato (header y footer en este caso) de template base.html -->
+{% load static %} <!-- carga la carpeta static para acceder a los archivos que estén dentro de ella -->
+
+{% block title %} Fruver - Datos Bancarios {% endblock title %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'Home/styles/datosbanco.css' %}"> <!-- referencia a la plantilla .css que corresponda -->
+{% endblock stylesheet %}
+
+{% block content %} <!-- agrega las sgtes. líneas de código dentro del bloque a la plantilla -->
+    <h1>Datos bancarios</h1>
+    <h2>Ingrese o actualice sus datos de cuenta bancaria para recibir transferencias de clientes.<br>
+        Esta información se mostrará a los clientes que realicen pedidos pagando vía transferencia.
+    </h2>
+    <div class="alignment"> <!-- div para centrar el databox en la página -->
+        <div class="databox"> <!-- div que almacena los inputs y el botón de login -->
+            <h3>Rellene los campos a continuación:</h3><br>
+            <form action="" method="post" > <!-- method="post" enctype="application/x-www-form-urlencoded" -->
+                {% csrf_token %}
+                <label for="name">Ingrese su nombre y apellido</label><br>
+                <input type="text" name="name" size="30" maxlength="30" placeholder="ej: José Andrade"><br><br>
+                <label for="rut">Ingrese su RUT</label><br>
+                <input type="text" name="rut" size="30" maxlength="30" minlength="8" placeholder="ej: 12.549.331-6"><br><br>
+                <label for="banco">Ingrese el nombre de su banco</label><br>
+                <input type="text" name="banco" size="30" maxlength="30" minlength="8" placeholder="ej: Banco de Chile"><br><br>
+                <label for="cuenta">Ingrese el tipo de cuenta</label><br>
+                <input type="text" name="cuenta" size="30" maxlength="30" minlength="8" placeholder="ej: Cuenta Corriente"><br><br>
+                <label for="numerocuenta">Ingrese el número de su cuenta</label><br>
+                <input type="text" name="numerocuenta" size="30" maxlength="30" minlength="8" placeholder="ej: 654987-445567-772"><br><br>
+                <label for="email">Ingrese su correo electrónico</label><br>
+                <input type="text" name="email" size="30" maxlength="30" minlength="8" placeholder="ej: micorreo@mail.com"><br><br>
+                <button type="submit" id="submit">Guardar Datos</button>
+            </form>
+        </div>
+    </div><br>
+{% endblock content %}
