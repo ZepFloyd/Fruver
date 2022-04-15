@@ -1,0 +1,187 @@
+{% extends "Home/mainmenu.html" %} <!-- hereda formato (header y footer en este caso) de template mainmenu.html -->
+{% load static %} <!-- carga la carpeta static para acceder a los archivos que estén dentro de ella -->
+
+{% block title %} Fruver - Registro de Vendedor {% endblock title %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'Home/styles/gestionarvendedor.css' %}"> <!-- referencia a la plantilla .css que corresponda -->
+{% endblock stylesheet %}
+
+{% block content %} <!-- agrega las sgtes. líneas de código dentro del bloque a la plantilla -->
+    <h1>Registro de vendedores</h1>
+    <h2>Gestione las cuentas de usuario vendedor de Fruver.</h2>
+    <p>Recuerde que los usuarios con cuenta de vendedor pueden acceder a todas las funcionalidades del menú principal,<br>
+       como la gestión de clientes, productos, pedidos y gastos.</p>
+    {% for message in messages %}
+        <h2>{{message}}</h2>
+    {% endfor %}
+    <div class="container1">
+        <div class="fila-titulos">
+            <div class="titulo-columnas" id="nombre">
+                <h4>Nombre</h4>
+            </div>
+            <div class="titulo-columnas" id="apellido">
+                <h4>Apellido</h4>
+            </div>
+            <div class="titulo-columnas" id="correo">
+                <h4>E-mail</h4>
+            </div>
+            <div class="titulo-columnas" id="telefono">
+                <h4>Telefono</h4>
+            </div>
+            <div class="titulo-columnas" id="domicilio">
+                <h4>Domicilio</h4>
+            </div>
+            <div class="titulo-columnas" id="comunax">
+                <h4>Comuna</h4>
+            </div>
+        </div>
+        <div class="lista-vendedores">
+            <div class="fila-datos">
+                {% for vendedor in vendedores %}
+                    <div class="datos">
+                        <div class="datosvendedor">
+                            <p> {{ vendedor.nombre_usuario }}</p>
+                        </div>
+                        <div class="datosvendedor">
+                            <p> {{ vendedor.apellido_usuario }}</p>
+                        </div>
+                        <div class="datosvendedor" id="emailvendedor" >
+                            <p> {{ vendedor.email_usuario }}</p>
+                        </div>
+                        <div class="datosvendedor">
+                            <p> {{ vendedor.telefono_usuario }}</p>
+                        </div>
+                        <div class="datosvendedor" id="domiciliovendedor">
+                            <p> {{ vendedor.domicilio_usuario }}</p>
+                        </div>
+                        <div class="datosvendedor" id="comunavendedor" >
+                            <p> {{ vendedor.comuna}}</p>
+                        </div>
+                        <a href="{% url 'fruver-editarvendedor' vendedor.id %}"><button type="button">Editar datos</button></a>
+                        <a href="{% url 'fruver-eliminarvendedor' vendedor.id %}"><button type="button">Eliminar vendedor</button></a>
+                    </div>
+                {% endfor %}
+            </div>
+                        
+        </div>
+        <button type="button" id="crearvendedor">Crear nuevo vendedor</button> <!-- muestra pop up para ingresar datos y crear nuevo vendedor -->
+    </div>
+{% endblock content %}
+
+{% block popup %} <!-- bloque para añadir pop ups a la página -->
+    <!-- pop up para crear un nuevo vendedor -->
+    <div class="popup-crearvendedor">
+        <div class="mainbox"> <!-- div para centrar el loginbox en la página -->
+            <div class="signupbox"> <!-- div que almacena los inputs de datos, lista de comunas y el botón de registro de usuario -->
+                <h3 class="nuevo-vendedor-titulo" >Ingrese los datos del nuevo vendedor</h3>
+                <form action="" method="POST"> <!-- formulario con inputs y etiquetas, para ingresar datos y registrar al usuario en el sistema -->
+                    {% csrf_token %} <!-- this is for django to handle the data being submited -->
+                    <!-- div que contiene los primeros 4 inputs del formulario -->
+                    <div class="box1"> 
+                        <div class="box1-1">
+                            <label for="firstname">Nombre:</label><br>
+                            <label for="lastname">Apellido:</label><br>
+                            <label for="password1">Contraseña:</label><br>
+                            <label for="password2">Confirme:</label><br>
+                        </div>
+                        <div class="box1-2">
+                            <!-- campo para el nombre -->
+                            {{form.nombre_usuario}}
+                            <!-- campo para el apellido -->
+                            {{form.apellido_usuario}}
+                            <!-- campo para la contraseña -->
+                            {{form.password1}}
+                            <!-- campo para la confirmación de contraseña -->
+                            {{form.password2}}
+                        </div>
+                    </div>
+                    <!-- div que contiene los 2 últimos inputs del formulario y la lista de comunas -->
+                    <div class="box2">
+                        <div class="box2-1">
+                            <label for="address">Dirección:</label><br>
+                            <label for="email">E-mail:</label><br>
+                            <label for="phone">Teléfono:</label><br>
+                            <label for="comuna">Comuna:</label><br>
+                        </div>
+                        <div class="box2-2">
+                            <!-- campo para la dirección del usuario -->
+                            {{form.domicilio_usuario}}
+                            <!-- campo para el correo electrónico -->
+                            {{form.email_usuario}}
+                            <!-- campo para el teléfono del usuario -->
+                            {{form.telefono_usuario}}
+                            <!-- lista desplegable (combobox) para seleccionar comuna dentro de la provincia de santiago -->
+                            {{form.comuna}}
+                        </div>
+                    </div>
+                    <div class="box3">
+                        <!-- botón para registrar al usuario en el sistema -->
+                        <button type="submit" id="submit">Crear Cuenta de Usuario</button>
+                        <!-- botón para cancelar la creación de usuario vendedor -->
+                        <button type="button" id="cancelar-crearvendedor">Cancelar</button>
+                    </div>
+                </form>
+                <div class="red"> <!-- muestra en pantalla con letras rojas errores al intentar registrar un nuevo usuario -->
+                    {{form.errors}}
+                </div>
+            </div>
+        </div><br>
+    </div>
+    
+    
+
+    <!-- pop up para editar datos de un vendedor -->
+    <div class="popup-editarvendedor"> <!-- div para poner el fondo oscuro -->
+        <div class="box-vendedor"> <!-- div para ordenar en fila data y botones en 2 divs diferentes -->
+            <div class="data-vendedor"> <!-- div para los datos del vendedor -->
+                <div class="nombre">
+                    <h4>Nombre</h4>
+                    <p class="datosvendedor">ZepFloyd</p>
+                </div>
+                <div class="apellido">
+                    <h4>Apellido</h4>
+                    <p class="datosvendedor">airnike93</p>
+                </div>
+                <div class="email">
+                    <h4>E-mail</h4>
+                    <p class="datosvendedor">new@mail.com</p>
+                </div>
+                <div class="telefono">
+                    <h4>Teléfono</h4>
+                    <p class="datosvendedor">airnike93</p>
+                </div>
+                <div class="domicilio">
+                    <h4>Domicilio</h4>
+                    <p class="datosvendedor">airnike93</p>
+                </div>
+                <div class="comuna">
+                    <h4>Comuna</h4>
+                    <p class="datosvendedor">airnike93</p>
+                </div>
+            </div>
+            <div class="botones-editar"> <!-- div para los botones de la opción editar -->
+                <!-- botón para guardar las modificaciones de datos -->
+                <button type="button" id="guardar">Guardar datos</button>
+                <!-- botón para cancelar la creación de usuario vendedor -->
+                <button type="button" id="cancelar-editarvendedor">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- pop up para eliminar un vendedor -->
+    <div class="popup-eliminarvendedor">
+        <div class="container3">
+            <p>¿Realmente desea eliminar a este usuario?<br>
+                Recuerde que esta acción no se puede deshacer. 
+            </p>
+            <!-- botón para guardar las modificaciones de datos -->
+            <button type="button" id="delete">Eliminar vendedor</button>
+            <!-- botón para cancelar la creación de usuario vendedor -->
+            <button type="button" id="cancelar-eliminarvendedor">Cancelar</button>
+        </div>
+    </div>
+
+    <script src="{% static 'Home/scripts/gestionarvendedor.js' %}"></script>
+
+{% endblock popup %}

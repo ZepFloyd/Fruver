@@ -10,21 +10,23 @@ main {
 /*contenedor para el signupbox, así se lo puede alinear al centro de la página*/
 .mainbox {
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: column wrap;
     justify-content: center;
     align-items: center;
+    margin: 0;
 }
 
 /*contenedor para box1, box2 (los inputs y la lista de comunas del formulario) y el botón de registro*/
 .signupbox {
     background: rgb(218, 214, 165);
     border: solid 0.2rem azure;
-    width: 55rem;
-    height: 20.5rem;
+    width: 45rem;
+    height: 22rem;
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
     align-items: center;
+    margin: 0;
 }
 
 /*contenedor para los 4 primeros campos del formulario*/
@@ -34,7 +36,7 @@ main {
     flex-flow: row wrap;
     justify-content: center;
     align-items: center;
-    margin: 1rem 2.5rem;
+    margin: 1rem;
 }
 
 /*contenedor para los 4 labels*/
@@ -60,7 +62,7 @@ main {
     flex-flow: row wrap;
     justify-content: center;
     align-items: center;
-    margin: 1rem 2.5rem;
+    margin: 1rem;
 }
 
 /*contenedor para los 3 labels*/
@@ -81,21 +83,21 @@ main {
 
 /*etiquetas y campos de los input, se modificó el margen para alinearlos horizontalmente*/
 label {
-    margin: 0.9rem 0.3rem;
+    margin: 0.8rem 0.5rem;
 }
 
 input, select {
-    margin: 1rem 0.5rem;
+    margin: 0.9rem 0.3rem;
 }
 
 /*contenedor para el botón crear cuenta de usuario, sirve para alinearlo al centro y abajo de la signupbox*/
 .box3 {
-    margin: 16rem 1rem;
+    margin: 0rem 1rem;
 }
 
 /*botón crear cuenta de usuario*/
 #submit {
-    margin: 1rem;
+    margin: 2rem;
     padding: 0.3rem 0.2rem;
     font-size: 1rem;
     border-radius: 0.3rem;

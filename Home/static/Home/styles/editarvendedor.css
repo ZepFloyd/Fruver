@@ -17,7 +17,7 @@ main {
 /*divs para los submenús*/
 .databox {
     margin: 1rem;
-    width: 40%;
+    width: 30%;
     height: 40%;
     background-color: rgb(184, 184, 184);
     border: solid 0.2rem azure;
@@ -27,14 +27,25 @@ main {
     align-items: center;
 }
 
+label {
+    margin: 15rem;
+}
+
 /*botón guardar datos*/
-button {
-    margin: 1rem;
+#submit {
+    margin: 3rem 10rem 1rem;
     padding: 0.3rem 0.2rem;
     font-size: 1rem;
     border-radius: 0.3rem;
 }
 
-button:hover {
+#cancel {
+    margin: 0rem 10rem 1rem;
+    padding: 0.3rem 0.2rem;
+    font-size: 1rem;
+    border-radius: 0.3rem;
+}
+
+#submit:hover, #cancel:hover {
     background: lightgrey;
 }

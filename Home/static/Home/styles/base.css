@@ -35,7 +35,7 @@ header a:hover {
     align-items: center;
 }
 
-.frutas, .verduras, .carrito, .login {
+.frutas, .verduras, .carrito, .login, .logout {
     font-size: 2.5rem;
 }
 

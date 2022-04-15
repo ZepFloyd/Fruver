@@ -11,6 +11,8 @@ urlpatterns = [
     path('verduras/', views.verduras, name='fruver-verduras'), #Sección de verduras a la venta
     path('carrito/', views.carrito, name='fruver-carrito'), #Productos en el carrito de compras
     path('mainmenu/', views.mainmenu, name='fruver-mainmenu'), #Menú principal para vendedor
-    path('registerPage/', views.registerPage, name='fruver-registerPage'),
-    path('mainmenu/datosbanco', views.datosbanco, name='fruver-datosbanco'), #Ingresar datos bancarios del vendedor 
+    path('mainmenu/datosbanco/', views.datosbanco, name='fruver-datosbanco'), #Ingresar datos bancarios del vendedor
+    path('mainmenu/gestionarvendedor', views.gestionarvendedor, name='fruver-gestionarvendedor'), #Gestionar CRUD de vendedores
+    path('mainmenu/gestionarvendedor/editarvendedor/<usuario_id>', views.editarvendedor, name='fruver-editarvendedor'), #editar datos de vendedores
+    path('mainmenu/gestionarvendedor/eliminarvendedor/<usuario_id>', views.eliminarvendedor, name='fruver-eliminarvendedor'), #elimina un vendedor de la base de datos
 ]

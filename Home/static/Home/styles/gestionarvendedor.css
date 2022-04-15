@@ -1,0 +1,357 @@
+
+/*div para almacenar y centrar el container con los vendedores y los botones*/
+.container1 {
+    display: flex;
+    flex-flow: column wrap;
+    margin: 2rem 4rem;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(184, 184, 184);
+    border: solid 0.2rem azure;
+    width: 95%;
+}
+
+/*div para almacenar los titulos de las columnas, ordenados en fila*/
+.fila-titulos {
+    margin: 1rem 1rem 0rem;
+    background-color: whitesmoke;
+    border: solid 0.2rem rgb(61, 61, 61);
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 95%;
+}
+
+/*div para cada columna dentro del div fila-titulos*/
+.titulo-columnas {
+    margin: 0.5rem 1.5rem;
+    width: 10rem;
+}
+
+/*se ajusta la anchura de los títulos de columna individualmente para que se alineen con las lista de vendedores*/
+#nombre {
+    width: 9rem;
+}
+
+#apellido {
+    width: 7rem;
+}
+
+#correo {
+    width: 25rem;
+}
+
+#telefono {
+    width: 6.5rem;
+}
+
+#domicilio {
+    width: 13.5rem;
+}
+
+#comunax {
+    width: 9.5rem;
+}
+
+/*etiquetas para los nombres de las columnas de la tabla*/
+h4 {
+    font-weight: bold;
+    margin: 0;
+}
+
+/*tabla con el listado de vendedores*/
+.lista-vendedores {
+    margin: 0.5rem 1rem 0.5rem;
+    background-color: whitesmoke;
+    border: solid 0.2rem rgb(61, 61, 61);
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    width: 95%;
+}
+
+/*filas dentro de la lista para cada vendedor que exista en el registro, ordenadas en columnas*/
+.fila-datos {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+}
+
+/*fila individual con datos ordenados horizontalmente*/
+.datos {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+.datos:hover {
+    background-color: lightgrey;
+}
+
+/*divs individuales para cada dato de los vendedores*/
+.datosvendedor {
+    margin: 0.01rem 1rem;
+    width: 9rem;
+}
+
+/*se agranda el ancho del campo para el email de los vendedores, ya que si el email es muy largo podría solaparse con el siguiente dato*/
+#emailvendedor {
+    width: 25rem;
+}
+
+#domiciliovendedor {
+    width: 13rem;
+}
+
+#comunavendedor {
+    width: 12rem;
+}
+
+/*formato para todos los botones*/
+button {
+    margin: 0.5rem;
+    padding: 0.3rem 0.2rem;
+    font-size: 1rem;
+    border-radius: 0.3rem;
+}
+
+button:hover {
+    background: lightgrey;
+}
+
+
+/*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*POP-UP CREAR NUEVO VENDEDOR*/
+
+.popup-crearvendedor {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+/*contenedor para el signupbox, así se lo puede alinear al centro de la página*/
+.mainbox {
+    width: 70%;
+    height: 85%;
+    /*background-color: rgb(184, 184, 184);
+    border: solid 0.2rem azure;*/
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+/*contenedor para box1, box2 (los inputs y la lista de comunas del formulario) y el botón de registro*/
+.signupbox {
+    margin: 0;
+    background: rgb(81, 101, 145);
+    border: solid 0.2rem azure;
+    color: white;
+    border-radius: 0.3rem;
+    width: 60%;
+    height: 50%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.nuevo-vendedor-titulo {
+    margin: 0rem;
+    width: 50%
+}
+
+/*contenedor para los 4 primeros campos del formulario*/
+.box1 {
+    float: left;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 1rem;
+    background-color: rgb(81, 101, 145);
+    border: none;
+    width: 45%;
+    height: 70%;
+}
+
+/*contenedor para los 4 labels*/
+.box1-1 {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    color: white;
+}
+
+/*contenedor para los 4 inputs*/
+.box1-2 {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+/*contenedor para el resto de campos del formulario y la lista de comunas*/
+.box2 {
+    float: right;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 1rem;
+    background-color: rgb(81, 101, 145);
+    border: none;
+    width: 45%;
+    height: 70%;
+}
+
+/*contenedor para los 3 labels*/
+.box2-1 {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    color: white;
+}
+
+/*contenedor para los 2 inputs y la lista*/
+.box2-2 {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+/*etiquetas y campos de los input, se modificó el margen para alinearlos horizontalmente*/
+label {
+    margin: 0.8rem 0.5rem;
+}
+
+input, select {
+    margin: 0.9rem 0.3rem;
+}
+
+/*contenedor para el botón crear cuenta de usuario, sirve para alinearlo al centro y abajo de la signupbox*/
+.box3 {
+    width: 100%;
+    height: 30%;
+    margin: 0;
+    background-color: rgb(81, 101, 145);
+    border: none;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+/*botón crear cuenta de usuario*/
+#submit, #cancelar-crearvendedor {
+    margin: 0.5rem 0.1rem;
+    padding: 0.3rem 0.2rem;
+    font-size: 1rem;
+    border-radius: 0.3rem;
+}
+
+#submit:hover, #cancelar-crearvendedor:hover {
+    background: lightgrey;
+}
+
+.red {
+    font-weight: bold;
+    color: red;
+}
+
+
+/*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*POP-UP EDITAR DATOS VENDEDOR*/
+
+.popup-editarvendedor {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+/*div para almacenar los datos de un vendedor individual*/
+.box-vendedor {
+    margin: 1rem;
+    color: white;
+    text-align: center;
+    background: rgb(81, 101, 145);
+    border: solid 0.2rem azure;
+    border-radius: 0.3rem;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.data-vendedor {
+    margin: 0;
+    text-align: center;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.botones-editar {
+    margin: 0;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+/*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*POP-UP ELIMINAR VENDEDOR*/
+
+.popup-eliminarvendedor {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+.container3 {
+    margin: 0;
+    background: rgb(81, 101, 145);
+    border: solid 0.2rem azure;
+    color: white;
+    border-radius: 0.3rem;
+    text-align: center;
+    width: 20%;
+    height: 25%;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+}

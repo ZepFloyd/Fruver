@@ -35,10 +35,17 @@
                     <img src="{% static 'Home/images/navbar/cart.png' %}" alt="Ver carrito" width="80" height="80"/>
                     <a class="carrito" href="/carrito">Mi carrito</a>
                 </div>
-                <div class="link4">
-                    <img src="{% static 'Home/images/navbar/user.png' %}" alt="Iniciar sesión" width="80" height="80">
-                    <a class="login"  href="/acceso">Iniciar Sesión</a>
-                </div> 
+                {% if user.is_authenticated %}
+                    <div class="link4">
+                        <img src="{% static 'Home/images/navbar/exit.png' %}" alt="Cerrar sesión" width="80" height="80">
+                        <a class="logout" href="/salir">Salir</a>
+                    </div>
+                {% else %}
+                    <div class="link4">
+                        <img src="{% static 'Home/images/navbar/user.png' %}" alt="Iniciar sesión" width="80" height="80">
+                        <a class="login"  href="/acceso">Iniciar Sesión</a>
+                    </div> 
+                {% endif %}
             </div>
         </nav>
     </header><br>
@@ -47,10 +54,7 @@
         {% block content %}{% endblock content %} <!-- bloque para agregar contenido de cada plantilla html que herede de esta base -->
     </main><br>
 
-    <div class="salir">
-        <a class="logout" href="/salir">Salir</a>
-        <img src="{% static 'Home/images/navbar/exit.png' %}" alt="Cerrar sesión" width="80" height="80">
-    </div>
+    
 
     <footer>
         <br>

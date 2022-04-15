@@ -19,70 +19,37 @@
                     <div class="box1-1">
                         <label for="firstname">Nombre:</label><br>
                         <label for="lastname">Apellido:</label><br>
-                        <label for="password">Contraseña:</label><br>
-                        <label for="address">Dirección:</label><br>
+                        <label for="password1">Contraseña:</label><br>
+                        <label for="password2">Confirme:</label><br>
                     </div>
                     <div class="box1-2">
                         <!-- campo para el nombre -->
-                        <input required name="firstname" type="text" id="firstname" size="30" maxlength="20" placeholder="ej: Juanito"><br>
+                        {{form.nombre_usuario}}
                         <!-- campo para el apellido -->
-                        <input required name="lastname" type="text" id="lastname" size="30" maxlength="20" placeholder="ej: Pérez"><br>
+                        {{form.apellido_usuario}}
                         <!-- campo para la contraseña -->
-                        <input required type="password" name="password" id="password" size="30" maxlength="12" minlength="8" placeholder="mínimo 8 - máximo 12 caracteres"><br>
-                        <!-- campo para la dirección del usuario -->
-                        <input required name="address" type="text" id="address" size="30" maxlength="30" placeholder="ej: calle nueva 123"><br>
+                        {{form.password1}}
+                        <!-- campo para la confirmación de contraseña -->
+                        {{form.password2}}
                     </div>
                 </div>
                 <!-- div que contiene los 2 últimos inputs del formulario y la lista de comunas -->
                 <div class="box2">
                     <div class="box2-1">
+                        <label for="address">Dirección:</label><br>
                         <label for="email">E-mail:</label><br>
                         <label for="phone">Teléfono:</label><br>
                         <label for="comuna">Comuna:</label><br>
                     </div>
                     <div class="box2-2">
+                        <!-- campo para la dirección del usuario -->
+                        {{form.domicilio_usuario}}
                         <!-- campo para el correo electrónico -->
-                        <input required type="email" name="email" id="email" size="30" maxlength="30" placeholder="ej: micorreo@mail.com"><br>
+                        {{form.email_usuario}}
                         <!-- campo para el teléfono del usuario -->
-                        <input required name="phone" type="tel" id="phone" size="30" maxlength="12" placeholder="ej: 569 4141 2323"><br>
+                        {{form.telefono_usuario}}
                         <!-- lista desplegable (combobox) para seleccionar comuna dentro de la provincia de santiago -->
-                        <select name="comuna" id="comuna">
-                            <option value="1">Cerrillos</option>
-                            <option value="2">Cerro Navia</option>
-                            <option value="3">Conchalí</option>
-                            <option value="4">El Bosque</option>
-                            <option value="5">Estación Central</option>
-                            <option value="6">Huechuraba</option>
-                            <option value="7">Independencia</option>
-                            <option value="8">La Cisterna</option>
-                            <option value="9">La Florida</option>
-                            <option value="10">La Granja</option>
-                            <option value="11">La Pintana</option>
-                            <option value="12">La Reina</option>
-                            <option value="13">Las Condes</option>
-                            <option value="14">Lo Barnechea</option>
-                            <option value="15">Lo Espejo</option>
-                            <option value="16">Lo Prado</option>
-                            <option value="17">Macul</option>
-                            <option value="18">Maipú</option>
-                            <option value="19">Ñuñoa</option>
-                            <option value="20">Padre Hurtado</option>
-                            <option value="21">Pedro Aguirre Cerda</option>
-                            <option value="22">Peñalolén</option>
-                            <option value="23">Providencia</option>
-                            <option value="24">Pudahuel</option>
-                            <option value="25">Puente Alto</option>
-                            <option value="26">Quilicura</option>
-                            <option value="27">Quinta Normal</option>
-                            <option value="28">Recoleta</option>
-                            <option value="29">Renca</option>
-                            <option value="30">San Bernardo</option>
-                            <option value="31">San Joaquín</option>
-                            <option value="32">San Miguel</option>
-                            <option value="33">San Ramón</option>
-                            <option value="34">Santiago Centro</option>
-                            <option value="35">Vitacura</option>
-                        </select><br>
+                        {{form.comuna}}
                     </div>
                 </div>
                 <div class="box3">
@@ -92,10 +59,36 @@
             </form>
         </div>
     </div><br>
+    <div class="red"> <!-- mensajes de errores -->
+        {{form.errors}}
+    </div>
 
     <div class="registro">
         <h2>Importante</h2>
         <p>Al crear una cuenta de usuario, estará enviando su información para ser administrada con máxima<br>
            confidencialidad por Fruver. De esta forma, se asegura un servicio eficaz en la entrega de los pedidos que usted realice.</p>
     </div>
+
+    <script>
+        /* Se agregan los placeholders con javascript y se comienza los queries
+        en índice 1 porque CSRF_token es el índice 0
+        (se le considera un input field)*/
+
+        //Query en todos input fields
+        var form_fields = document.getElementsByTagName('input')
+        form_fields[1].placeholder='ej: Juan';
+        form_fields[2].placeholder='ej: Pérez';
+        form_fields[3].placeholder='Mínimo 8 caracteres';
+        form_fields[4].placeholder='Reingrese su contraseña';
+        form_fields[5].placeholder='Nueva Av. 561';
+        form_fields[6].placeholder='ej: micorreo@mail.com';
+        form_fields[7].placeholder='ej: 56944441111';
+
+
+        for (var field in form_fields){	
+        form_fields[field].className += 'form-control'}
+
+        var select_field = document.getElementsByTagName('select')
+        select_field.className = 'form-control'
+    </script>
 {% endblock content %}

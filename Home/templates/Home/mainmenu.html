@@ -53,7 +53,7 @@
 
     <main>
         {% block content %} <!-- bloque para agregar contenido de cada plantilla html que herede de esta base -->
-        <h1>Bienvenido al menú de vendedor Fruver</h1>
+        <h1>Bienvenido al menú principal de vendedor Fruver</h1>
         <h2>Seleccione el módulo que desea gestionar</h2>
     
         <container class="container1" >
@@ -95,7 +95,7 @@
             <div class="box6">
                 <div class="box6-1">
                     <img class="submenuicon" src="{% static 'Home/images/mainmenu/vendedor.png' %}" alt="Ver reportes" width="60" height="60"/>
-                    <a class="submenulink2" href="#">Gestionar Vendedor</a>
+                    <a class="submenulink2" href="/mainmenu/gestionarvendedor">Gestionar Vendedores</a>
                 </div>
                 <div class="box6-2">
                     <img class="submenuicon" src="{% static 'Home/images/mainmenu/banco.png' %}" alt="Ver reportes" width="60" height="60"/>
@@ -114,5 +114,7 @@
         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vero natus distinctio repudiandae repellat mollitia laudantium voluptatem eos hic tempora doloribus?</p>
         <p>Fruver®. All Rights Reserved.</p>
     </footer>
+
+    {% block popup %}{% endblock popup %}
 </body>
 </html>
