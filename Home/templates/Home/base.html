@@ -38,7 +38,7 @@
                 {% if user.is_authenticated %}
                     <div class="link4">
                         <img src="{% static 'Home/images/navbar/exit.png' %}" alt="Cerrar sesión" width="80" height="80">
-                        <a class="logout" href="/salir">Salir</a>
+                        <a class="logout" href="/salir">Cerrar Sesión</a>
                     </div>
                 {% else %}
                     <div class="link4">
@@ -54,8 +54,6 @@
         {% block content %}{% endblock content %} <!-- bloque para agregar contenido de cada plantilla html que herede de esta base -->
     </main><br>
 
-    
-
     <footer>
         <br>
         <a>Contacto&emsp;</a>
@@ -64,5 +62,10 @@
         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vero natus distinctio repudiandae repellat mollitia laudantium voluptatem eos hic tempora doloribus?</p>
         <p>Fruver®. All Rights Reserved.</p>
     </footer>
+
+    <!-- se importa la librería SweetAlert2 para emitir alertas y mensajes pop-up, y se hereda al resto de plantillas -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {% block messages %}{% endblock messages %}
+
 </body>
 </html>

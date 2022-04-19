@@ -30,3 +30,29 @@
         <p>Regístrese con sus datos <a href="/registro">aquí</a> para poder acceder a los servicios que ofrece nuestro sitio web.</p>
     </div>
 {% endblock content %}
+
+<!-- esta URL muestra 2 tipos de mensajes, error cuando se intenta login sin credenciales, y éxito cuando el usuario es redirigido desde la creación de cuenta -->
+<!-- con el for loop se recorren los mensajes que llegan desde la views.acceso, y con el control de flujo if se determina si el mensaje es de error o éxito -->
+{% block messages %}
+    {% for message in messages %}
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+            <script>
+                Swal.fire({
+                    "title": "{{message}}",
+                    "text": "Ya puede iniciar sesión con su correo y contraseña.",
+                    "icon": "success",
+                    "confirmButtonColor": "green"
+                })
+            </script>   
+        {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+            <script>
+                Swal.fire({
+                    "title": "{{message}}",
+                    "text":"Intente de nuevo. Si no posee cuenta de usuario, debe registrarse antes de iniciar sesión",
+                    "icon": "error",
+                    "confirmButtonColor": "red"
+                })
+            </script>
+        {% endif %}
+    {% endfor %}
+{% endblock messages %}

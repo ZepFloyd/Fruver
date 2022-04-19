@@ -11,6 +11,24 @@ function() {
 });
 
 
+function eliminarVendedor(id) {
+    Swal.fire({
+        "title":"¿Realmente desea eliminar a este usuario?",
+        "text":"Recuerde que esta acción no se puede deshacer",
+        "icon":"warning",
+        "showCancelButton":true,
+        "cancelButtonText":"Cancelar",
+        "confirmButtonText":"Sí, eliminar",
+        "confirmButtonColor": "red",
+    })
+    .then(function(result) {
+        if(result.isConfirmed) {
+            window.location.href = "/mainmenu/gestionarvendedor/eliminarvendedor/"+id
+        }
+    })
+}
+
+
 /*
 
 document.getElementById("editar").addEventListener('click',

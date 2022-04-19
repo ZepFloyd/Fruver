@@ -116,5 +116,22 @@
     </footer>
 
     {% block popup %}{% endblock popup %}
+
+    <!-- se importa la librería SweetAlert2 para emitir alertas y mensajes pop-up, y se hereda al resto de plantillas de submenús -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    {% block messages %}
+        {% for message in messages %}
+            <script>
+                Swal.fire({
+                    "title": "{{message}}",
+                    "text": "Ha iniciado sesión correctamente. Puede comenzar a trabajar seleccionando uno de los módulos disponibles.",
+                    "icon": "success",
+                    "confirmButtonColor": "green"
+                })
+            </script>
+        {% endfor %}
+    {% endblock messages %}
 </body>
 </html>
+

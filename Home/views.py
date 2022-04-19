@@ -1,3 +1,4 @@
+from ssl import AlertDescription
 from django.forms import PasswordInput
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -23,8 +24,7 @@ def registro(request):
             form = FormularioCrearUsuario(request.POST)
             if form.is_valid():
                 form.save()
-                user = form.cleaned_data.get('nombre_usuario')
-                messages.success(request,'¡Muy bien ' + user + ', su cuenta ha sido creada con éxtio!')
+                messages.success(request,'¡Su cuenta ha sido creada con éxito!')
                 return redirect('fruver-acceso')
 
         context = {'form': form}
@@ -44,19 +44,25 @@ def acceso(request):
 
             if user is not None:
                 login(request, user)
-                
-                if user.is_superuser is True:
+
+                name = user.nombre_usuario
+                # Valida si el usuario es cliente o vendedor, y lo redirige a la página que corresponda
+                if user.is_staff is True:
+                    messages.success(request,'¡Hola ' + name + '!')
                     return redirect('fruver-mainmenu')
                 else:
+                    messages.success(request,'¡Hola ' + name + '!')
                     return redirect('fruver-home')
             else:
-                return messages.info(request, 'E-mail o contraseña incorrectos')
+                messages.error(request, 'E-mail o contraseña incorrectos')
+                return redirect('fruver-acceso')
         return render(request, 'Home/acceso.html')
 
 
 #Cerrar sesión
 def salir(request):
     logout(request)
+    messages.info(request, 'Ha cerrado sesión correctamente')
     return redirect('fruver-home')
 
 
@@ -89,34 +95,27 @@ def datosbanco(request):
     form = FormularioCuentaBancaria(request.POST or None, instance=cuenta)
     if form.is_valid():
         form.save()
-        account = form.cleaned_data.get('numero_cuenta')
-        messages.success(request,'¡La cuenta número ' + account + ' se ha guardado con éxito!')
+        messages.success(request,'Los datos de la cuenta se han guardado con éxito')
         return redirect('fruver-datosbanco')
     context = {'cuenta': cuenta, 'form': form}
     return render(request, 'Home/datosbanco.html', context)
+
 
 
 #Gestionar a los vendedores, crear nuevo vendedor, actualizar, eliminar
 @login_required(login_url='fruver-acceso')
 def gestionarvendedor(request):
 
-    vendedores = Usuario.objects.all()
-
+    #query hace filtro para obtener a los usuarios cuyo atributo is_staff es True, se muestran en el listado de vendedores del html
+    vendedores = Usuario.objects.filter(is_staff=True)
     form = FormularioCrearUsuario()
     if request.method == 'POST':
         form = FormularioCrearUsuario(request.POST)
         if form.is_valid():
-            '''nombre_usuario = form.cleaned_data.get('nombre_usuario')
-            apellido_usuario = form.cleaned_data.get('apellido_usuario')
-            email_usuario = form.cleaned_data.get('email_usuario')
-            password = form.cleaned_data.get('password')
-            telefono_usuario = form.cleaned_data.get('telefono_usuario')
-            domicilio_usuario = form.cleaned_data.get('domicilio_usuario')
-            comuna = form.cleaned_data.get['comuna']
-            CustomAccountManager.create_superuser(nombre_usuario, apellido_usuario, email_usuario, password, telefono_usuario, domicilio_usuario, comuna)'''
+            form.instance.is_staff = True  #setea verdadero el atributo is_staff para crear usuario perfil vendedor
             form.save()
             user = form.cleaned_data.get('nombre_usuario')
-            messages.success(request,'¡La cuenta de vendedor ' + user + ', ha sido creada con éxito!')
+            messages.success(request,'¡La cuenta de vendedor ' + user + ' ha sido creada con éxito!')
             return redirect('fruver-gestionarvendedor')
 
     context = {'form': form, 'vendedores': vendedores}
@@ -133,7 +132,7 @@ def editarvendedor(request, usuario_id):
     if form.is_valid():
         form.save()
         user = form.cleaned_data.get('nombre_usuario')
-        messages.success(request,'¡Los datos del vendedor ' + user + ', han sido actualizados con éxito!')
+        messages.success(request,'¡Los datos del vendedor ' + user + ' han sido actualizados con éxito!')
         return redirect('fruver-gestionarvendedor')
     context = {'usuario': usuario, 'form': form}
     return render(request, 'Home/editarvendedor.html', context)
@@ -146,4 +145,5 @@ def eliminarvendedor(request, usuario_id):
 
     usuario = Usuario.objects.get(pk=usuario_id)
     usuario.delete()
+    messages.success(request,'El usuario ha sido eliminado')
     return redirect('fruver-gestionarvendedor')

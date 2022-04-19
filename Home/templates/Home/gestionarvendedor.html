@@ -12,9 +12,6 @@
     <h2>Gestione las cuentas de usuario vendedor de Fruver.</h2>
     <p>Recuerde que los usuarios con cuenta de vendedor pueden acceder a todas las funcionalidades del menú principal,<br>
        como la gestión de clientes, productos, pedidos y gastos.</p>
-    {% for message in messages %}
-        <h2>{{message}}</h2>
-    {% endfor %}
     <div class="container1">
         <div class="fila-titulos">
             <div class="titulo-columnas" id="nombre">
@@ -59,11 +56,10 @@
                             <p> {{ vendedor.comuna}}</p>
                         </div>
                         <a href="{% url 'fruver-editarvendedor' vendedor.id %}"><button type="button">Editar datos</button></a>
-                        <a href="{% url 'fruver-eliminarvendedor' vendedor.id %}"><button type="button">Eliminar vendedor</button></a>
+                        <a href="#" onclick="eliminarVendedor({{ vendedor.id }})"><button type="button">Eliminar vendedor</button></a>
                     </div>
                 {% endfor %}
-            </div>
-                        
+            </div>      
         </div>
         <button type="button" id="crearvendedor">Crear nuevo vendedor</button> <!-- muestra pop up para ingresar datos y crear nuevo vendedor -->
     </div>
@@ -185,3 +181,16 @@
     <script src="{% static 'Home/scripts/gestionarvendedor.js' %}"></script>
 
 {% endblock popup %}
+
+<!-- block para mensajes y alertas pop-up -->
+{% block messages %}
+    {% for message in messages %}
+        <script>
+            Swal.fire({
+                "title": "{{message}}",
+                "icon": "success",
+                "confirmButtonColor": "green"
+            })
+        </script>
+    {% endfor %}
+{% endblock messages %}

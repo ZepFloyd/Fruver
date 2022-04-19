@@ -12,9 +12,6 @@
     <h2>Ingrese o actualice sus datos de cuenta bancaria para recibir transferencias de clientes.<br>
         Esta información se mostrará a los clientes que realicen pedidos pagando vía transferencia.
     </h2>
-    {% for message in messages %}
-        <h2>{{message}}</h2>
-    {% endfor %}
     <div class="alignment"> <!-- div para centrar el databox en la página -->
         <div class="databox"> <!-- div que almacena los inputs y el botón de login -->
             <h3>Rellene los campos a continuación:</h3><br>
@@ -39,3 +36,17 @@
         </div>
     </div><br>
 {% endblock content %}
+
+<!-- muestra mensaje desde la view cuando se guardan los datos -->
+{% block messages %}
+    {% for message in messages %}
+        <script>
+            Swal.fire({
+                "title": "Cuenta Actualizada",
+                "text": "{{message}}",
+                "icon": "success",
+                "confirmButtonColor": "green"
+            })
+        </script>
+    {% endfor %}
+{% endblock messages %}

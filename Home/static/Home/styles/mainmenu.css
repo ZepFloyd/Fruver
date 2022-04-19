@@ -16,7 +16,8 @@ header a {
 }
 
 header a:hover {
-    color: #41a7eb;
+    color: goldenrod;
+    text-decoration: underline;
 }
 
 /*barra de navegación con links ordenados en fila*/
@@ -127,11 +128,13 @@ main {
 }
 
 .submenulink:hover {
-    color: #b8b8b8;
+    color: goldenrod;
+    text-shadow: 2px 2px 2px black;
 }
 
 .submenulink2:hover {
-    color: #b8b8b8;
+    color: goldenrod;
+    text-shadow: 1px 1px 1px black;
 }
 
 footer {

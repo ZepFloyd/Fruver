@@ -5,7 +5,7 @@ from .models import Usuario, CuentaBancaria
 
 # Create your forms here.
 
-#formulario para registrar usuario
+#formulario para registrar usuario cliente y crear vendedores
 class FormularioCrearUsuario(UserCreationForm):
     class Meta:
         model = Usuario
@@ -17,7 +17,8 @@ class FormularioCrearUsuario(UserCreationForm):
             'password2',
             'telefono_usuario',
             'domicilio_usuario',
-            'comuna'
+            'comuna',
+            'is_staff'  #por defecto seteado False. No se muestra en la plantilla .html, solo sirve para setearlo True al crear un vendedor
         ]
         
         COMUNA_CHOICES = (

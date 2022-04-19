@@ -23,3 +23,29 @@
         &emsp;&emsp;&emsp;<img width="1720" height="1000" src="{% static 'Home/images/homepage/detalles.png' %}" alt="Horarios y costo de envío">
     </section>
 {% endblock content %}
+
+<!-- esta URL muestra 2 tipos de mensajes, info cuando el usuario cierra sesión, y éxito cuando el usuario es redirigido desde el login -->
+<!-- con el for loop se recorren los mensajes que llegan desde la views.acceso, y con el control de flujo if se determina si el mensaje es de info o éxito -->
+{% block messages %}
+    {% for message in messages %}
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+            <script>
+                Swal.fire({
+                        "title": "{{message}}",
+                        "text": "Ha iniciado sesión correctamente. Ya Puede agregar productos al carrito desde la sección de Frutas o Verduras y hacer su pedido.",
+                        "icon": "success",
+                        "confirmButtonColor": "green"
+                })
+            </script>
+        {% elif message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+            <script>
+                Swal.fire({
+                        "title": "{{message}}",
+                        "text": "¡Nos vemos!",
+                        "icon": "info",
+                        "confirmButtonColor": "royalblue"
+                })
+            </script>
+        {% endif %}
+    {% endfor %}
+{% endblock messages %}
