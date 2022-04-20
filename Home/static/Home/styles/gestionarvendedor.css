@@ -1,9 +1,13 @@
+/*titulo y texto de informacion*/
+.info {
+    margin: 0.1rem
+}
 
 /*div para almacenar y centrar el container con los vendedores y los botones*/
 .container1 {
     display: flex;
     flex-flow: column wrap;
-    margin: 2rem 4rem;
+    margin: 2rem 2.7rem;
     justify-content: center;
     align-items: center;
     background-color: rgb(184, 184, 184);

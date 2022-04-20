@@ -1,0 +1,113 @@
+{% extends "Home/mainmenu.html" %} <!-- hereda formato (header y footer en este caso) de template mainmenu.html -->
+{% load static %} <!-- carga la carpeta static para acceder a los archivos que estén dentro de ella -->
+
+{% block title %} Fruver - Pedidos {% endblock title %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'Pedidos/styles/pedidos.css' %}"> <!-- referencia a la plantilla .css que corresponda -->
+{% endblock stylesheet %}
+
+{% block content %}
+    <h1 class="info">Registro de Pedidos</h1>
+    <h2 class="info">Gestione el estado de los pedidos de los clientes de Fruver</h2>
+    <p class="info">Para acceder a los pedidos según su estado, seleccione una de las opciones que se muestran a continuación:</p>
+    <div class="container0">
+        <div class="estados">
+            <img src="{% static 'Pedidos/images/status/todos.png' %}" alt="Ver todos" width="65" height="65"/>
+            <button type="button" class="filtros">Todos los Pedidos</button>
+        </div>
+        <div class="estados">
+            <img src="{% static 'Pedidos/images/status/recibido.png' %}" alt="Ver recibidos" width="65" height="65"/>
+            <button type="button" class="filtros">Pedidos Recibidos</button>
+        </div>
+        <div class="estados">
+            <img src="{% static 'Pedidos/images/status/armado.png' %}" alt="Ver armados" width="65" height="65"/>
+            <button type="button" class="filtros">Pedidos Armados</button>
+        </div>
+        <div class="estados">
+            <img src="{% static 'Pedidos/images/status/despachado.png' %}" alt="Ver despachados" width="65" height="65"/>
+            <button type="button" class="filtros">Pedidos Despachados</button>
+        </div>
+        <div class="estados">
+            <img src="{% static 'Pedidos/images/status/pagado.png' %}" alt="Ver pagados" width="65" height="65"/>
+            <button type="button" class="filtros">Pedidos Pagados</button>
+        </div>
+    </div>
+    <div class="container1">
+        <div class="fila-titulos">
+            <div class="titulo-columnas" id="cliente">
+                <h4>Cliente</h4>
+            </div>
+            <div class="titulo-columnas" id="domicilio">
+                <h4>Dirección</h4>
+            </div>
+            <div class="titulo-columnas" id="comunax">
+                <h4>Comuna</h4>
+            </div>
+            <div class="titulo-columnas" id="valor">
+                <h4>Valor</h4>
+            </div>
+            <div class="titulo-columnas" id="pago">
+                <h4>Medio de Pago</h4>
+            </div>
+            <div class="titulo-columnas" id="fecha">
+                <h4>Fecha</h4>
+            </div>
+            <div class="titulo-columnas" id="estado">
+                <h4>Estado</h4>
+            </div>
+        </div>
+        <div class="lista-pedidos">
+            <div class="fila-datos">
+                {% for pedido in pedidos %}
+                    <div class="datos">
+                        <div class="datospedido" id="name">
+                            <p> {{ pedido.cliente.nombre_usuario }} {{ pedido.cliente.apellido_usuario }}</p>
+                        </div>
+                        <div class="datospedido" id="address">
+                            <p> {{ pedido.cliente.domicilio_usuario }}</p>
+                        </div>
+                        <div class="datospedido" id="cartier">
+                            <p> {{ pedido.cliente.comuna }}</p>
+                        </div>
+                        <div class="datospedido" id="amount">
+                            <p> ${{ pedido.monto_pedido }}</p>
+                        </div>
+                        <div class="datospedido" id="payment" >
+                            <p> {{ pedido.medio_pago }}</p>
+                        </div>
+                        <div class="datospedido" id="date">
+                            <p> {{ pedido.fecha_pedido }}</p>
+                        </div>
+                        <div class="datospedido" id="status">
+                            {% if pedido.estado_pedido == 'Recibido' %}
+                                <p id="status-icon" style="background-color:firebrick;"> {{pedido.estado_pedido}}</p>
+                            {% elif pedido.estado_pedido == 'Armado' %}
+                                <p id="status-icon" style="background-color:goldenrod;"> {{pedido.estado_pedido}}</p>
+                            {% elif pedido.estado_pedido == 'Despachado' %}
+                                <p id="status-icon" style="background-color:royalblue;"> {{pedido.estado_pedido}}</p>
+                            {% elif pedido.estado_pedido == 'Pagado' %}
+                                <p id="status-icon" style="background-color:forestgreen;"> {{pedido.estado_pedido}}</p>
+                            {% endif %}
+                        </div>
+                        <a href="#" id="update-status"><button type="button">Actualizar Estado</button></a>
+                    </div>
+                {% endfor %}
+            </div>      
+        </div>
+        <button type="button" id="crearvendedor">Crear nuevo vendedor</button> <!-- muestra pop up para ingresar datos y crear nuevo vendedor -->
+    </div>
+{% endblock content %}
+
+<!-- block para mensajes y alertas pop-up -->
+{% block messages %}
+    {% for message in messages %}
+        <script>
+            Swal.fire({
+                "title": "{{message}}",
+                "icon": "success",
+                "confirmButtonColor": "green"
+            })
+        </script>
+    {% endfor %}
+{% endblock messages %}

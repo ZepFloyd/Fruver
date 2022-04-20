@@ -21,7 +21,7 @@
             <!-- links de la barra de navegación: frutas, verduras, carrito, login -->
             <div class="navigation">
                 <div class="link0">
-                    <a class="logo" href="/mainmenu"><img src="{% static 'Home/images/navbar/logo.svg' %}" alt="Fruver logo"></a>
+                    <a class="logo" href="/mainmenu"><img src="{% static 'Home/images/mainmenu/mainmenu-logo.svg' %}" alt="Fruver Menú Principal" width="320" height="150" ></a>
                 </div>
                 <div class="link1">
                     <img src="{% static 'Home/images/mainmenu/clientes.png' %}" alt="Ver clientes" width="65" height="65"/>
@@ -29,7 +29,7 @@
                 </div>
                 <div class="link2">
                     <img src="{% static 'Home/images/mainmenu/pedidos.png' %}" alt="Ver pedidos" width="65" height="65"/>
-                    <a class="pedidos" href="#">Pedidos</a>
+                    <a class="pedidos" href="/pedidos">Pedidos</a>
                 </div>
                 <div class="link3">
                     <img src="{% static 'Home/images/mainmenu/productos.png' %}" alt="Ver productos" width="65" height="65"/>
@@ -67,7 +67,7 @@
             <div class="box2">
                 <div class="box2-1">
                     <img class="submenuicon" src="{% static 'Home/images/mainmenu/pedidos.png' %}" alt="Ver pedidos" width="120" height="120"/>
-                    <a class="submenulink" href="#">Pedidos</a>
+                    <a class="submenulink" href="/pedidos">Pedidos</a>
                 </div>
                 <p>Gestione los pedidos ralizados por los clientes. Actualice sus estado o modifique el registro.</p>
             </div>
@@ -117,7 +117,7 @@
 
     {% block popup %}{% endblock popup %}
 
-    <!-- se importa la librería SweetAlert2 para emitir alertas y mensajes pop-up, y se hereda al resto de plantillas de submenús -->
+    <!-- se importa la librería SweetAlert2 para emitir alertas y mensajes pop-up, y se hereda al resto de plantillas de submenús de los módulos -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     {% block messages %}

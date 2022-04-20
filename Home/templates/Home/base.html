@@ -21,28 +21,28 @@
             <!-- links de la barra de navegación: frutas, verduras, carrito, login -->
             <div class="navigation">
                 <div class="link0">
-                    <a class="logo" href="http://127.0.0.1:8000"><img src="{% static 'Home/images/navbar/logo.svg' %}" alt="Fruver logo"></a>
+                    <a class="logo" href="http://127.0.0.1:8000"><img src="{% static 'Home/images/navbar/logo.svg' %}" alt="Fruver logo" width="320" height="150" ></a>
                 </div>
                 <div class="link1">
-                    <img src="{% static 'Home/images/navbar/frutas.png' %}" alt="Ver frutas" width="80" height="80"/>
+                    <img src="{% static 'Home/images/navbar/frutas.png' %}" alt="Ver frutas" width="65" height="65"/>
                     <a class="frutas" href="/frutas">Frutas</a>
                 </div>
                 <div class="link2">
-                    <img src="{% static 'Home/images/navbar/verduras.png' %}" alt="Ver verduras" width="80" height="80"/>
+                    <img src="{% static 'Home/images/navbar/verduras.png' %}" alt="Ver verduras" width="65" height="65"/>
                     <a class="verduras" href="/verduras">Verduras</a>
                 </div>
                 <div class="link3">
-                    <img src="{% static 'Home/images/navbar/cart.png' %}" alt="Ver carrito" width="80" height="80"/>
-                    <a class="carrito" href="/carrito">Mi carrito</a>
+                    <img src="{% static 'Home/images/navbar/cart.png' %}" alt="Ver carrito" width="65" height="65"/>
+                    <a class="carrito" href="/pedidos/carrito">Mi carrito</a>
                 </div>
                 {% if user.is_authenticated %}
                     <div class="link4">
-                        <img src="{% static 'Home/images/navbar/exit.png' %}" alt="Cerrar sesión" width="80" height="80">
+                        <img src="{% static 'Home/images/navbar/exit.png' %}" alt="Cerrar sesión" width="65" height="65">
                         <a class="logout" href="/salir">Cerrar Sesión</a>
                     </div>
                 {% else %}
                     <div class="link4">
-                        <img src="{% static 'Home/images/navbar/user.png' %}" alt="Iniciar sesión" width="80" height="80">
+                        <img src="{% static 'Home/images/navbar/user.png' %}" alt="Iniciar sesión" width="65" height="65">
                         <a class="login"  href="/acceso">Iniciar Sesión</a>
                     </div> 
                 {% endif %}

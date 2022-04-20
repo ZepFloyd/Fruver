@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'Home.apps.HomeConfig', #Home app
+    'Pedidos.apps.PedidosConfig', #Pedidos app
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

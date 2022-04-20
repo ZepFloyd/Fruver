@@ -76,11 +76,6 @@ def verduras(request):
     return render(request, 'Home/verduras.html')
 
 
-#Ver carrito de compras
-def carrito(request):
-    return render(request, 'Home/carrito.html')
-
-
 #Menú principal para vendedor
 @login_required(login_url='fruver-acceso')
 def mainmenu(request):

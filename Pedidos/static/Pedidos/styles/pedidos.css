@@ -1,0 +1,184 @@
+/*titulo y texto de informacion*/
+.info {
+    margin: 0.1rem
+}
+
+/*div para almacenar los links con las listas de pedidos según su estado*/
+.container0 {
+    display: flex;
+    flex-flow: row wrap;
+    margin: 2rem 2.7rem 0.5rem;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(143, 143, 143);
+    border: solid 0.2rem azure;
+    width: 95%;
+}
+
+/*divs para cada icono de estado con su botón*/
+.estados {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5rem 2rem 0rem;
+}
+
+/*div para almacenar y centrar el container con los pedidos y los botones*/
+.container1 {
+    display: flex;
+    flex-flow: column wrap;
+    margin: 1rem 2.7rem;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(184, 184, 184);
+    border: solid 0.2rem azure;
+    width: 95%;
+}
+
+/*div para almacenar los titulos de las columnas, ordenados en fila*/
+.fila-titulos {
+    margin: 1rem 1rem 0rem;
+    background-color: whitesmoke;
+    border: solid 0.2rem rgb(61, 61, 61);
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 95%;
+}
+
+/*div para cada columna dentro del div fila-titulos*/
+.titulo-columnas {
+    margin: 0.5rem 1.5rem;
+    width: 10rem;
+}
+
+/*se ajusta la anchura de los títulos de columna individualmente para que se alineen con las lista de pedidos*/
+#cliente {
+    width: 12rem;
+}
+
+#domicilio {
+    width: 14rem;
+}
+
+#comunax {
+    width: 12rem;
+}
+
+#valor {
+    width: 6.5rem;
+}
+
+#pago {
+    width: 12rem;
+}
+
+#fecha {
+    width: 7rem;
+}
+
+#estado {
+    width: 6rem;
+}
+
+/*etiquetas para los nombres de las columnas de la tabla*/
+h4 {
+    font-weight: bold;
+    margin: 0;
+}
+
+/*tabla con el listado de pedidos*/
+.lista-pedidos {
+    margin: 0.5rem 1rem 0.5rem;
+    background-color: whitesmoke;
+    border: solid 0.2rem rgb(61, 61, 61);
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    width: 95%;
+}
+
+/*filas dentro de la lista para cada pedido que exista en el registro, ordenadas en columnas*/
+.fila-datos {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+}
+
+/*fila individual con datos ordenados horizontalmente*/
+.datos {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: center;
+    width: 100%;
+}
+
+.datos:hover {
+    background-color: lightgrey;
+}
+
+/*divs individuales para cada dato de los pedidos*/
+.datospedido {
+    margin: 0.01rem 1rem;
+    width: 9rem;
+}
+
+/*se agranda el ancho del campo para los datos de los pedidos, ya que si son muy largos podrían solaparse con el siguiente dato*/
+#name {
+    width: 13rem;
+}
+
+#address {
+    width: 15rem;
+}
+
+#cartier {
+    width: 13rem;
+}
+
+#payment {
+    width: 13.5rem;
+}
+
+#amount {
+    width: 7rem;
+}
+
+#date {
+    width: 8rem;
+}
+
+#status {
+    width: 7rem;
+}
+
+#update-status {
+    width: 15rem;
+    margin: 0.5rem 0.1rem;
+}
+
+#status-icon {
+    color: whitesmoke;
+    text-shadow: 1px 1px 1px black;
+    border-radius: 0.3rem;
+    padding: 0.1rem;
+}
+
+/*formato para todos los botones*/
+button {
+    margin: 0.5rem;
+    padding: 0.3rem 0.2rem;
+    font-size: 1rem;
+    border-radius: 0.3rem;
+}
+
+button:hover {
+    background: lightgrey;
+}
