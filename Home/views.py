@@ -9,6 +9,7 @@ from django.contrib import messages
 from .forms import *
 from .models import *
 
+
 # Página principal de Fruver
 def home(request):
     return render(request, 'Home/index.html')
@@ -66,20 +67,12 @@ def salir(request):
     return redirect('fruver-home')
 
 
-#ver frutas a la venta
-def frutas(request):
-    return render(request, 'Home/frutas.html')
-
-
-#ver verduras a la venta
-def verduras(request):
-    return render(request, 'Home/verduras.html')
-
 
 #Menú principal para vendedor
 @login_required(login_url='fruver-acceso')
 def mainmenu(request):
     return render(request, 'Home/mainmenu.html')
+
 
 
 #Ingresar o actualizar datos de cuenta bancaria

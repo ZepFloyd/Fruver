@@ -81,13 +81,13 @@
                         </div>
                         <div class="datospedido" id="status">
                             {% if pedido.estado_pedido == 'Recibido' %}
-                                <p id="status-icon" style="background-color:firebrick;"> {{pedido.estado_pedido}}</p>
+                                <p id="status-icon" style="background-color:firebrick;">{{pedido.estado_pedido}}</p>
                             {% elif pedido.estado_pedido == 'Armado' %}
-                                <p id="status-icon" style="background-color:goldenrod;"> {{pedido.estado_pedido}}</p>
+                                <p id="status-icon" style="background-color:goldenrod;">{{pedido.estado_pedido}}</p>
                             {% elif pedido.estado_pedido == 'Despachado' %}
-                                <p id="status-icon" style="background-color:royalblue;"> {{pedido.estado_pedido}}</p>
+                                <p id="status-icon" style="background-color:royalblue;">{{pedido.estado_pedido}}</p>
                             {% elif pedido.estado_pedido == 'Pagado' %}
-                                <p id="status-icon" style="background-color:forestgreen;"> {{pedido.estado_pedido}}</p>
+                                <p id="status-icon" style="background-color:forestgreen;">{{pedido.estado_pedido}}</p>
                             {% endif %}
                         </div>
                         <a href="#" id="update-status"><button type="button">Actualizar Estado</button></a>
@@ -95,7 +95,7 @@
                 {% endfor %}
             </div>      
         </div>
-        <button type="button" id="crearvendedor">Crear nuevo vendedor</button> <!-- muestra pop up para ingresar datos y crear nuevo vendedor -->
+        <!-- <button type="button" id="crearvendedor">Crear nuevo vendedor</button> --> <!-- muestra pop up para ingresar datos y crear nuevo vendedor -->
     </div>
 {% endblock content %}
 

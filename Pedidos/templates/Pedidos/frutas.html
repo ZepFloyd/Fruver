@@ -1,0 +1,65 @@
+{% extends "Home/base.html" %} <!-- hereda formato (header y footer en este caso) de template base.html -->
+{% load static %}
+
+{% block title %} Fruver - Frutas {% endblock title %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'Pedidos/styles/frutas.css' %}"> <!-- referencia a la plantilla .css que corresponda -->
+{% endblock stylesheet %}
+
+{% block content %} <!-- agrega las sgtes. líneas de código dentro del bloque a la plantilla -->
+    <h1>Frutas</h1>
+    <section class="combobox" >
+        <!-- lista desplegable para ordenar los productos-->
+        <label for="ordenar">Elija cómo desea ver los productos:</label><br>
+        <select name="ordenar" id="ordenar">
+            <option value="1">Precio de menor a mayor</option>
+            <option value="2">Precio de mayor a menor</option>
+            <option value="3">Orden alfabético</option>
+            <option value="4">Stock disponible</option>
+        </select><br><br>
+    </section>
+    <section class="productoss" >
+        <!-- iteramos sobre el diccionario que llega desde la view para acceder a los atributos de cada objeto Producto del tipo Fruta -->
+        {% for fruta in frutas %}
+            <div class="producto">
+                <div class="box1">
+                    <!-- Producto: nombre, precio, stock, categoría, descripción, botón para agregar al carrito -->
+                    <img src="{% static 'Pedidos/images/fruits/manzanasfuji.jpg' %}" alt={{fruta.nombre_producto}} width="250" height="250">
+                    <h2>{{fruta.nombre_producto}}<br>1 {{fruta.modo_venta}}</h2> <!-- nombre y modo de venta -->
+                </div>
+                <div class="box2">
+                    <h3></h3><!-- elemento vacío para centrar bien la columna -->
+                    <h3>Precio:<br>${{fruta.precio_producto}}{% if fruta.modo_venta == 'Kg'%}/Kg{% elif fruta.modo_venta == 'Unidad'%}/unid.{% endif %}</h3>
+                    <h3>Stock:<br>{{fruta.stock_producto}} {% if fruta.modo_venta == 'Kg'%}Kg{% elif fruta.modo_venta == 'Unidad'%}unid.{% endif %}</h3>
+                    <h3>Categoría:<br>{{fruta.tipo_producto}}</h3>
+                </div>
+                <div class="box3">
+                    <h3>Descripción:</h3>
+                    <p>{{fruta.descripcion_producto}}</p>
+                    <!-- input para aumentar o disminuir Kg/unidades -->
+                    <label class="cantidad" for="cantidad">Indique la cantidad que desea (máx. 20):</label><br>
+                    <input type="number" name="cantidad" id="cantidad" placeholder="1" min="1" max="20" width="1" ><br>
+                    <!-- Botón para agregar al carrito -->
+                    <img src="{% static 'Home/images/navbar/cart.png' %}" alt="Carrito de compras" width="80" height="80">
+                    <a href="{% url 'fruver-agregarproducto' fruta.id %}"><button class="addcart">Añadir al carrito</button></a>
+                    <!-- <input class="addcart" type="button" name="añadircarrito" value="Añadir al carrito"> -->
+                </div>
+            </div>
+        {% endfor %}
+    </section>
+{% endblock content %}
+
+{% block messages %}
+        {% for message in messages %}
+            <script>
+                Swal.fire({
+                    "title": "{{message}}",
+                    "text": "Para ver los productos en su carrito de compras, seleccione el ícono del carrito en la parte superior de la página.",
+                    "icon": "success",
+                    "confirmButtonColor": "green"
+                })
+            </script>
+        {% endfor %}
+{% endblock messages %}
+
+<script type="text/javascript" src="{% static 'Pedidos/scripts/carrito.js' %}"></script>
