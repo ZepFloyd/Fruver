@@ -1,5 +1,4 @@
 
-
 def total_pedido(request):
     total = 0
     

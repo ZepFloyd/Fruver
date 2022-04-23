@@ -20,9 +20,14 @@ def frutas(request):
     return render(request, 'Pedidos/frutas.html', context)
 
 
+
+
+
 #ver verduras a la venta
 def verduras(request):
     return render(request, 'Pedidos/verduras.html')
+
+
 
 
 #Agregar productos al carrito de compras
@@ -32,39 +37,70 @@ def agregarproducto(request, producto_id):
     carrito = Carrito(request)
     producto = Producto.objects.get(id=producto_id)
 
-    carrito.agregar(producto)
+    cantidad = int(request.POST.get('cantidad'))
+
+    producto.stock_producto -= cantidad
+    producto.save()
+    
+
+    carrito.agregar(producto, cantidad)
     messages.success(request,'¡Producto agregado al carrito!')
     return redirect('fruver-frutas')
 
 
-'''    if request.POST:
-        producto = Producto.objects.get(pk=producto_id)
-        cantidad = request.POST.get('cantidad')
-        print(cantidad)
-        messages.success(request,'¡Producto añadido al carrito!')
-        return redirect('fruver-frutas')
 
-    return render(request, 'Pedidos/.html')'''
 
-'''#Eliminar productos al carrito de compras
+
+#Eliminar productos al carrito de compras
 @login_required(login_url='fruver-acceso')
 def eliminarproducto(request, producto_id):
 
     carrito = Carrito(request)
     producto = Producto.objects.get(id=producto_id)
 
+    cantidad = int(request.POST.get('cantidad'))
+    producto.stock_producto += cantidad
+    producto.save()
+
     carrito.eliminar(producto)
-    return redirect('fruver-frutas')
-'''
-#Restar productos al carrito de compras
+    return redirect('fruver-carrito')
+
+
+
+
+#Restar unidades/Kg de productos al carrito de compras
 @login_required(login_url='fruver-acceso')
 def restarproducto(request, producto_id):
 
     carrito = Carrito(request)
     producto = Producto.objects.get(id=producto_id)
 
+    producto.stock_producto += 1
+    producto.save()
+
     carrito.restar(producto)
-    return redirect('fruver-frutas')
+    return redirect('fruver-carrito')
+
+
+
+#Suma unidades/Kg de productos al carrito de compras
+@login_required(login_url='fruver-acceso')
+def sumarproducto(request, producto_id):
+
+    carrito = Carrito(request)
+    producto = Producto.objects.get(id=producto_id)
+
+    if producto.stock_producto == 0:
+        messages.error(request, 'Lo sentimos')
+
+    elif producto.stock_producto > 0:
+        producto.stock_producto -= 1
+        producto.save()
+        carrito.agregar(producto, 1)
+    return redirect('fruver-carrito')
+
+
+
 
 #Limpiar carrito de compras
 @login_required(login_url='fruver-acceso')
@@ -75,10 +111,17 @@ def limpiarcarrito(request):
     carrito.limpiar()
     return redirect('fruver-carrito')
 
+
+
+
+
 #ver carrito de compras
 @login_required(login_url='fruver-acceso')
 def carrito(request):
     return render(request, 'Pedidos/carrito.html')
+
+
+
 
 
 #Accede a la lista de pedidos activos de los clientes

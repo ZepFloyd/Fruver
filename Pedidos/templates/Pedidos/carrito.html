@@ -13,9 +13,25 @@
         {% if request.session.carrito.items %}
             {% for key, value in request.session.carrito.items %}
 
-            {{value.nombre}}
-            {{value.subtotal}}<br>
-
+            {{value.nombre}}<br>
+            <a href="{% url 'fruver-restarproducto' value.producto_id %}" class="sub" ><button>–</button></a>
+            {{value.cantidad}} 
+            {% if value.modo_venta == 'Kg' %}
+                {{value.modo_venta}}
+            {% elif value.modo_venta == 'Unidad'%} <!-- diferenciamos cuando haya 1 o más de 1 producto para mostrar "unidad" o "unidades" -->
+                {% if value.cantidad == 1 %}
+                    {{value.modo_venta}}
+                {% elif value.cantidad > 1 %}
+                    {{value.modo_venta}}es
+                {% endif %}
+            {% endif %}
+            <a href="{% url 'fruver-sumarproducto' value.producto_id %}" class="add"><button>+</button></a><br>
+            <p>Subtotal: ${{value.subtotal}}</p>
+            <form action="{% url 'fruver-eliminarproducto' value.producto_id %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" value={{value.cantidad}} name="cantidad">
+                <button type="submit">Quitar del carrito</button>
+            </form><br><br><br>
             {% endfor %}
         {% else %}
             <h3>Carrito Vacío</h3>
@@ -26,3 +42,27 @@
         <a href="#"><button>Hacer Pedido</button></a>
     </section>
 {% endblock content %}
+
+{% block messages %}
+    {% for message in messages %}
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+            <script>
+                Swal.fire({
+                        "title": "{{message}}",
+                        "text": "",
+                        "icon": "success",
+                        "confirmButtonColor": "green"
+                })
+            </script>
+        {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+            <script>
+                Swal.fire({
+                        "title": "{{message}}",
+                        "text": "No queda stock suficiente de este producto",
+                        "icon": "error",
+                        "confirmButtonColor": "firebrick"
+                })
+            </script>
+        {% endif %}
+    {% endfor %}
+{% endblock messages %}

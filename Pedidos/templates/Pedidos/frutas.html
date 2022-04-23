@@ -24,7 +24,7 @@
             <div class="producto">
                 <div class="box1">
                     <!-- Producto: nombre, precio, stock, categoría, descripción, botón para agregar al carrito -->
-                    <img src="{% static 'Pedidos/images/fruits/manzanasfuji.jpg' %}" alt={{fruta.nombre_producto}} width="250" height="250">
+                    <img src="{% static 'Pedidos/images/fruits/bananas.jpg' %}" alt={{fruta.nombre_producto}} width="250" height="250">
                     <h2>{{fruta.nombre_producto}}<br>1 {{fruta.modo_venta}}</h2> <!-- nombre y modo de venta -->
                 </div>
                 <div class="box2">
@@ -36,13 +36,15 @@
                 <div class="box3">
                     <h3>Descripción:</h3>
                     <p>{{fruta.descripcion_producto}}</p>
-                    <!-- input para aumentar o disminuir Kg/unidades -->
-                    <label class="cantidad" for="cantidad">Indique la cantidad que desea (máx. 20):</label><br>
-                    <input type="number" name="cantidad" id="cantidad" placeholder="1" min="1" max="20" width="1" ><br>
-                    <!-- Botón para agregar al carrito -->
-                    <img src="{% static 'Home/images/navbar/cart.png' %}" alt="Carrito de compras" width="80" height="80">
-                    <a href="{% url 'fruver-agregarproducto' fruta.id %}"><button class="addcart">Añadir al carrito</button></a>
-                    <!-- <input class="addcart" type="button" name="añadircarrito" value="Añadir al carrito"> -->
+                    <form action="{% url 'fruver-agregarproducto' fruta.id %}" method="POST">
+                        {% csrf_token %}
+                        <!-- input para aumentar o disminuir Kg/unidades -->
+                        <label class="cantidad" for="cantidad">Indique la cantidad que desea (máx. {{fruta.stock_producto}}):</label><br>
+                        <input type="number" name="cantidad" id="cantidad" value="1" min="1" max={{fruta.stock_producto}} width="1"><br>
+                        <!-- Botón para agregar productos al carrito -->
+                        <img src="{% static 'Home/images/navbar/cart.png' %}" alt="Carrito de compras" width="80" height="80">
+                        <button type="submit" class="addcart">Añadir al carrito</button>
+                    </form>
                 </div>
             </div>
         {% endfor %}
