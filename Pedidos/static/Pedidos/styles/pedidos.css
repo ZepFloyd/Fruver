@@ -167,18 +167,36 @@ h4 {
 #status-icon {
     color: whitesmoke;
     text-shadow: 1px 1px 1px black;
-    border-radius: 0.3rem;
-    padding: 0.1rem;
+    border-radius: 2rem;
+    padding: 0.2rem;
 }
 
-/*formato para todos los botones*/
+/* From uiverse.io by @aasisodiya */
 button {
-    margin: 0.5rem;
-    padding: 0.3rem 0.2rem;
+    background-color: rgb(238, 238, 238);
+    margin: 0.3rem;
+    border: none;
+    padding: 0.5rem;
     font-size: 1rem;
-    border-radius: 0.3rem;
-}
-
-button:hover {
-    background: lightgrey;
-}
+    border-radius: 2rem;
+    color: rgb(3, 68, 112);
+    border: solid 0.1rem grey;
+    cursor: pointer;
+   }
+   
+button:active {
+    color: white;
+    transform: translateY(0.2rem);
+   }
+   
+button:hover:not(:disabled) {
+    background: rgb(3, 68, 112);
+    color: white;
+    border: solid 0.1rem white;
+    text-shadow: 0.2rem #b4b7bc;
+   }
+   
+button:disabled {
+    cursor: auto;
+    color: grey;
+   }

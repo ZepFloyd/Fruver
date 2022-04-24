@@ -1,0 +1,15 @@
+{% extends "Home/base.html" %} <!-- hereda formato (header y footer en este caso) de template base.html -->
+{% load static %}
+
+{% block title %} Fruver - Hacer Pedido {% endblock title %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'Pedidos/styles/hacerpedido.css' %}"> <!-- referencia a la plantilla .css que corresponda -->
+{% endblock stylesheet %}
+
+{% block content %} <!-- agrega las sgtes. líneas de código dentro del bloque a la plantilla -->
+    <h1>Su Pedido</h1>
+    
+    <section class="productoss">
+        
+    </section>
+{% endblock content %}

@@ -27,14 +27,30 @@ main {
     align-items: center;
 }
 
-/*botón guardar datos*/
+/* From uiverse.io by @aasisodiya */
 button {
-    margin: 1rem;
-    padding: 0.3rem 0.2rem;
+    background-color: rgb(238, 238, 238);
+    margin: 0.5rem;
+    border: none;
+    padding: 0.5rem;
     font-size: 1rem;
-    border-radius: 0.3rem;
-}
-
-button:hover {
-    background: lightgrey;
-}
+    border-radius: 2rem;
+    color: rgb(3, 68, 112);
+    cursor: pointer;
+   }
+   
+button:active {
+    color: white;
+    transform: translateY(0.2rem);
+   }
+   
+button:hover:not(:disabled) {
+    background: rgb(3, 68, 112);
+    color: white;
+    text-shadow: 0.2rem #b4b7bc;
+   }
+   
+button:disabled {
+    cursor: auto;
+    color: grey;
+   }

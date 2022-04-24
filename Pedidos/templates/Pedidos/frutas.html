@@ -24,7 +24,7 @@
             <div class="producto">
                 <div class="box1">
                     <!-- Producto: nombre, precio, stock, categoría, descripción, botón para agregar al carrito -->
-                    <img src="{% static 'Pedidos/images/fruits/bananas.jpg' %}" alt={{fruta.nombre_producto}} width="250" height="250">
+                    <img src="{{fruta.imagen_producto.url}}" alt={{fruta.nombre_producto}} width="250" height="250">
                     <h2>{{fruta.nombre_producto}}<br>1 {{fruta.modo_venta}}</h2> <!-- nombre y modo de venta -->
                 </div>
                 <div class="box2">
@@ -41,8 +41,9 @@
                         <!-- input para aumentar o disminuir Kg/unidades -->
                         <label class="cantidad" for="cantidad">Indique la cantidad que desea (máx. {{fruta.stock_producto}}):</label><br>
                         <input type="number" name="cantidad" id="cantidad" value="1" min="1" max={{fruta.stock_producto}} width="1"><br>
+                        <input type="hidden" value={{fruta.imagen_producto.url}} name="image">
                         <!-- Botón para agregar productos al carrito -->
-                        <img src="{% static 'Home/images/navbar/cart.png' %}" alt="Carrito de compras" width="80" height="80">
+                        <img src="{% static 'Home/images/navbar/cart.png' %}" alt="Carrito de compras" width="50" height="50"><br>
                         <button type="submit" class="addcart">Añadir al carrito</button>
                     </form>
                 </div>

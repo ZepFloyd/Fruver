@@ -11,7 +11,7 @@ class Carrito:
         else:
             self.carrito = carrito
 
-    def agregar(self, producto, cantidad):
+    def agregar(self, producto, cantidad, imagen):
         id = str(producto.id)
         if id not in self.carrito.keys():
             self.carrito[id] = {
@@ -22,6 +22,7 @@ class Carrito:
                 "modo_venta": producto.modo_venta,
                 "stock": producto.stock_producto,
                 "descripcion": producto.descripcion_producto,
+                "imagen": imagen,
                 "cantidad": cantidad,
             }
         else:
@@ -46,6 +47,13 @@ class Carrito:
             self.carrito[id]["subtotal"] -= producto.precio_producto
             if self.carrito[id]["cantidad"] <= 0:
                 self.eliminar(producto)
+            self.guardar_carrito()
+
+    def sumar(self, producto):
+        id = str(producto.id)
+        if id in self.carrito.keys():
+            self.carrito[id]["cantidad"] += 1
+            self.carrito[id]["subtotal"] += producto.precio_producto
             self.guardar_carrito()
 
     def limpiar(self):
