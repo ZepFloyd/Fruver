@@ -9,7 +9,63 @@
 {% block content %} <!-- agrega las sgtes. líneas de código dentro del bloque a la plantilla -->
     <h1>Su Pedido</h1>
     
-    <section class="productoss">
-        
-    </section>
+    <div class="contenidos">
+        <section class="productos" >
+            <h2>Resumen de Productos</h2>
+            {% if request.session.carrito.items %}
+                {% for key, value in request.session.carrito.items %}
+                <div class="producto">
+                    <div class="box1">
+                        <img src="{{value.imagen}}" alt={{value.nombre}} width="100" height="100">
+                    </div>
+                    <div class="box2">
+                        {{value.nombre}}<br>
+                        {{value.cantidad}} 
+                        {% if value.modo_venta == 'Kg' %}
+                            {{value.modo_venta}}
+                        {% elif value.modo_venta == 'Unidad'%} <!-- diferenciamos cuando haya 1 o más de 1 producto para mostrar "unidad" o "unidades" -->
+                            {% if value.cantidad == 1 %}
+                                {{value.modo_venta}}
+                            {% elif value.cantidad > 1 %}
+                                {{value.modo_venta}}es
+                            {% endif %}
+                        {% endif %}
+                        <p>${{value.subtotal}}</p>
+                        </form>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <h2>Carrito Vacío</h2>
+            {% endif %}
+        </section>
+        <section class="detalles">
+            <h2>Detalle del Pedido</h2>
+            <div class="datospedido">
+                <p>Recibe: {{current_user.nombre_usuario}} {{current_user.apellido_usuario}}</p>
+                <p>Dirección: {{current_user.domicilio_usuario}}</p>
+                <p>Comuna: {{current_user.comuna}}</p>
+            </div>
+            <div class="mediodepago">
+                
+            </div>
+            <section>
+                <h2>Total: ${{total_pedido}}</h2>
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <input name="totalpedido" type="hidden" value={{total_pedido}}>
+                    <input name="estadopedido" type="hidden" value="Recibido">
+                    <label for="mediopago">Seleccione el medio de pago</label><br>
+                    <select name="mediopago" id="mediopago">
+                        <option value="Efectivo">Efectivo</option>
+                        <option value="Transferencia">Transferencia</option>
+                        <option value="Tarjeta Crédito/Débito">Tarjeta Crédito/Débito</option>
+                    </select>
+                    <p class="info">Recuerde que si elige Efectivo o Tarjeta, deberá pagar al momento de recibir el pedido (en el caso de tarjeta, se operará con un dispositivo Sumup).
+                       Si elige Transferencia, se desplegarán los datos bancarios del vendedor para recibir en su cuenta el monto del pedido.</p>
+                    <button class="botonpedido" type="submit"><span>Confirmar el Pedido</span></button>
+                </form>
+            </section>
+        </section>
+    </div>
 {% endblock content %}

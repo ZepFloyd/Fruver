@@ -40,13 +40,15 @@
             </div>
             {% endfor %}
         {% else %}
-            <h3>Carrito Vacío</h3>
+            <h2>Carrito Vacío</h2>
         {% endif %}
     </section>
     <section>
         <h2>Total: ${{total_pedido}}</h2>
         <!-- <a href="{% url 'fruver-limpiarcarrito' %}"><button>Limpiar Carrito</button></a> -->
-        <button class="botonpedido"><span>Hacer Pedido</span></button>
+        {% if total_pedido > 0 %} <!-- muestra el botón hacer pedido sólo cuando el carrito contiene items -->
+            <a href="{% url 'fruver-hacerpedido' %}"><button class="botonpedido"><span>Hacer Pedido</span></button></a>
+        {% endif %}
     </section>
 {% endblock content %}
 

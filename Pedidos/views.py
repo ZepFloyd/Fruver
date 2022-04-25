@@ -85,10 +85,45 @@ def limpiarcarrito(request):
 def carrito(request):
     return render(request, 'Pedidos/carrito.html')
 
+
+
+
 #Confirmar preoductos, medio de pago y hacer el pedido
 @login_required(login_url='fruver-acceso')
 def hacerpedido(request):
-    return render(request, 'Pedidos/hacerpedido.html')
+    #Instanciamos al usuario actual para crear el pedido, y también para acceder a sus atributos desde el template, lo pasamos al return en el context
+    current_user = request.user
+    
+    if request.method == 'POST':  
+        #Recogemos el medio de pago, el monto y el estado del pedido desde el POST y los asignamos a avriables
+        pago = request.POST.get('mediopago')
+        monto = int(request.POST.get('totalpedido'))
+        estado = request.POST.get('estadopedido')
+        #creamos un pedido pasando los argumentos de monto, medio de pago, estado y id del cliente
+        order = Pedido.objects.create(monto_pedido=monto, medio_pago=pago, estado_pedido=estado, cliente=current_user)
+        cart = request.session.get("carrito")
+        for value in cart:
+            producto = value.producto_id
+            cantidad = value.cantidad
+            modoventa = value.modo_venta
+            subtotal = value.subtotal
+            precio = subtotal / cantidad
+            detalle = DetallePedido.objects.create(precio_producto=precio, modo_venta=modoventa, cantidad_producto=cantidad, subtotal=subtotal, pedido_id=order.id, producto_id=producto)
+
+
+        #limpiamos el carrito
+        carrito = Carrito(request)
+        carrito.limpiar()
+        #informamos al usuario que su pedido ha sido confirmado y redirigimos a página principal
+        messages.success(request,'¡Su pedido ha sido confirmado!')
+        return redirect('fruver-home')
+    
+    context = {'current_user': current_user} 
+    return render(request, 'Pedidos/hacerpedido.html', context)
+
+
+
+
 
 #Accede a la lista de pedidos activos de los clientes
 @login_required(login_url='fruver-acceso')
