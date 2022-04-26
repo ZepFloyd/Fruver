@@ -1,0 +1,59 @@
+{% extends "Home/mainmenu.html" %} <!-- hereda formato (header y footer en este caso) de template mainmenu.html -->
+{% load static %} <!-- carga la carpeta static para acceder a los archivos que estén dentro de ella -->
+
+{% block title %} Fruver - Detalle de Pedido {% endblock title %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'Pedidos/styles/detallepedido.css' %}"> <!-- referencia a la plantilla .css que corresponda -->
+{% endblock stylesheet %}
+
+{% block content %}
+    <h1 class="info">Detalle del Pedido</h1>
+
+    <div class="contenidos">
+        <section class="cliente">
+            <h2 id="subtitle1">Datos del cliente</h2>
+            <div class="datos">
+                {% for pedido in pedidos %}
+                    <p>Nombre: {{ pedido.cliente.nombre_usuario }} {{ pedido.cliente.apellido_usuario }}</p>
+                    <p>Dirección: {{ pedido.cliente.domicilio_usuario }}</p>
+                    <p>Comuna: {{ pedido.cliente.comuna }}</p>
+                    <p>Teléfono: {{ pedido.cliente.telefono_usuario }}</p>
+                    <p>E-mail: {{ pedido.cliente.email_usuario }}</p>
+                    <p>Fecha Pedido: {{ pedido.fecha_pedido }}</p>
+                    <p>Medio de Pago: {{ pedido.medio_pago }}</p>
+                    <p>Estado del Pedido: {{ pedido.estado_pedido }}</p>
+                    <p id="total">Monto del Pedido: ${{ pedido.monto_pedido }}</p>
+                {% endfor %}
+            </div>
+        </section>
+        <section class="products">
+            <h2 id="subtitle2">Productos del pedido</h2>
+            {% for detalle in detalles %}
+                <div class="producto">
+                    <div class="caja1">
+                        <img src="{{detalle.producto.imagen_producto.url}}" alt={{detalle.producto.nombre_producto}} width="100" height="100">
+                    </div>
+                    <div class="caja2">
+                        {{detalle.producto.nombre_producto}}<br>
+                        {{detalle.cantidad_producto}} 
+                        {% if detalle.modo_venta == 'Kg' %}
+                            {{detalle.modo_venta}}
+                        {% elif detalle.modo_venta == 'Unidad'%} <!-- diferenciamos cuando haya 1 o más de 1 producto para mostrar "unidad" o "unidades" -->
+                            {% if detalle.cantidad_producto == 1 %}
+                                {{detalle.modo_venta}}
+                            {% elif detalle.cantidad_producto > 1 %}
+                                {{detalle.modo_venta}}es
+                            {% endif %}
+                        {% endif %}
+                        <p>${{detalle.subtotal}}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </section>
+    </div>
+    <section class="volver">
+        <a href="/pedidos"><button type="button">Volver a Pedidos</button></a>
+    </section>
+{% endblock content %}
+

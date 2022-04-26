@@ -72,15 +72,15 @@
 }
 
 #pago {
-    width: 12rem;
+    width: 9.5rem;
 }
 
 #fecha {
-    width: 7rem;
+    width: 7.5rem;
 }
 
 #estado {
-    width: 6rem;
+    width: 5.5rem;
 }
 
 /*etiquetas para los nombres de las columnas de la tabla*/
@@ -144,7 +144,7 @@ h4 {
 }
 
 #payment {
-    width: 13.5rem;
+    width: 11.5rem;
 }
 
 #amount {
@@ -153,25 +153,33 @@ h4 {
 
 #date {
     width: 8rem;
+    height: 3rem;
+    font-size: 0.7rem;
 }
 
 #status {
     width: 7rem;
 }
 
-#update-status {
-    width: 15rem;
-    margin: 0.5rem 0.1rem;
-}
-
+/*ícono del estado de un pedido, en colores*/
 #status-icon {
     color: whitesmoke;
     text-shadow: 1px 1px 1px black;
-    border-radius: 2rem;
+    border-radius: 0.5rem;
     padding: 0.2rem;
 }
 
-/* From uiverse.io by @aasisodiya */
+/*botones actualizar estado y ver detalles*/
+#update-status {
+    width: 9.5rem;
+    margin: 0.5rem 0rem;
+}
+
+#view-details {
+    width: 7rem;
+    margin: 0.5rem 0rem;
+}
+
 button {
     background-color: rgb(238, 238, 238);
     margin: 0.3rem;

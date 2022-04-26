@@ -22,13 +22,23 @@ label {
 /*lista desplegable para elegir orden de productos (precio, A-Z, stock)*/
 select {
     margin: 0.5rem;
-    padding: 0.3rem 0.2rem;
     font-size: 1.3rem;
-    border-radius: 0.3rem;
+    border: solid 0.1rem grey;
+    border-radius: 2rem;
+    font-size: 1rem;
+    letter-spacing: 0.09rem;
+    padding: 0.8em 1.2em;
+    color: black;
+    background-color: rgb(221, 221, 221);
 }
 
 select:hover {
-    background: lightgrey;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    color: white;
+    background-color: goldenrod;
+    border: solid 0.1rem white;
+    text-shadow: 1px 1px 1px black;
 }
 
 /*cuerpo de página con listado de productos, ordenados en filas*/
@@ -68,6 +78,62 @@ select:hover {
 .cantidad {
     font-size: 1.1rem;
 }
+
+
+/* botón para ordenar los items */
+.order {
+    position: relative;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.09rem;
+    padding: 0.7em 1.2em;
+    display: inline-block;
+    border: solid 0.1rem grey;
+    border-radius: 2rem;
+    transition: all .2s;
+    font-family: inherit;
+    font-weight: 500;
+    color: black;
+    background-color: rgb(221, 221, 221);
+   }
+   
+.order:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    color: white;
+    background-color: goldenrod;
+    text-shadow: 1px 1px 1px black;
+    border: solid 0.1rem white;
+   }
+   
+.order:active {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+   }
+   
+.order::after {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all .4s;
+   }
+   
+.order::after {
+    background-color: white;
+   }
+   
+.order:hover::after {
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0;
+   }
+
+
 
 /*botón añadir al carrito carrito*/
 .addcart {

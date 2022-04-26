@@ -14,26 +14,25 @@
             <h2>Resumen de Productos</h2>
             {% if request.session.carrito.items %}
                 {% for key, value in request.session.carrito.items %}
-                <div class="producto">
-                    <div class="box1">
-                        <img src="{{value.imagen}}" alt={{value.nombre}} width="100" height="100">
-                    </div>
-                    <div class="box2">
-                        {{value.nombre}}<br>
-                        {{value.cantidad}} 
-                        {% if value.modo_venta == 'Kg' %}
-                            {{value.modo_venta}}
-                        {% elif value.modo_venta == 'Unidad'%} <!-- diferenciamos cuando haya 1 o más de 1 producto para mostrar "unidad" o "unidades" -->
-                            {% if value.cantidad == 1 %}
+                    <div class="producto">
+                        <div class="box1">
+                            <img src="{{value.imagen}}" alt={{value.nombre}} width="100" height="100">
+                        </div>
+                        <div class="box2">
+                            {{value.nombre}}<br>
+                            {{value.cantidad}} 
+                            {% if value.modo_venta == 'Kg' %}
                                 {{value.modo_venta}}
-                            {% elif value.cantidad > 1 %}
-                                {{value.modo_venta}}es
+                            {% elif value.modo_venta == 'Unidad'%} <!-- diferenciamos cuando haya 1 o más de 1 producto para mostrar "unidad" o "unidades" -->
+                                {% if value.cantidad == 1 %}
+                                    {{value.modo_venta}}
+                                {% elif value.cantidad > 1 %}
+                                    {{value.modo_venta}}es
+                                {% endif %}
                             {% endif %}
-                        {% endif %}
-                        <p>${{value.subtotal}}</p>
-                        </form>
+                            <p>${{value.subtotal}}</p>
+                        </div>
                     </div>
-                </div>
                 {% endfor %}
             {% else %}
                 <h2>Carrito Vacío</h2>
@@ -45,9 +44,6 @@
                 <p>Recibe: {{current_user.nombre_usuario}} {{current_user.apellido_usuario}}</p>
                 <p>Dirección: {{current_user.domicilio_usuario}}</p>
                 <p>Comuna: {{current_user.comuna}}</p>
-            </div>
-            <div class="mediodepago">
-                
             </div>
             <section>
                 <h2>Total: ${{total_pedido}}</h2>

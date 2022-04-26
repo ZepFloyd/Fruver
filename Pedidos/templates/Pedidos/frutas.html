@@ -11,12 +11,16 @@
     <section class="combobox" >
         <!-- lista desplegable para ordenar los productos-->
         <label for="ordenar">Elija cómo desea ver los productos:</label><br>
-        <select name="ordenar" id="ordenar">
-            <option value="1">Precio de menor a mayor</option>
-            <option value="2">Precio de mayor a menor</option>
-            <option value="3">Orden alfabético</option>
-            <option value="4">Stock disponible</option>
-        </select><br><br>
+        <form action="{% url 'fruver-filtrarfrutas' %}" method="POST">
+            {% csrf_token %}
+            <select name="ordenar" id="ordenar">
+                <option value="precio_producto">Precio de menor a mayor</option>
+                <option value="-precio_producto">Precio de mayor a menor</option>
+                <option value="nombre_producto">Orden alfabético</option>
+                <option value="-stock_producto">Stock disponible</option>
+            </select>
+            <button type="submit" class="order">Ordenar</button>
+        </form><br>
     </section>
     <section class="productoss" >
         <!-- iteramos sobre el diccionario que llega desde la view para acceder a los atributos de cada objeto Producto del tipo Fruta -->
@@ -64,5 +68,3 @@
             </script>
         {% endfor %}
 {% endblock messages %}
-
-<script type="text/javascript" src="{% static 'Pedidos/scripts/carrito.js' %}"></script>

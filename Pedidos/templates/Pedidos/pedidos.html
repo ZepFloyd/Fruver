@@ -9,28 +9,28 @@
 
 {% block content %}
     <h1 class="info">Registro de Pedidos</h1>
-    <h2 class="info">Gestione el estado de los pedidos de los clientes de Fruver</h2>
+    <h2 class="info">Gestione el estado de los pedidos de clientes</h2>
     <p class="info">Para acceder a los pedidos según su estado, seleccione una de las opciones que se muestran a continuación:</p>
     <div class="container0">
         <div class="estados">
             <img src="{% static 'Pedidos/images/status/todos.png' %}" alt="Ver todos" width="65" height="65"/>
-            <button type="button" class="filtros">Todos los Pedidos</button>
+            <a href="{% url 'fruver-pedidos' %}"><button type="button" class="filtros">Todos los Pedidos</button></a>
         </div>
         <div class="estados">
             <img src="{% static 'Pedidos/images/status/recibido.png' %}" alt="Ver recibidos" width="65" height="65"/>
-            <button type="button" class="filtros">Pedidos Recibidos</button>
+            <a href="{% url 'fruver-filtrarpedidos' 'Recibido' %}"><button type="button" class="filtros">Pedidos Recibidos</button></a>
         </div>
         <div class="estados">
             <img src="{% static 'Pedidos/images/status/armado.png' %}" alt="Ver armados" width="65" height="65"/>
-            <button type="button" class="filtros">Pedidos Armados</button>
+            <a href="{% url 'fruver-filtrarpedidos' 'Armado' %}"><button type="button" class="filtros">Pedidos Armados</button></a>
         </div>
         <div class="estados">
             <img src="{% static 'Pedidos/images/status/despachado.png' %}" alt="Ver despachados" width="65" height="65"/>
-            <button type="button" class="filtros">Pedidos Despachados</button>
+            <a href="{% url 'fruver-filtrarpedidos' 'Despachado' %}"><button type="button" class="filtros">Pedidos Despachados</button></a>
         </div>
         <div class="estados">
             <img src="{% static 'Pedidos/images/status/pagado.png' %}" alt="Ver pagados" width="65" height="65"/>
-            <button type="button" class="filtros">Pedidos Pagados</button>
+            <a href="{% url 'fruver-filtrarpedidos' 'Pagado' %}"><button type="button" class="filtros">Pedidos Pagados</button></a>
         </div>
     </div>
     <div class="container1">
@@ -90,24 +90,38 @@
                                 <p id="status-icon" style="background-color:forestgreen;">{{pedido.estado_pedido}}</p>
                             {% endif %}
                         </div>
-                        <a href="#" id="update-status"><button type="button">Actualizar Estado</button></a>
+                        <a href="{% url 'fruver-detallepedido' pedido.id %}" id="view-details"><button type="button">Ver Detalle</button></a>
+                        <a href="#" onclick="actualizarPedido({{ pedido.id }})" id="update-status"><button type="button">Actualizar Estado</button></a>
                     </div>
                 {% endfor %}
             </div>      
         </div>
         <!-- <button type="button" id="crearvendedor">Crear nuevo vendedor</button> --> <!-- muestra pop up para ingresar datos y crear nuevo vendedor -->
     </div>
+    <script src="{% static 'Pedidos/scripts/actualizarpedido.js' %}"></script>
 {% endblock content %}
+
+
 
 <!-- block para mensajes y alertas pop-up -->
 {% block messages %}
     {% for message in messages %}
-        <script>
-            Swal.fire({
-                "title": "{{message}}",
-                "icon": "success",
-                "confirmButtonColor": "green"
-            })
-        </script>
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+            <script>
+                Swal.fire({
+                        "title": "{{message}}",
+                        "icon": "success",
+                        "confirmButtonColor": "green"
+                })
+            </script>
+        {% elif message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+            <script>
+                Swal.fire({
+                        "title": "{{message}}",
+                        "icon": "warning",
+                        "confirmButtonColor": "goldenrod"
+                })
+            </script>
+        {% endif %}
     {% endfor %}
 {% endblock messages %}
