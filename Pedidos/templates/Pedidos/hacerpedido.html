@@ -11,7 +11,7 @@
     
     <div class="contenidos">
         <section class="productos" >
-            <h2>Resumen de Productos</h2>
+            <h2 id="lefttitle">Resumen de Productos</h2>
             {% if request.session.carrito.items %}
                 {% for key, value in request.session.carrito.items %}
                     <div class="producto">
@@ -37,17 +37,24 @@
             {% else %}
                 <h2>Carrito Vacío</h2>
             {% endif %}
+            <p style="color: firebrick; font-weight: bold; width: 100%;">Pedido sujeto a confirmación de stock disponible</p>
         </section>
         <section class="detalles">
-            <h2>Detalle del Pedido</h2>
+            <h2 id="righttitle">Antes de confirmar su pedido</h2>
             <div class="datospedido">
-                <p>Recibe: {{current_user.nombre_usuario}} {{current_user.apellido_usuario}}</p>
-                <p>Dirección: {{current_user.domicilio_usuario}}</p>
-                <p>Comuna: {{current_user.comuna}}</p>
+                <div class="datospedidoleft">
+                    <p>Recibe: {{current_user.nombre_usuario}} {{current_user.apellido_usuario}}</p>
+                    <p>Dirección: {{current_user.domicilio_usuario}}</p>
+                    <p>Comuna: {{current_user.comuna}}</p>
+                    <p>Fecha Pedido: {{ fecha_pedido }} hrs.</p>
+                </div>
+                <div class="datospedidoright">
+                    <p>Fecha estimada de entrega:<br>{{ fecha_estimada }}</p>
+                    <h3>Total a Pagar: ${{total_pedido}}</h3>
+                </div>
             </div>
-            <section>
-                <h2>Total: ${{total_pedido}}</h2>
-                <form action="" method="POST">
+            <section class="mediodepago">
+                <form action="" method="POST" id="payment">
                     {% csrf_token %}
                     <input name="totalpedido" type="hidden" value={{total_pedido}}>
                     <input name="estadopedido" type="hidden" value="Recibido">
@@ -57,11 +64,31 @@
                         <option value="Transferencia">Transferencia</option>
                         <option value="Tarjeta Crédito/Débito">Tarjeta Crédito/Débito</option>
                     </select>
-                    <p class="info">Recuerde que si elige Efectivo o Tarjeta, deberá pagar al momento de recibir el pedido (en el caso de tarjeta, se operará con un dispositivo Sumup).
-                       Si elige Transferencia, se desplegarán los datos bancarios del vendedor para recibir en su cuenta el monto del pedido.</p>
-                    <button class="botonpedido" type="submit"><span>Confirmar el Pedido</span></button>
                 </form>
             </section>
+            <section class="parrafo">
+                <p class="info">Recuerde que si elige Efectivo o Tarjeta, deberá pagar al momento de recibir el pedido (en el caso de tarjeta, se operará con un dispositivo Sumup).
+                Si elige Transferencia, deberá utilizar los datos bancarios del vendedor detallados a continuación para transferir a su cuenta el monto del pedido.</p>
+            </section>
+            <div class="datospedido">
+                <h3>Datos bancarios para transferencia</h3>
+                {% for cuenta in banco %}
+                    <div class="bankdataleft">
+                        <p class="bankdata">Titular: {{ cuenta.titular }} </p>
+                        <p class="bankdata">RUT: {{ cuenta.rut }} </p>
+                        <p class="bankdata">Banco: {{ cuenta.banco }} </p>
+                    </div>
+                    <div class="bankdataright">
+                        <p class="bankdata">Tipo de Cuenta: {{ cuenta.tipo_cuenta }} </p>
+                        <p class="bankdata">Número de Cuenta: {{ cuenta.numero_cuenta }} </p>
+                        <p class="bankdata">E-mail: {{ cuenta.email }} </p>
+                    </div>
+                {% endfor %}
+            </div>
+            {% if total_pedido > 0 %}
+                <button class="botonpedido" type="submit" form="payment"><span>Confirmar el Pedido</span></button>
+            {% endif %}
         </section>
     </div>
+    <a href="{% url 'fruver-carrito' %}"><button class="order" id="backtocart">Volver al carrito</button></a>
 {% endblock content %}

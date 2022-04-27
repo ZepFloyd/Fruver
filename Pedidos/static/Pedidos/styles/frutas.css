@@ -137,6 +137,37 @@ select:hover {
    }
 
 
+/*input para indicar la cantidad de productos a añadir al carrito*/
+#cantidad {
+    margin: 0.2rem;
+    font-size: 1rem;
+    border: solid 0.1rem grey;
+    border-radius: 0.1rem;
+    letter-spacing: 0.09rem;
+    padding: 0.2em 0.1em;
+    color: black;
+    background-color: white;
+    text-align: center;
+    width: 5rem;
+}
+
+#cantidad:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    color: white;
+    background-color: goldenrod;
+    border: solid 0.1rem white;
+    text-shadow: 1px 1px 1px black;
+}
+
+
+/*div para imagen y boton añadir carrito*/
+.shoppingcart {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
 
 /*botón añadir al carrito carrito*/
 .addcart {

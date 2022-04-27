@@ -64,11 +64,11 @@ class CuentaBancaria(models.Model):
     rut = models.CharField(max_length=12)
     banco = models.CharField(max_length=30)
     tipo_cuenta = models.CharField(max_length=20)
-    numero_cuenta = models.CharField(primary_key=True, max_length=40) #primary key
+    numero_cuenta = models.CharField(max_length=40)
     email = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.numero_cuenta
+        return 'Cuenta N° '+self.numero_cuenta+' de '+self.titular
 
 
 

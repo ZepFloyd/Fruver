@@ -34,7 +34,11 @@
                 <div class="box2">
                     <h3></h3><!-- elemento vacío para centrar bien la columna -->
                     <h3>Precio:<br>${{verdura.precio_producto}}{% if verdura.modo_venta == 'Kg'%}/Kg{% elif verdura.modo_venta == 'Unidad'%}/unid.{% endif %}</h3>
-                    <h3>Stock:<br>{{verdura.stock_producto}} {% if verdura.modo_venta == 'Kg'%}Kg{% elif verdura.modo_venta == 'Unidad'%}unid.{% endif %}</h3>
+                    {% if verdura.stock_producto == 0 %}
+                        <h3 style="color: firebrick">Sin Stock</h3>
+                    {% elif verdura.stock_producto > 0 %}
+                        <h3>Stock:<br>{{verdura.stock_producto}} {% if verdura.modo_venta == 'Kg'%}Kg{% elif verdura.modo_venta == 'Unidad'%}unid.{% endif %}</h3>
+                    {% endif %}
                     <h3>Categoría:<br>{{verdura.tipo_producto}}</h3>
                 </div>
                 <div class="box3">
@@ -47,8 +51,10 @@
                         <input type="number" name="cantidad" id="cantidad" value="1" min="1" max={{verdura.stock_producto}} width="1"><br>
                         <input type="hidden" value={{verdura.imagen_producto.url}} name="image">
                         <!-- Botón para agregar productos al carrito -->
-                        <img src="{% static 'Home/images/navbar/cart.png' %}" alt="Carrito de compras" width="50" height="50"><br>
-                        <button type="submit" class="addcart">Añadir al carrito</button>
+                        <div class="shoppingcart">
+                            <img src="{% static 'Home/images/navbar/cart.png' %}" alt="Carrito de compras" width="50" height="50" style="margin:1rem 1.5rem;">
+                            <button type="submit" class="addcart">Añadir al carrito</button>
+                        </div>
                     </form>
                 </div>
             </div>

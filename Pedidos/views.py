@@ -7,7 +7,8 @@ from django.contrib import messages
 from .models import *
 from Productos.models import Producto
 from Pedidos.carrito import Carrito
-
+from Home.models import CuentaBancaria
+from datetime import datetime, timedelta
 
 #ver frutas a la venta
 def frutas(request):
@@ -108,6 +109,16 @@ def carrito(request):
 def hacerpedido(request):
     #Instanciamos al usuario actual para crear el pedido, y también para acceder a sus atributos desde el template, lo pasamos al return dentro de la variable context
     current_user = request.user
+    #Instanciamos el objeto de cuenta bancaria para mostrar los datos al cliente
+    #en caso de que desee pagar vía transferencia
+    banco = CuentaBancaria.objects.filter(id=1)
+    #Mediante la librería datetime de python asignamos la fecha de hoy a la variable ahora, y definimos una variable dias_entrega
+    #para informar la fecha estimada de entrega del pedido
+    ahora = datetime.now()
+    dias_entrega = datetime.now()+timedelta(days=2)
+    #damos formato a la fecha, para pasarla luego al return en el diccionario context
+    fecha_pedido = ahora.strftime("%d-%m-%Y %H:%M")
+    fecha_estimada = dias_entrega.strftime("%d-%m-%Y")
     if request.method == 'POST':  
         #Recogemos el medio de pago, el monto y el estado del pedido desde el POST y los asignamos a variables
         pago = request.POST.get('mediopago')
@@ -130,10 +141,8 @@ def hacerpedido(request):
         #informamos al usuario que su pedido ha sido confirmado y redirigimos a la página del carrito
         messages.success(request,'¡Su pedido ha sido confirmado!')
         return redirect('fruver-carrito')
-    context = {'current_user': current_user} 
+    context = {'current_user': current_user, 'banco': banco, 'fecha_estimada': fecha_estimada, 'fecha_pedido': fecha_pedido} 
     return render(request, 'Pedidos/hacerpedido.html', context)
-
-
 
 
 

@@ -13,6 +13,11 @@ h1 {
     text-shadow: 1px 1px 1px black;
 }
 
+/*Textos carrito vacío y monto toal*/
+#emptycart, #totalorder {
+    color: rgb(61, 61, 61)
+}
+
 /*cuerpo de página con listado de productos, ordenados en filas*/
 .productoss {
     display: flex;
