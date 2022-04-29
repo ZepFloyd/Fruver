@@ -59,9 +59,9 @@
             </form>
         </div>
     </div><br>
-    <div class="red"> <!-- mensajes de errores -->
-        {{form.errors}}
-    </div>
+    <!-- <div>
+       <p class="red">{{form.errors.values}}</p> 
+    </div> -->
 
     <div class="registro">
         <h2>Importante</h2>
@@ -76,13 +76,13 @@
 
         //Query en todos input fields
         var form_fields = document.getElementsByTagName('input')
-        form_fields[1].placeholder='ej: Juan';
-        form_fields[2].placeholder='ej: Pérez';
-        form_fields[3].placeholder='Mínimo 8 caracteres';
-        form_fields[4].placeholder='Reingrese su contraseña';
-        form_fields[5].placeholder='Nueva Av. 561';
-        form_fields[6].placeholder='ej: micorreo@mail.com';
-        form_fields[7].placeholder='ej: 56944441111';
+        form_fields[1].placeholder='ej: micorreo@mail.com';
+        form_fields[2].placeholder='ej: Juan';
+        form_fields[3].placeholder='ej: Pérez';
+        form_fields[4].placeholder='ej: 56944441111';
+        form_fields[5].placeholder='Letras y números mín. 8';
+        form_fields[6].placeholder='Reingrese su contraseña';
+        form_fields[7].placeholder='Nueva Av. 561';
 
 
         for (var field in form_fields){	
@@ -92,3 +92,22 @@
         select_field.className = 'form-control'
     </script>
 {% endblock content %}
+
+<!-- accedemos al atributo errors de la clase Form (viene con Django). Este atributo es un diccionario,
+    cuyas keys son el nombre del campo dónde ocurrió el error, y los values son c/u una lista de strings que representan los errores,
+    ya que cada campo podría tener más de 1 tipo de error -->
+{% block messages %}
+    {% if form.errors %}
+        {% for error in form.errors.values %}
+            {% for message in error %}
+                <script>
+                    Swal.fire({
+                            "title": "{{message}}",
+                            "icon": "error",
+                            "confirmButtonColor": "firebrick"
+                    })
+                </script>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+{% endblock messages %}

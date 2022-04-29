@@ -46,6 +46,15 @@
                         "confirmButtonColor": "royalblue"
                 })
             </script>
+        {% elif message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+            <script>
+                Swal.fire({
+                    "title": "{{message}}",
+                    "text":"Primero debe cerrar la sesión actual",
+                    "icon": "warning",
+                    "confirmButtonColor": "goldenrod"
+                })
+            </script>
         {% endif %}
     {% endfor %}
 {% endblock messages %}

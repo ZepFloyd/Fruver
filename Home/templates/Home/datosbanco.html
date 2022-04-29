@@ -30,6 +30,7 @@
                 {{form.numero_cuenta}}<br><br>
                 <label for="email">Ingrese su correo electrónico</label><br>
                 {{form.email}}<br><br>
+                <p>Última modificación hecha por:<br>{{cuenta.vendedor.nombre_usuario}} {{cuenta.vendedor.apellido_usuario}} el {{fecha}} a las {{hora}} hrs.</p>
                 <button type="submit" id="submit">Guardar Datos</button>
             </form>
             <a href="/mainmenu"><button type="button">Volver al menú principal</button></a>

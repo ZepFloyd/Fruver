@@ -55,7 +55,7 @@ class FormularioCrearUsuario(UserCreationForm):
             ('San Joaquín', 'San Joaquín'),
             ('San Miguel', 'San Miguel'),
             ('San Ramón', 'San Ramón'),
-            ('Santiago Centro', 'Santiago Centro'),
+            ('Santiago', 'Santiago'),
             ('Vitacura', 'Vitacura')
             )
 
@@ -112,7 +112,7 @@ class FormularioEditarVendedor(forms.ModelForm):
             ('San Joaquín', 'San Joaquín'),
             ('San Miguel', 'San Miguel'),
             ('San Ramón', 'San Ramón'),
-            ('Santiago Centro', 'Santiago Centro'),
+            ('Santiago', 'Santiago'),
             ('Vitacura', 'Vitacura')
             )
 

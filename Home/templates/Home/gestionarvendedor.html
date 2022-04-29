@@ -118,9 +118,9 @@
                         <button type="button" id="cancelar-crearvendedor">Cancelar</button>
                     </div>
                 </form>
-                <div class="red"> <!-- muestra en pantalla con letras rojas errores al intentar registrar un nuevo usuario -->
+                <!-- <div class="red">
                     {{form.errors}}
-                </div>
+                </div> -->
             </div>
         </div><br>
     </div>
@@ -193,4 +193,20 @@
             })
         </script>
     {% endfor %}
+    <!-- accedemos al atributo errors de la clase Form (viene con Django). Este atributo es un diccionario,
+    cuyas keys son el nombre del campo dónde ocurrió el error, y los values son c/u una lista de strings que representan los errores,
+    ya que cada campo podría tener más de 1 tipo de error -->
+    {% if form.errors %}
+        {% for error in form.errors.values %}
+            {% for message in error %}
+                <script>
+                    Swal.fire({
+                            "title": "{{message}}",
+                            "icon": "error",
+                            "confirmButtonColor": "firebrick"
+                    })
+                </script>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
 {% endblock messages %}

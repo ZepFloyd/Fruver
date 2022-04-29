@@ -19,7 +19,7 @@ function eliminarVendedor(id) {
         "showCancelButton":true,
         "cancelButtonText":"Cancelar",
         "confirmButtonText":"Sí, eliminar",
-        "confirmButtonColor": "red",
+        "confirmButtonColor": "firebrick",
     })
     .then(function(result) {
         if(result.isConfirmed) {

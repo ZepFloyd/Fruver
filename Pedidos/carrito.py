@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+from Productos.models import Producto
 
 class Carrito:
     def __init__(self,request):
@@ -59,3 +61,21 @@ class Carrito:
     def limpiar(self):
         self.session["carrito"] = {}
         self.session.modified = True
+
+    def expiracion(self):
+        carrito = self.session.get('carrito')
+        if len(carrito) > 0:
+            inicio_sesion = datetime.now()
+            expiracion_carrito = datetime.now()+timedelta(seconds=40)
+            while inicio_sesion != expiracion_carrito:
+                inicio_sesion = datetime.now()
+                if inicio_sesion == expiracion_carrito:
+                    for key, value in self.session["carrito"].items():
+                        cantidad = self.carrito["cantidad"]
+                        producto = Producto.objects.get(id=key)
+                        producto.stock_producto += cantidad
+                        producto.save()
+                        del self.carrito[key]
+                        self.guardar_carrito()
+
+

@@ -1,7 +1,8 @@
 from django.db import models
 #from Home.models import *
 
-
+#Tabla que almacena los pedidos de clientes. Tiene una llave foránea hacia tabla de usuario (cliente),
+# y una relación N es a N (detalle_pedido) con la tabla Productos
 class Pedido(models.Model):
     fecha_pedido = models.DateTimeField(auto_now_add=True)
     monto_pedido = models.IntegerField(default=0)
@@ -16,7 +17,7 @@ class Pedido(models.Model):
 
 #Tabla auxiliar intermedia entre Pedido y Productos para manejar la relación N:N
 class DetallePedido(models.Model):
-    pedido = models.ForeignKey('Pedido', on_delete=models.CASCADE)
+    pedido = models.ForeignKey('Pedido', on_delete=models.DO_NOTHING)
     producto = models.ForeignKey('Productos.Producto', on_delete=models.DO_NOTHING)
     precio_producto = models.IntegerField(default=0)
     modo_venta = models.CharField(max_length=30, null=True)
@@ -24,4 +25,4 @@ class DetallePedido(models.Model):
     subtotal = models.IntegerField(default=0)
 
     def __str__(self):
-        return str(self.id_pedido) + ' Item: ' + str(self.id_producto) + ' ' + str(self.cantidad_producto) + ' ' + self.modo_venta
+        return str(self.pedido) + ' Item: ' + str(self.producto) + ' ' + str(self.cantidad_producto) + ' ' + self.modo_venta

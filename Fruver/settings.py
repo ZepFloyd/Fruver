@@ -90,8 +90,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'fruverdb',
-        'USER': '', #empty for security reasons
-        'PASSWORD': '', #empty for security reasons
+        'USER': 'root',
+        'PASSWORD': '1234',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }

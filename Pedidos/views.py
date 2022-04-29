@@ -107,6 +107,11 @@ def carrito(request):
 #Confirmar preoductos, medio de pago y hacer el pedido
 @login_required(login_url='fruver-acceso')
 def hacerpedido(request):
+    #instanciamos el carrito y verificamos que contenga items, si no hay, se redirige al usuario a la página del carrito
+    #así evitamos que un usuario intente hacer un pedido con el carrito vacío, ingresando mediante la URL de hacerpedido
+    cart = request.session.get('carrito')
+    if len(cart) == 0:
+        return redirect('fruver-carrito')
     #Instanciamos al usuario actual para crear el pedido, y también para acceder a sus atributos desde el template, lo pasamos al return dentro de la variable context
     current_user = request.user
     #Instanciamos el objeto de cuenta bancaria para mostrar los datos al cliente
@@ -149,6 +154,10 @@ def hacerpedido(request):
 #Accede a la lista de pedidos activos de los clientes
 @login_required(login_url='fruver-acceso')
 def pedidos(request):
+    #instanciamos al usuario actual y verificamos que sea staff, si no lo es, se le redirige a la página principal
+    current_user = request.user
+    if current_user.is_staff != 1:
+        return redirect('fruver-home')
     #Hacemos query sobre todas las ocurrencias de la tabla Pedido, para iterar sobre ellas en el template
     pedidos = Pedido.objects.all()
     #Hacemos query sobre el objeto vinculado con la llave foránea de tabla Pedido, en este caso, su atributo cliente se corresponde con tabla Usuario,
@@ -162,6 +171,10 @@ def pedidos(request):
 #Filtra y muestra los pedidos según su estado
 @login_required(login_url='fruver-acceso')
 def filtrarpedidos(request, estado):
+    #instanciamos al usuario actual y verificamos que sea staff, si no lo es, se le redirige a la página principal
+    current_user = request.user
+    if current_user.is_staff != 1:
+        return redirect('fruver-home')
     pedidos = Pedido.objects.filter(estado_pedido=estado)
     clientes = Pedido.objects.select_related()
     if not pedidos:
@@ -184,6 +197,10 @@ def actualizarpedido(request, pedido_id, estado):
 #Accede al detalle de un pedido
 @login_required(login_url='fruver-acceso')
 def detallepedido(request, pedido_id):
+    #instanciamos al usuario actual y verificamos que sea staff, si no lo es, se le redirige a la página principal
+    current_user = request.user
+    if current_user.is_staff != 1:
+        return redirect('fruver-home')
     #Obtenemos un queryset del Pedido, lo que nos permitirá iterar sobre sus atributos
     pedidos = Pedido.objects.filter(pk=pedido_id)
     clientes = Pedido.objects.select_related()
