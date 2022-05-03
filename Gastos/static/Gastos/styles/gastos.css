@@ -1,0 +1,252 @@
+/*titulo y texto de informacion*/
+.info {
+    margin: 0.1rem
+}
+
+/*div para almacenar los links con las listas de pedidos según su estado*/
+.container0 {
+    display: flex;
+    flex-flow: row wrap;
+    margin: 2rem 2.7rem 0.5rem;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: rgb(117, 117, 117);
+    border: solid 0.2rem azure;
+    width: 95%;
+}
+
+/*divs para cada icono de estado con su botón*/
+.estados {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5rem 2rem 0rem;
+}
+
+/*div para almacenar y centrar el container con los pedidos y los botones*/
+.container1 {
+    display: flex;
+    flex-flow: column wrap;
+    margin: 1rem 2.7rem;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(184, 184, 184);
+    border: solid 0.2rem azure;
+    width: 95%;
+}
+
+/*div para almacenar los titulos de las columnas, ordenados en fila*/
+.fila-titulos {
+    margin: 1rem 1rem 0rem;
+    background-color: whitesmoke;
+    border: solid 0.2rem rgb(61, 61, 61);
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 95%;
+}
+
+/*div para cada columna dentro del div fila-titulos*/
+.titulo-columnas {
+    margin: 0.5rem 1.5rem;
+    width: 10rem;
+}
+
+/*se ajusta la anchura de los títulos de columna individualmente para que se alineen con las lista de pedidos*/
+#fecha {
+    width: 9rem;
+}
+
+#frutas {
+    width: 6rem;
+}
+
+#verduras {
+    width: 6rem;
+}
+
+#bolsas {
+    width: 6rem;
+}
+
+#subtotal {
+    width: 6rem;
+}
+
+#otrosgastos {
+    width: 7rem;
+}
+
+#totaldia {
+    width: 7rem;
+}
+
+/*etiquetas para los nombres de las columnas de la tabla*/
+h4 {
+    font-weight: bold;
+    margin: 0;
+}
+
+/*tabla con el listado de pedidos*/
+.lista-pedidos {
+    margin: 0.5rem 1rem 0.5rem;
+    background-color: whitesmoke;
+    border: solid 0.2rem rgb(61, 61, 61);
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    width: 95%;
+}
+
+/*filas dentro de la lista para cada pedido que exista en el registro, ordenadas en columnas*/
+.fila-datos {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+}
+
+/*fila individual con datos ordenados horizontalmente*/
+.datos {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: center;
+    width: 100%;
+}
+
+.datos:hover {
+    background-color: lightgrey;
+}
+
+/*divs individuales para cada dato de los pedidos*/
+.datospedido {
+    margin: 0.01rem 1rem;
+    width: 9rem;
+}
+
+/*se agranda el ancho del campo para los datos de los pedidos, ya que si son muy largos podrían solaparse con el siguiente dato*/
+#date {
+    width: 10rem;
+}
+
+#fruits {
+    width: 7rem;
+}
+
+#vegetables {
+    width: 7rem;
+}
+
+#bags {
+    width: 7rem;
+}
+
+#total-products {
+    width: 7rem;
+}
+
+#amount {
+    width: 7rem;
+}
+
+
+/*botones actualizar estado y ver detalles*/
+#edit {
+    width: 9.5rem;
+    margin: 0.5rem 0rem;
+}
+
+#view-details {
+    width: 12rem;
+    margin: 0.5rem 0rem;
+}
+
+button {
+    background-color: rgb(238, 238, 238);
+    margin: 0.3rem;
+    border: none;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 2rem;
+    color: rgb(3, 68, 112);
+    border: solid 0.1rem grey;
+    cursor: pointer;
+   }
+   
+button:active {
+    color: white;
+    transform: translateY(0.2rem);
+   }
+   
+button:hover:not(:disabled) {
+    background: rgb(3, 68, 112);
+    color: white;
+    border: solid 0.1rem white;
+    text-shadow: 0.2rem #b4b7bc;
+   }
+   
+button:disabled {
+    cursor: auto;
+    color: grey;
+   }
+
+
+
+
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*POP-UP AGREGAR GASTOS DEL DÍA*/
+
+.popup-creargasto {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+/*contenedor para el signupbox, así se lo puede alinear al centro de la página*/
+.mainbox {
+    width: 70%;
+    height: 85%;
+    /*background-color: rgb(184, 184, 184);
+    border: solid 0.2rem azure;*/
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+/*contenedor para box1, box2 (los inputs y la lista de comunas del formulario) y el botón de registro*/
+.gastobox {
+    margin: 0;
+    background: rgb(81, 101, 145);
+    border: solid 0.2rem azure;
+    color: white;
+    border-radius: 0.3rem;
+    width: 60%;
+    height: 50%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.nuevo-gasto-titulo {
+    margin: 0rem;
+    width: 50%
+}
+
+
+

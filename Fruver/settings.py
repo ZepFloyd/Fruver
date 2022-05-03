@@ -32,15 +32,16 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'Home.apps.HomeConfig', #Home app
-    'Pedidos.apps.PedidosConfig', #Pedidos app
-    'Productos.apps.ProductosConfig', #Productos app
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'Home.apps.HomeConfig', #Home app
+    'Pedidos.apps.PedidosConfig', #Pedidos app
+    'Productos.apps.ProductosConfig', #Productos app
+    'Gastos.apps.GastosConfig', #Gastos app
 ]
 
 MIDDLEWARE = [

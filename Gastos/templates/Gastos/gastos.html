@@ -1,0 +1,131 @@
+{% extends "Home/mainmenu.html" %} <!-- hereda formato (header y footer en este caso) de template mainmenu.html -->
+{% load static %} <!-- carga la carpeta static para acceder a los archivos que estén dentro de ella -->
+
+{% block title %} Fruver - Gastos {% endblock title %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'Gastos/styles/gastos.css' %}"> <!-- referencia a la plantilla .css que corresponda -->
+{% endblock stylesheet %}
+
+{% block content %}
+    <h1 class="info">Registro de Gastos</h1>
+    <h2 class="info">Gestione los gastos de la empresa</h2>
+    <p class="info">Para acceder a los pedidos según su estado, seleccione una de las opciones que se muestran a continuación:</p>
+    <div class="container0">
+        <div class="estados">
+            <img src="{% static 'Pedidos/images/status/todos.png' %}" alt="Ver todos" width="65" height="65"/>
+            <a href="{% url 'fruver-pedidos' %}"><button type="button" class="filtros">Todos los Pedidos</button></a>
+        </div>
+        <div class="estados">
+            <img src="{% static 'Pedidos/images/status/recibido.png' %}" alt="Ver recibidos" width="65" height="65"/>
+            <a href="{% url 'fruver-filtrarpedidos' 'Recibido' %}"><button type="button" class="filtros">Pedidos Recibidos</button></a>
+        </div>
+        <div class="estados">
+            <img src="{% static 'Pedidos/images/status/armado.png' %}" alt="Ver armados" width="65" height="65"/>
+            <a href="{% url 'fruver-filtrarpedidos' 'Armado' %}"><button type="button" class="filtros">Pedidos Armados</button></a>
+        </div>
+        <div class="estados">
+            <img src="{% static 'Pedidos/images/status/despachado.png' %}" alt="Ver despachados" width="65" height="65"/>
+            <a href="{% url 'fruver-filtrarpedidos' 'Despachado' %}"><button type="button" class="filtros">Pedidos Despachados</button></a>
+        </div>
+        <div class="estados">
+            <img src="{% static 'Pedidos/images/status/pagado.png' %}" alt="Ver pagados" width="65" height="65"/>
+            <a href="{% url 'fruver-filtrarpedidos' 'Pagado' %}"><button type="button" class="filtros">Pedidos Pagados</button></a>
+        </div>
+    </div>
+    <div class="container1">
+        <div class="fila-titulos">
+            <div class="titulo-columnas" id="fecha">
+                <h4>Fecha</h4>
+            </div>
+            <div class="titulo-columnas" id="frutas">
+                <h4>Frutas</h4>
+            </div>
+            <div class="titulo-columnas" id="verduras">
+                <h4>Verduras</h4>
+            </div>
+            <div class="titulo-columnas" id="bolsas">
+                <h4>Bolsas</h4>
+            </div>
+            <div class="titulo-columnas" id="subtotal">
+                <h4>Subtotal</h4>
+            </div>
+            <div class="titulo-columnas" id="otrosgastos">
+                <h4>Otros Gastos</h4>
+            </div>
+            <div class="titulo-columnas" id="totaldia">
+                <h4>Total del Día</h4>
+            </div>
+        </div>
+        <div class="lista-pedidos">
+            <div class="fila-datos">
+                {% for gasto in gastos %}
+                    <div class="datos">
+                        <div class="datospedido" id="date">
+                            <p>{{ gasto.fecha_gasto }}</p>
+                        </div>
+                        <div class="datospedido" id="fruits">
+                            <p>${{ gasto.monto_frutas }}</p>
+                        </div>
+                        <div class="datospedido" id="vegetables">
+                            <p>${{ gasto.monto_verduras }}</p>
+                        </div>
+                        <div class="datospedido" id="bags">
+                            <p>${{ gasto.monto_bolsas }}</p>
+                        </div>
+                        <div class="datospedido" id="total-products">
+                            <p>${{ gasto.total_gasto }}</p>
+                        </div>
+                        <a href="#" id="view-details"><button type="button">Detalle Otros Gastos</button></a>
+                        <a href="#" id="edit"><button type="button">Editar</button></a>
+                    </div>
+                {% endfor %}
+            </div>      
+        </div>
+        <button type="button" id="creargasto">Añadir Gastos del Día</button> <!-- muestra pop up para ingresar datos y crear nuevo vendedor -->
+    </div>
+{% endblock content %}
+
+
+{% block popup %}
+    <div class="popup-creargasto">
+        <div class="mainbox">
+            <div class="gastobox">
+                <h3 class="nuevo-gasto-titulo">Ingrese los gastos del Día</h3>
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <!-- botón para registrar al usuario en el sistema -->
+                    <button type="submit" id="submit">Añadir los Gastos</button>
+                    <!-- botón para cancelar la creación de usuario vendedor -->
+                    <button type="button" id="cancelar-creargasto">Cancelar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'Gastos/scripts/gastos.js' %}"></script>    
+{% endblock popup %}
+
+
+<!-- block para mensajes y alertas pop-up -->
+{% block messages %}
+    {% for message in messages %}
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+            <script>
+                Swal.fire({
+                        "title": "{{message}}",
+                        "icon": "success",
+                        "confirmButtonColor": "green"
+                })
+            </script>
+        {% elif message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+            <script>
+                Swal.fire({
+                        "title": "{{message}}",
+                        "icon": "warning",
+                        "confirmButtonColor": "goldenrod"
+                })
+            </script>
+        {% endif %}
+    {% endfor %}
+{% endblock messages %}
