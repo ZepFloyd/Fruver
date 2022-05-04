@@ -162,9 +162,17 @@ h4 {
     margin: 0.5rem 0rem;
 }
 
-#view-details {
+#view-details, #add-others {
     width: 12rem;
     margin: 0.5rem 0rem;
+}
+
+/*div para los botones añadir gasto del día, y añadir otro gasto*/
+.button-container {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
 }
 
 button {
@@ -202,7 +210,7 @@ button:disabled {
 /*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 /*POP-UP AGREGAR GASTOS DEL DÍA*/
 
-.popup-creargasto {
+.popup-creargasto, .popup-otrogasto {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7);
@@ -237,7 +245,7 @@ button:disabled {
     width: 60%;
     height: 50%;
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: column wrap;
     justify-content: center;
     align-items: center;
     text-align: center;

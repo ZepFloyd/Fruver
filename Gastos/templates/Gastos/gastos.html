@@ -74,15 +74,44 @@
                             <p>${{ gasto.monto_bolsas }}</p>
                         </div>
                         <div class="datospedido" id="total-products">
-                            <p>${{ gasto.total_gasto }}</p>
+                            <p>${{ gasto.total_gastoproductos }}</p>
                         </div>
-                        <a href="#" id="view-details"><button type="button">Detalle Otros Gastos</button></a>
+                        <div class="datospedido" id="total-products">
+                            <p>${{ gasto.total_otrosgastos }}</p>
+                        </div>
+                        <div class="datospedido" id="total-products">
+                            <p>${{ gasto.total_dia }}</p>
+                        </div>
                         <a href="#" id="edit"><button type="button">Editar</button></a>
+                        <a href="#" id="add-others"><button type="button" id="otherexpenses">Agregar Otros Gastos</button></a>
+                        <a href="#" id="view-details"><button type="button">Detalle Otros Gastos</button></a>
+                    </div>
+                    <div class="popup-otrogasto">
+                        <div class="mainbox">
+                            <div class="gastobox">
+                                <h3 class="nuevo-gasto-titulo">Ingrese el detalle del gasto:</h3><br><br><br>
+                                <form action="{% url 'fruver-ingresarotrosgastos' gasto.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <label for="nombregasto">Nombre del gasto:</label>
+                                    <input type="text" name="nombregasto"><br>
+                                    <label for="montogasto">Monto del gasto:</label>
+                                    <input type="text" name="montogasto"><br>
+                                    <label for="descripciongasto">Descripción del gasto:</label>
+                                    <input type="text" name="descripciongasto"><br><br>
+                                    <!-- botón para registrar al usuario en el sistema -->
+                                    <button type="submit" id="submit">Añadir a Otros Gastos</button>
+                                    <!-- botón para cancelar la creación de usuario vendedor -->
+                                    <button type="button" id="cancelar-otrogasto">Cancelar</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 {% endfor %}
             </div>      
         </div>
-        <button type="button" id="creargasto">Añadir Gastos del Día</button> <!-- muestra pop up para ingresar datos y crear nuevo vendedor -->
+        <div class="button-container">
+            <button type="button" id="creargasto">Añadir Gastos del Día</button> <!-- muestra pop up para ingresar datos y crear nueva fila de gasto productos -->
+        </div>
     </div>
 {% endblock content %}
 
@@ -96,7 +125,7 @@
                     {% csrf_token %}
                     {{form.as_p}}
                     <!-- botón para registrar al usuario en el sistema -->
-                    <button type="submit" id="submit">Añadir los Gastos</button>
+                    <button type="submit" id="submit">Añadir Gastos</button>
                     <!-- botón para cancelar la creación de usuario vendedor -->
                     <button type="button" id="cancelar-creargasto">Cancelar</button>
                 </form>
