@@ -21,6 +21,7 @@ def gastos(request):
     otros_gastos = OtroGasto.objects.all()
 
     form = FormularioGastoProductos()
+    form2 = FormularioOtroGasto()
     if request.method == 'POST':
         form = FormularioGastoProductos(request.POST)
         frutas = int(request.POST.get('monto_frutas'))
@@ -33,7 +34,7 @@ def gastos(request):
             form.save()
             messages.success(request, '¡Los gastos del día han sido registrados con éxito!')
             return redirect('fruver-gastos')
-    context = {'form': form, 'gastos': gastos, 'otros_gastos': otros_gastos}
+    context = {'form': form, 'form2': form2, 'gastos': gastos, 'otros_gastos': otros_gastos}
     return render(request, 'Gastos/gastos.html', context)
 
 
@@ -47,9 +48,9 @@ def ingresarotrosgastos(request, id_gasto):
         return redirect('fruver-home')
     
     main_expense = GastoProductos.objects.get(pk=id_gasto)
-    nombre = request.POST.get('nombregasto')
-    monto = int(request.POST.get('montogasto'))
-    descripcion = request.POST.get('descripciongasto')
+    nombre = request.POST.get('nombre_otrogasto')
+    monto = int(request.POST.get('monto_otrogasto'))
+    descripcion = request.POST.get('descripcion_otrogasto')
     otro_gasto = OtroGasto.objects.create(vendedor=current_user, main_gasto=main_expense, nombre_otrogasto=nombre, monto_otrogasto=monto, descripcion_otrogasto=descripcion)
     main_expense.otros_gastos += 1
     main_expense.total_otrosgastos += monto

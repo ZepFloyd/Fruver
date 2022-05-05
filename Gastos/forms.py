@@ -22,9 +22,7 @@ class FormularioOtroGasto(forms.ModelForm):
     class Meta:
         model = OtroGasto
         fields = [
-            'main_gasto',
             'nombre_otrogasto',
             'monto_otrogasto',
             'descripcion_otrogasto',
-            'vendedor'
         ]

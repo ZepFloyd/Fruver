@@ -76,32 +76,32 @@
                         <div class="datospedido" id="total-products">
                             <p>${{ gasto.total_gastoproductos }}</p>
                         </div>
-                        <div class="datospedido" id="total-products">
+                        <div class="datospedido" id="total-others">
                             <p>${{ gasto.total_otrosgastos }}</p>
                         </div>
-                        <div class="datospedido" id="total-products">
+                        <div class="datospedido" id="total-day">
                             <p>${{ gasto.total_dia }}</p>
                         </div>
                         <a href="#" id="edit"><button type="button">Editar</button></a>
-                        <a href="#" id="add-others"><button type="button" id="otherexpenses">Agregar Otros Gastos</button></a>
+                        <a href="#" id="add-others" onclick="agregarOtroGasto({{gasto.id}})"><button type="button">Agregar Otros Gastos</button></a>
                         <a href="#" id="view-details"><button type="button">Detalle Otros Gastos</button></a>
                     </div>
-                    <div class="popup-otrogasto">
+                    <div class="popup-otrogasto" id="{{gasto.id}}">
                         <div class="mainbox">
                             <div class="gastobox">
                                 <h3 class="nuevo-gasto-titulo">Ingrese el detalle del gasto:</h3><br><br><br>
                                 <form action="{% url 'fruver-ingresarotrosgastos' gasto.id %}" method="POST">
                                     {% csrf_token %}
-                                    <label for="nombregasto">Nombre del gasto:</label>
-                                    <input type="text" name="nombregasto"><br>
-                                    <label for="montogasto">Monto del gasto:</label>
-                                    <input type="text" name="montogasto"><br>
-                                    <label for="descripciongasto">Descripción del gasto:</label>
-                                    <input type="text" name="descripciongasto"><br><br>
+                                    <label for="nombre_otrogasto">Nombre del gasto:</label><br>
+                                    {{form2.nombre_otrogasto}}<br>
+                                    <label for="monto_otrogasto">Monto del gasto:</label><br>
+                                    {{form2.monto_otrogasto}}<br>
+                                    <label for="descripcion_otrogasto">Descripción del gasto:</label><br>
+                                    {{form2.descripcion_otrogasto}}<br><br>
                                     <!-- botón para registrar al usuario en el sistema -->
                                     <button type="submit" id="submit">Añadir a Otros Gastos</button>
                                     <!-- botón para cancelar la creación de usuario vendedor -->
-                                    <button type="button" id="cancelar-otrogasto">Cancelar</button>
+                                    <button type="button" id="cancelar-otrogasto" onclick="cancelarOtroGasto({{gasto.id}})">Cancelar</button>
                                 </form>
                             </div>
                         </div>

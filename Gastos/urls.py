@@ -3,6 +3,6 @@ from . import views
 
 urlpatterns = [
     path('', views.gastos, name='fruver-gastos'), #Listado de gastos de la empresa
-    path('ingresartrosgastos/<id_gasto>', views.ingresarotrosgastos, name='fruver-ingresarotrosgastos'), #Ingresa otros gastos
+    path('ingresarotrosgastos/<id_gasto>', views.ingresarotrosgastos, name='fruver-ingresarotrosgastos'), #Ingresa otros gastos
 ]
 

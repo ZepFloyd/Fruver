@@ -151,8 +151,12 @@ h4 {
     width: 7rem;
 }
 
-#amount {
-    width: 7rem;
+#total-others {
+    width: 8rem;
+}
+
+#total-day {
+    width: 9rem;
 }
 
 
@@ -242,8 +246,8 @@ button:disabled {
     border: solid 0.2rem azure;
     color: white;
     border-radius: 0.3rem;
-    width: 60%;
-    height: 50%;
+    width: 45%;
+    height: 65%;
     display: flex;
     flex-flow: column wrap;
     justify-content: center;
@@ -252,7 +256,7 @@ button:disabled {
 }
 
 .nuevo-gasto-titulo {
-    margin: 0rem;
+    margin: 0rem 0rem 2rem;
     width: 50%
 }
 
