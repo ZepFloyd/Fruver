@@ -17,7 +17,7 @@ def gastos(request):
     if current_user.is_staff != 1:
         return redirect('fruver-home')
 
-    gastos = GastoProductos.objects.all()
+    gastos = GastoProductos.objects.all().order_by('fecha_gasto')
     otros_gastos = OtroGasto.objects.all()
 
     form = FormularioGastoProductos()
@@ -27,12 +27,14 @@ def gastos(request):
         frutas = int(request.POST.get('monto_frutas'))
         verduras = int(request.POST.get('monto_verduras'))
         bolsas = int(request.POST.get('monto_bolsas'))
+        fecha = request.POST.get('fecha')
         if form.is_valid():
+            form.instance.fecha_gasto = fecha
             form.instance.total_gastoproductos = frutas + verduras + bolsas
             form.instance.total_dia = frutas + verduras + bolsas
             form.instance.vendedor = current_user
             form.save()
-            messages.success(request, '¡Los gastos del día han sido registrados con éxito!')
+            messages.success(request, '¡Los gastos del día '+fecha+' han sido registrados con éxito!')
             return redirect('fruver-gastos')
     context = {'form': form, 'form2': form2, 'gastos': gastos, 'otros_gastos': otros_gastos}
     return render(request, 'Gastos/gastos.html', context)

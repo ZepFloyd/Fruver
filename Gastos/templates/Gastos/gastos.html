@@ -10,27 +10,19 @@
 {% block content %}
     <h1 class="info">Registro de Gastos</h1>
     <h2 class="info">Gestione los gastos de la empresa</h2>
-    <p class="info">Para acceder a los pedidos según su estado, seleccione una de las opciones que se muestran a continuación:</p>
+    <p class="info">Puede filtrar el registro de gastos por semana, mes, o un rango personalizado usando los siguientes botones:</p>
     <div class="container0">
         <div class="estados">
-            <img src="{% static 'Pedidos/images/status/todos.png' %}" alt="Ver todos" width="65" height="65"/>
-            <a href="{% url 'fruver-pedidos' %}"><button type="button" class="filtros">Todos los Pedidos</button></a>
+            <img src="{% static 'Gastos/images/semana.png' %}" alt="Ver por semana" width="65" height="65"/>
+            <a href="#"><button type="button" class="filtros">Ver por semana</button></a>
         </div>
         <div class="estados">
-            <img src="{% static 'Pedidos/images/status/recibido.png' %}" alt="Ver recibidos" width="65" height="65"/>
-            <a href="{% url 'fruver-filtrarpedidos' 'Recibido' %}"><button type="button" class="filtros">Pedidos Recibidos</button></a>
+            <img src="{% static 'Gastos/images/mes.png' %}" alt="Ver por mes" width="65" height="65"/>
+            <a href="#"><button type="button" class="filtros">Ver por mes</button></a>
         </div>
         <div class="estados">
-            <img src="{% static 'Pedidos/images/status/armado.png' %}" alt="Ver armados" width="65" height="65"/>
-            <a href="{% url 'fruver-filtrarpedidos' 'Armado' %}"><button type="button" class="filtros">Pedidos Armados</button></a>
-        </div>
-        <div class="estados">
-            <img src="{% static 'Pedidos/images/status/despachado.png' %}" alt="Ver despachados" width="65" height="65"/>
-            <a href="{% url 'fruver-filtrarpedidos' 'Despachado' %}"><button type="button" class="filtros">Pedidos Despachados</button></a>
-        </div>
-        <div class="estados">
-            <img src="{% static 'Pedidos/images/status/pagado.png' %}" alt="Ver pagados" width="65" height="65"/>
-            <a href="{% url 'fruver-filtrarpedidos' 'Pagado' %}"><button type="button" class="filtros">Pedidos Pagados</button></a>
+            <img src="{% static 'Gastos/images/calendario.png' %}" alt="Rango personalizado" width="65" height="65"/>
+            <a href="#"><button type="button" class="filtros">Rango personalizado</button></a>
         </div>
     </div>
     <div class="container1">
@@ -89,7 +81,7 @@
                     <div class="popup-otrogasto" id="{{gasto.id}}">
                         <div class="mainbox">
                             <div class="gastobox">
-                                <h3 class="nuevo-gasto-titulo">Ingrese el detalle del gasto:</h3><br><br><br>
+                                <h3 class="nuevo-gasto-titulo">Ingrese el detalle del gasto</h3><br><br><br>
                                 <form action="{% url 'fruver-ingresarotrosgastos' gasto.id %}" method="POST">
                                     {% csrf_token %}
                                     <label for="nombre_otrogasto">Nombre del gasto:</label><br>
@@ -110,7 +102,7 @@
             </div>      
         </div>
         <div class="button-container">
-            <button type="button" id="creargasto">Añadir Gastos del Día</button> <!-- muestra pop up para ingresar datos y crear nueva fila de gasto productos -->
+            <button type="button" id="creargasto">Añadir Registro de Gastos</button> <!-- muestra pop up para ingresar datos y crear nueva fila de gasto productos -->
         </div>
     </div>
 {% endblock content %}
@@ -120,10 +112,17 @@
     <div class="popup-creargasto">
         <div class="mainbox">
             <div class="gastobox">
-                <h3 class="nuevo-gasto-titulo">Ingrese los gastos del Día</h3>
+                <h3 class="nuevo-gasto-titulo">Ingrese los gastos de productos</h3><br><br><br>
                 <form action="" method="POST">
                     {% csrf_token %}
-                    {{form.as_p}}
+                    <label for="monto_frutas">Fecha de gastos:</label><br>
+                    <input autofocus type="date" name="fecha" required="True"><br><br>
+                    <label for="monto_frutas">Gasto en frutas:</label><br>
+                    {{form.monto_frutas}}<br><br>
+                    <label for="monto_verduras">Gasto en verduras:</label><br>
+                    {{form.monto_verduras}}<br><br>
+                    <label for="monto_bolsas">Gasto en bolsas:</label><br>
+                    {{form.monto_bolsas}}<br><br><br><br>
                     <!-- botón para registrar al usuario en el sistema -->
                     <button type="submit" id="submit">Añadir Gastos</button>
                     <!-- botón para cancelar la creación de usuario vendedor -->

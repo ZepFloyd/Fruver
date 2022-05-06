@@ -3,7 +3,7 @@ from django.db import models
 
 
 class GastoProductos(models.Model):
-    fecha_gasto = models.DateField(auto_now_add=True)
+    fecha_gasto = models.DateField(auto_now_add=False)
     monto_frutas = models.IntegerField(default=0)
     monto_verduras = models.IntegerField(default=0)
     monto_bolsas = models.IntegerField(default=0)
@@ -16,9 +16,9 @@ class GastoProductos(models.Model):
 
 class OtroGasto(models.Model):
     fecha_otrogasto = models.DateField(auto_now_add=True)
-    main_gasto = models.ForeignKey('GastoProductos', null=True, on_delete=models.SET_NULL)
     nombre_otrogasto = models.CharField(max_length=50)
     monto_otrogasto = models.IntegerField(default=0)
     descripcion_otrogasto = models.TextField(max_length=350)
+    main_gasto = models.ForeignKey('GastoProductos', null=True, on_delete=models.SET_NULL)
     vendedor = models.ForeignKey('Home.Usuario', null=True, on_delete=models.SET_NULL)
 

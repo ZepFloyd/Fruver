@@ -11,9 +11,6 @@ class FormularioGastoProductos(forms.ModelForm):
             'monto_frutas',
             'monto_verduras',
             'monto_bolsas',
-            'total_gastoproductos',
-            'total_dia',
-            'vendedor'
         ]
 
 
