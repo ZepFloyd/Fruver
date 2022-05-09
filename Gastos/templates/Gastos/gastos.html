@@ -74,9 +74,10 @@
                         <div class="datospedido" id="total-day">
                             <p>${{ gasto.total_dia }}</p>
                         </div>
-                        <a href="#" id="edit"><button type="button">Editar</button></a>
+                        <a href="{% url 'fruver-editargasto' gasto.id %}" id="edit"><button type="button">Editar</button></a>
+                        <a href="#" id="delete" onclick="eliminarGasto({{ gasto.id }})"><button type="button">Eliminar</button></a>
                         <a href="#" id="add-others" onclick="agregarOtroGasto({{gasto.id}})"><button type="button">Agregar Otros Gastos</button></a>
-                        <a href="#" id="view-details"><button type="button">Detalle Otros Gastos</button></a>
+                        <a href="{% url 'fruver-detalleotrosgastos' gasto.id %}" id="view-details"><button type="button">Detalle Otros Gastos</button></a>
                     </div>
                     <div class="popup-otrogasto" id="{{gasto.id}}">
                         <div class="mainbox">
@@ -115,7 +116,7 @@
                 <h3 class="nuevo-gasto-titulo">Ingrese los gastos de productos</h3><br><br><br>
                 <form action="" method="POST">
                     {% csrf_token %}
-                    <label for="monto_frutas">Fecha de gastos:</label><br>
+                    <label for="fecha">Fecha de gastos:</label><br>
                     <input autofocus type="date" name="fecha" required="True"><br><br>
                     <label for="monto_frutas">Gasto en frutas:</label><br>
                     {{form.monto_frutas}}<br><br>

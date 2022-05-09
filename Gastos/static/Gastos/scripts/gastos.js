@@ -34,3 +34,21 @@ function agregarOtroGasto(id) {
 function cancelarOtroGasto(id) {
     document.getElementById(id).style.display = 'none';
 }
+
+
+function eliminarGasto(id) {
+    Swal.fire({
+        "title":"¿Realmente desea eliminar este registro?",
+        "text":"Recuerde que esta acción también incluye a todos los otros gastos asociados y no se puede deshacer",
+        "icon":"warning",
+        "showCancelButton":true,
+        "cancelButtonText":"Cancelar",
+        "confirmButtonText":"Sí, eliminar",
+        "confirmButtonColor": "firebrick",
+    })
+    .then(function(result) {
+        if(result.isConfirmed) {
+            window.location.href = "/gastos/eliminargasto/"+id
+        }
+    })
+}

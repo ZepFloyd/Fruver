@@ -1,0 +1,50 @@
+{% extends "Home/mainmenu.html" %} <!-- hereda formato (header y footer en este caso) de template mainmenu.html -->
+{% load static %} <!-- carga la carpeta static para acceder a los archivos que estén dentro de ella -->
+
+{% block title %} Fruver - Detalle de Otros Gastos {% endblock title %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'Gastos/styles/detalleotrosgastos.css' %}"> <!-- referencia a la plantilla .css que corresponda -->
+{% endblock stylesheet %}
+
+{% block content %}
+    <h1 class="info">Detalle de Otros Gastos</h1>
+
+    <div class="contenidos">
+        <section class="cliente">
+            <h2 id="subtitle1">Gastos de Productos</h2>
+            <div class="datos">
+                {% for gasto in gasto_productos %}
+                    <p>Fecha de gastos: {{gasto.fecha_gasto}}</p>
+                    <p>Gasto en frutas: ${{gasto.monto_frutas}}</p>
+                    <p>Gasto en verduras: ${{gasto.monto_verduras}}</p>
+                    <p>Gasto en Bolsas: ${{gasto.monto_bolsas}}</p>
+                    <p>Subtotal: ${{gasto.total_gastoproductos}}</p>
+                    <p>Cantidad Otros Gastos: {{gasto.otros_gastos}} gastos asociados</p>
+                    <p>Total Otros Gastos: ${{gasto.total_otrosgastos}}</p>
+                    <p>Total del Día: ${{gasto.total_dia}}</p>
+                {% endfor %}
+            </div>
+        </section>
+        <section class="products">
+            <h2 id="subtitle2">Otros gastos del día asociados</h2>
+            {% for detalle in otros_gastos %}
+                <div class="producto">
+                    <div class="caja1">
+                        <img src="{% static 'Home/images/mainmenu/costos.png' %}" alt="Detalle de otro gasto" width="100" height="100">
+                    </div>
+                    <div class="caja2">
+                        {{detalle.nombre_otrogasto}}<br>
+                        {{detalle.monto_otrogasto}}<br> 
+                        {{detalle.descripcion_otrogasto}}<br> 
+                        <p>Ingresado por: {{detalle.vendedor}}</p>
+                        <p>El {{detalle.fecha_otrogasto}}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </section>
+    </div>
+    <section class="volver">
+        <a href="/gastos"><button type="button">Volver a Gastos</button></a>
+    </section>
+{% endblock content %}

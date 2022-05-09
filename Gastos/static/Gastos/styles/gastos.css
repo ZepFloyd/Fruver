@@ -160,9 +160,9 @@ h4 {
 }
 
 
-/*botones actualizar estado y ver detalles*/
-#edit {
-    width: 9.5rem;
+/*botones editar y eliminar*/
+#edit, #delete {
+    width: 6rem;
     margin: 0.5rem 0rem;
 }
 

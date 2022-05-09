@@ -41,6 +41,50 @@ def gastos(request):
 
 
 
+#Editar gasto de productos
+@login_required(login_url='fruver-acceso')
+def editargasto(request, id_gasto):
+    #instanciamos al usuario actual y verificamos que sea staff, si no lo es, se le redirige a la página principal
+    current_user = request.user
+    if current_user.is_staff != 1:
+        return redirect('fruver-home')
+    gasto = GastoProductos.objects.get(pk=id_gasto)
+    otros_gastos = gasto.total_otrosgastos
+    form = FormularioGastoProductos(request.POST or None, instance=gasto)
+    if request.method == 'POST':
+        frutas = int(request.POST.get('monto_frutas'))
+        verduras = int(request.POST.get('monto_verduras'))
+        bolsas = int(request.POST.get('monto_bolsas'))
+        if form.is_valid():
+            form.instance.total_gastoproductos = frutas + verduras + bolsas
+            form.instance.total_dia = frutas + verduras + bolsas + otros_gastos
+            form.instance.vendedor = current_user
+            form.save()
+            messages.success(request, '¡Gastos actualizados con éxito!')
+            return redirect('fruver-gastos')
+    context = {'gasto': gasto, 'form': form}
+    return render(request, 'Gastos/editargasto.html', context)
+    
+
+
+#Editar gasto de productos
+@login_required(login_url='fruver-acceso')
+def eliminargasto(request, id_gasto):
+    #instanciamos al usuario actual y verificamos que sea staff, si no lo es, se le redirige a la página principal
+    current_user = request.user
+    if current_user.is_staff != 1:
+        return redirect('fruver-home')
+    
+    gasto = GastoProductos.objects.get(pk=id_gasto)
+    otros_gastos = OtroGasto.objects.filter(main_gasto=id_gasto)
+    for expense in otros_gastos:
+        expense.delete()
+    gasto.delete()
+    messages.success(request,'El registro de gasto de productos, y sus otros gastos asociados han sido eliminados')
+    return redirect('fruver-gastos')
+
+
+
 #Registrar otros de Gastos
 @login_required(login_url='fruver-acceso')
 def ingresarotrosgastos(request, id_gasto):
@@ -60,3 +104,19 @@ def ingresarotrosgastos(request, id_gasto):
     main_expense.save()
     messages.success(request, '¡El gasto ha sido registrado con éxito!')
     return redirect('fruver-gastos')
+
+
+
+#Ver detalle de otros gastos vinculados a un gasto
+@login_required(login_url='fruver-acceso')
+def detalleotrosgastos(request, id_gastoproductos):
+    #instanciamos al usuario actual y verificamos que sea staff, si no lo es, se le redirige a la página principal
+    current_user = request.user
+    if current_user.is_staff != 1:
+        return redirect('fruver-home')
+
+    gasto_productos = GastoProductos.objects.filter(pk=id_gastoproductos)
+    product_expenses = GastoProductos.objects.get(pk=id_gastoproductos)
+    otros_gastos = OtroGasto.objects.filter(main_gasto=product_expenses.id)    
+    context = {'gasto_productos': gasto_productos, 'otros_gastos': otros_gastos}
+    return render(request, 'Gastos/detalleotrosgastos.html', context)

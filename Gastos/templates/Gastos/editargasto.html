@@ -1,0 +1,42 @@
+{% extends "Home/mainmenu.html" %} <!-- hereda formato (header y footer en este caso) de template mainmenu.html -->
+{% load static %} <!-- carga la carpeta static para acceder a los archivos que estén dentro de ella -->
+
+{% block title %} Fruver - Editar Gastos {% endblock title %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'Gastos/styles/editargasto.css' %}"> <!-- referencia a la plantilla .css que corresponda -->
+{% endblock stylesheet %}
+
+{% block content %} <!-- agrega las sgtes. líneas de código dentro del bloque a la plantilla -->
+    <h1>Gastos del día</h1>
+    <h2>Ingrese los datos que requiera en los campos mostrados a continuación, luego presione el botón Guardar Datos.</h2>
+    <div class="alignment"> <!-- div para centrar el databox en la página -->
+        <div class="databox"> <!-- div que almacena los inputs y el botón de login -->
+            <h3>Rellene los campos a continuación:</h3><br>
+            <form action="" method="post" > <!-- method="post" enctype="application/x-www-form-urlencoded" -->
+                {% csrf_token %}
+                <label for="name">Gasto en frutas:</label><br>
+                {{form.monto_frutas}}<br><br>
+                <label for="rut">Gasto en verduras:</label><br>
+                {{form.monto_verduras}}<br><br>
+                <label for="banco">Gasto en bolsas:</label><br>
+                {{form.monto_bolsas}}<br><br>
+                <button type="submit" id="submit">Guardar Datos</button>
+            </form>
+            <a href="/gastos"><button type="button">Volver a Gastos</button></a>
+        </div>
+    </div><br>
+{% endblock content %}
+
+<!-- muestra mensaje desde la view cuando se guardan los datos -->
+{% block messages %}
+    {% for message in messages %}
+        <script>
+            Swal.fire({
+                "title": "{{message}}",
+                "icon": "success",
+                "confirmButtonColor": "green"
+            })
+        </script>
+    {% endfor %}
+{% endblock messages %}

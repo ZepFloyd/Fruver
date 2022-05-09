@@ -1,0 +1,130 @@
+main {
+    background-color: rgb(184, 184, 184);
+    border: solid 0.2rem azure;
+    text-align: center;
+    color: black;
+}
+
+/*título Carrito*/
+h1 {
+    background-color: rgb(3, 68, 112);
+    color: white;
+    margin-top: 0rem;
+    text-shadow: 1px 1px 1px black;
+}
+
+
+/*contenedor para resumen de productos y datos del cliente, ordenados en fila*/
+.contenidos {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0rem;
+}
+
+
+/*Títulos resumen de productos y datos de cliente*/
+#subtitle1 {
+    margin: 0.2rem 10rem;
+}
+
+/*Títulos resumen de productos y datos de cliente*/
+#subtitle2 {
+    margin: 1rem 28rem;
+}
+
+/*resumen con datos del cliente y del pedido, ordenados en columnas*/
+.cliente {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    background-color: rgb(255, 255, 245);
+    border: solid 0.2rem rgb(61, 61, 61);
+    border-radius: 1rem;
+}
+
+.datos {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    font-size: 1.1rem;
+}
+
+
+/*datos del cliente*/
+p {
+    margin: 0.4rem
+}
+
+/*monto total del pedido*/
+#total {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+
+/*resumen con listado de productos, ordenados en filas*/
+.products {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    width: 65%;
+}
+
+/*producto individual, contenido interno ordenado en fila (box1, box, box3)*/
+.producto {
+    background-color: rgb(255, 255, 245);
+    margin: 0.5rem;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 0.4rem;
+    border: solid 0.2rem rgb(61, 61, 61);
+    border-radius: 1rem;
+    font-size: 0.8rem;
+}
+
+
+/*container del botón volver a pedidos*/
+.volver {
+    width: 100%;
+    background-color: rgb(184, 184, 184);
+}
+
+
+button {
+    background-color: rgb(238, 238, 238);
+    margin: 0.3rem;
+    border: none;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 2rem;
+    color: rgb(3, 68, 112);
+    border: solid 0.1rem grey;
+    cursor: pointer;
+   }
+   
+button:active {
+    color: white;
+    transform: translateY(0.2rem);
+   }
+   
+button:hover:not(:disabled) {
+    background: rgb(3, 68, 112);
+    color: white;
+    border: solid 0.1rem white;
+    text-shadow: 0.2rem #b4b7bc;
+   }
+   
+button:disabled {
+    cursor: auto;
+    color: grey;
+   }
