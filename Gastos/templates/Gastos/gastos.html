@@ -10,11 +10,16 @@
 {% block content %}
     <h1 class="info">Registro de Gastos</h1>
     <h2 class="info">Gestione los gastos de la empresa</h2>
-    <p class="info">Puede filtrar el registro de gastos por semana, mes, o un rango personalizado usando los siguientes botones:</p>
+    <p class="info">Puede filtrar los gastos que desea ver por semana, mes, o un rango personalizado usando los siguientes botones<br>
+    (seleccione una fecha, y luego presione el botón para ejecutar el filtro):</p>
     <div class="container0">
         <div class="estados">
             <img src="{% static 'Gastos/images/semana.png' %}" alt="Ver por semana" width="65" height="65"/>
-            <a href="#"><button type="button" class="filtros">Ver por semana</button></a>
+            <form action="{% url 'fruver-filtrarsemana' %}" method="POST">
+                {% csrf_token %}
+                <input type="week" name="week" id="week" min="2022-W01" max="2022-W52" required><br>
+                <button type="submit" class="filtros">Ver por semana</button>
+            </form>
         </div>
         <div class="estados">
             <img src="{% static 'Gastos/images/mes.png' %}" alt="Ver por mes" width="65" height="65"/>

@@ -41,6 +41,43 @@ def gastos(request):
 
 
 
+#Filtra gastos por semana, mes o rango personalizado de fecha
+@login_required(login_url='fruver-acceso')
+def filtrarsemana(request):
+    #instanciamos al usuario actual y verificamos que sea staff, si no lo es, se le redirige a la página principal
+    current_user = request.user
+    if current_user.is_staff != 1:
+        return redirect('fruver-home')
+    if request.method == 'POST' and request.POST.get('week') != None:
+        year_week = request.POST.get("week") #recibe un string con el formato '2022-W11' desde el input week del html
+        semana = year_week.rsplit("-W") #separamos el string year_week, generando una lista con 2 items tipo string, el año y el número de la semana
+        #pasamos el año y el número de semana para generar un formato de fecha válido para el lunes y el domingo de la semana requerida
+        lunes = datetime.strptime(semana[0]+"-"+semana[1]+'-1', "%Y-%W-%w")
+        domingo = datetime.strptime(semana[0]+"-"+semana[1]+'-0', "%Y-%W-%w")
+        #hacemos query sobre los registros cuya fecha esté en el rango lunes - domingo de la semana requerida y ordenamos el dataset según fecha
+        gastos = GastoProductos.objects.filter(fecha_gasto__range=[lunes, domingo]).order_by('fecha_gasto')
+    otros_gastos = OtroGasto.objects.all()
+    form = FormularioGastoProductos()
+    form2 = FormularioOtroGasto()
+    if request.method == 'POST' and request.POST.get('monto_frutas') != None:
+        form = FormularioGastoProductos(request.POST)
+        frutas = int(request.POST.get('monto_frutas'))
+        verduras = int(request.POST.get('monto_verduras'))
+        bolsas = int(request.POST.get('monto_bolsas'))
+        fecha = request.POST.get('fecha')
+        if form.is_valid():
+            form.instance.fecha_gasto = fecha
+            form.instance.total_gastoproductos = frutas + verduras + bolsas
+            form.instance.total_dia = frutas + verduras + bolsas
+            form.instance.vendedor = current_user
+            form.save()
+            messages.success(request, '¡Los gastos del día '+fecha+' han sido registrados con éxito!')
+            return redirect('fruver-gastos')
+    context = {'form': form, 'form2': form2, 'gastos': gastos, 'otros_gastos': otros_gastos}
+    return render(request, 'Gastos/gastos.html', context)
+
+
+
 #Editar gasto de productos
 @login_required(login_url='fruver-acceso')
 def editargasto(request, id_gasto):

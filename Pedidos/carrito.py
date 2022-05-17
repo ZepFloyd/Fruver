@@ -62,7 +62,7 @@ class Carrito:
         self.session["carrito"] = {}
         self.session.modified = True
 
-    def expiracion(self):
+    '''def expiracion(self):
         carrito = self.session.get('carrito')
         if len(carrito) > 0:
             inicio_sesion = datetime.now()
@@ -76,6 +76,6 @@ class Carrito:
                         producto.stock_producto += cantidad
                         producto.save()
                         del self.carrito[key]
-                        self.guardar_carrito()
+                        self.guardar_carrito()'''
 
 
