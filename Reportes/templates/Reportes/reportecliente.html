@@ -1,0 +1,46 @@
+{% extends "Home/mainmenu.html" %} <!-- hereda formato (header y footer en este caso) de template mainmenu.html -->
+{% load static %} <!-- carga la carpeta static para acceder a los archivos que estén dentro de ella -->
+
+{% block title %} Fruver - Ventas por Cliente {% endblock title %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'Reportes/styles/reportecliente.css' %}"> <!-- referencia a la plantilla .css que corresponda -->
+{% endblock stylesheet %}
+
+{% block content %}
+    <h1 class="info">Reporte de Ventas por Cliente</h1>
+    <div class="contenidos">
+        <section class="cliente">
+            <h2 id="subtitle1">Cliente {{customer.nombre_usuario}} {{customer.apellido_usuario}}<br>
+            Para el período del {{inicio}} al {{fin}}</h2>
+            <div class="datos">
+                <div class="cash">
+                    <h4>Pagos en Efectivo</h4>
+                    <p>Cantidad de Pagos en Efectivo: {{cantidad_efectivo}}</p>
+                    <p>Monto de Pagos en Efectivo: ${{total_efectivo}}</p>
+                    <p>Proporción de Pagos en Efectivo: %{{porcentaje_efectivo}}</p>
+                </div>
+                <div class="transfer">
+                    <h4>Pagos con Transferencia</h4>
+                    <p>Cantidad de Transferencias: {{cantidad_transferencias}}</p>
+                    <p>Monto de Transferencias: ${{total_transferencias}}</p>
+                    <p>Proporción de Transferencias: %{{porcentaje_transferencias}}</p>
+                </div>
+                <div class="card">
+                    <h4>Pagos con Tarjeta de Crédito/Débito</h4>
+                    <p>Cantidad de Pagos con Tarjeta: {{cantidad_tarjetas}}</p>
+                    <p>Monto de Pagos con Tarjeta: ${{total_tarjetas}}</p>
+                    <p>Proporción de Pagos con Tarjeta: %{{porcentaje_tarjetas}}</p>
+                </div>
+                <div class="summary">
+                    <h4>Global</h4>
+                    <p>Cantidad de Transacciones del Período: {{cantidad_ventas}}</p>
+                    <p style="font-weight: bold;">Total Ventas del período: ${{total_ventas}}</p>
+                </div>
+            </div>
+        </section>
+    </div>
+    <section class="volver">
+        <a href="{% url 'fruver-elegirfecha' 'cliente' %}"><button type="button">Volver a Selección de Fechas</button></a>
+    </section>
+{% endblock content %}

@@ -1,0 +1,29 @@
+{% extends "Home/mainmenu.html" %} <!-- hereda formato (header y footer en este caso) de template mainmenu.html -->
+{% load static %} <!-- carga la carpeta static para acceder a los archivos que estén dentro de ella -->
+
+{% block title %} Fruver - Reporte de Gastos {% endblock title %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'Reportes/styles/reportegastos.css' %}"> <!-- referencia a la plantilla .css que corresponda -->
+{% endblock stylesheet %}
+
+{% block content %}
+    <h1 class="info">Reporte de Gastos</h1>
+    <div class="contenidos">
+        <section class="cliente">
+            <h2 id="subtitle1">Para el período del {{inicio}} al {{fin}}</h2>
+            <div class="datos">
+                <h4>Sumario de gastos:</h4>
+                <span>Total Gasto en Frutas: ${{total_frutas}}</span><br>
+                <span>Total Gasto en Verduras: ${{total_verduras}}</span><br>
+                <span>Total Gasto en Bolsas: ${{total_bolsas}}</span><br>
+                <span>Total Gasto de Productos: ${{total_gastoproductos}}</span><br>
+                <span>Total Otros Gastos: ${{total_otrosgastos}}</span><br>
+                <p style="font-weight: bold;">Total Gastos del período: ${{total_gastos}}</p>
+            </div>
+        </section>
+    </div>
+    <section class="volver">
+        <a href="{% url 'fruver-elegirfecha' 'gastos' %}"><button type="button">Volver a Selección de Fechas</button></a>
+    </section>
+{% endblock content %}

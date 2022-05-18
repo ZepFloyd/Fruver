@@ -1,0 +1,157 @@
+{% extends "Home/mainmenu.html" %} <!-- hereda formato (header y footer en este caso) de template mainmenu.html -->
+{% load static %} <!-- carga la carpeta static para acceder a los archivos que estén dentro de ella -->
+
+{% block title %} Fruver - Fecha de Reporte {% endblock title %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'Reportes/styles/elegirfecha.css' %}"> <!-- referencia a la plantilla .css que corresponda -->
+{% endblock stylesheet %}
+
+{% block content %} <!-- agrega las sgtes. líneas de código dentro del bloque a la plantilla -->
+    <h1>
+        {% if tipo_reporte == 'ventas' %}
+            Reporte de Ventas Globales
+        {% elif tipo_reporte == 'cliente' %}
+            Reporte de Ventas por Cliente
+        {% elif tipo_reporte == 'gastos' %}
+            Reporte de Gastos
+        {% endif %}
+    </h1>
+    <h2>Seleccione una semana, mes o rango de fechas, y presione el botón para generar el reporte requerido.</h2>
+    <container class="container1" >
+        <div class="box1">
+            <div class="box1-1">
+                <!-- cambiamos la form action según el tipo de formulario que estemos generando -->
+                {% if tipo_reporte == 'ventas' %}
+                <img class="submenuicon" src="{% static 'Reportes/images/week.png' %}" alt="Semana" width="120" height="120"/>
+                <form action="{% url 'fruver-reporteventas' 'semana' %}" method="POST" id="semanas">
+                    {% csrf_token %}
+                    <p style="font-weight: bold;">Seleccione una semana:</p>
+                    <input type="week" name="week" id="week" min="2022-W01" max="2022-W52" required><br>
+                </form>
+                {% elif tipo_reporte == 'cliente' %}
+                <img class="submenuicon" src="{% static 'Reportes/images/week.png' %}" alt="Semana" width="120" height="120"/>
+                <form action="{% url 'fruver-reportecliente' 'semana' %}" method="POST" id="semanas">
+                    {% csrf_token %}
+                    <span style="font-weight: bold;">Seleccione una semana:</span><br>
+                    <input type="week" name="week" id="week" min="2022-W01" max="2022-W52" required><br>
+                    <span style="font-weight: bold;">Seleccione un cliente:</span><br>
+                    <select name="customer" id="customer" required>
+                        {% for cliente in clientes %}
+                            <option value="{{cliente.id}}">{{cliente.nombre_usuario}} {{cliente.apellido_usuario}}</option>
+                        {% endfor %}
+                    </select>
+                </form>
+                {% elif tipo_reporte == 'gastos' %}
+                <img class="submenuicon" src="{% static 'Reportes/images/week.png' %}" alt="Semana" width="120" height="120"/>
+                <form action="{% url 'fruver-reportegastos' 'semana' %}" method="POST" id="semanas">
+                    {% csrf_token %}
+                    <p style="font-weight: bold;">Seleccione una semana:</p>
+                    <input type="week" name="week" id="week" min="2022-W01" max="2022-W52" required><br>
+                </form>
+                {% endif %}
+            </div>
+            <button type="submit" class="filtros" form="semanas">Generar Reporte Semanal</button>
+            {% if tipo_reporte == 'ventas' %}
+                <p>Genere un informe semanal de ventas.</p>
+            {% elif tipo_reporte == 'cliente' %}
+                <p>Genere un informe semanal de ventas por cliente.</p>
+            {% elif tipo_reporte == 'gastos' %}
+                <p>Genere un informe semanal de gastos.</p>
+            {% endif %}
+        </div>
+        <div class="box2">
+            <div class="box2-1">
+                <img class="submenuicon" src="{% static 'Reportes/images/month.png' %}" alt="Mes" width="120" height="120"/>
+                {% if tipo_reporte == 'ventas'%}
+                <form action="{% url 'fruver-reporteventas' 'mes' %}" method="POST" id="meses">
+                    {% csrf_token %}
+                    <p style="font-weight: bold;">Seleccione un mes:</p>
+                    <input type="month" name="month" id="month" min="2022-01" max="2022-12" required><br>
+                </form>
+                {% elif tipo_reporte == 'cliente'%}
+                <form action="{% url 'fruver-reportecliente' 'mes' %}" method="POST" id="meses">
+                    {% csrf_token %}
+                    <span style="font-weight: bold;">Seleccione un mes:</span><br>
+                    <input type="month" name="month" id="month" min="2022-01" max="2022-12" required><br>
+                    <span style="font-weight: bold;">Seleccione un cliente:</span><br>
+                    <select name="customer" id="customer" required>
+                        {% for cliente in clientes %}
+                            <option value="{{cliente.id}}">{{cliente.nombre_usuario}} {{cliente.apellido_usuario}}</option>
+                        {% endfor %}
+                    </select>
+                </form>
+                {% elif tipo_reporte == 'gastos'%}
+                <form action="{% url 'fruver-reportegastos' 'mes' %}" method="POST" id="meses">
+                    {% csrf_token %}
+                    <p style="font-weight: bold;">Seleccione un mes:</p>
+                    <input type="month" name="month" id="month" min="2022-01" max="2022-12" required><br>
+                </form>
+                {% endif %}
+            </div>
+            <button type="submit" class="filtros" form="meses">Generar Reporte Mensual</button>
+            {% if tipo_reporte == 'ventas' %}
+                <p>Genere un informe mensual de ventas.</p>
+            {% elif tipo_reporte == 'cliente' %}
+                <p>Genere un informe mensual de ventas por cliente.</p>
+            {% elif tipo_reporte == 'gastos' %}
+                <p>Genere un informe mensual de gastos.</p>
+            {% endif %}
+        </div>
+        <div class="box3">
+            <div class="box3-1">
+                <img class="submenuicon" src="{% static 'Reportes/images/calendar.png' %}" alt="Rango de fechas" width="120" height="120"/>
+                {% if tipo_reporte == 'ventas'%}
+                    <form action="{% url 'fruver-reporteventas' 'rangofecha' %}" method="POST" id="fechas">
+                        {% csrf_token %}
+                        <p style="font-weight: bold;">Seleccione un rango de fechas:</p>
+                        <span style="color:black" font-size="1.2rem">Desde:</span> <input type="date" name="start" id="start" min="2022-01-01" max="2022-12-30" required>&nbsp;
+                        <span style="color:black" font-size="1.2rem">Hasta:</span> <input type="date" name="end" id="end" min="2022-01-02" max="2022-12-31" required><br>
+                    </form>
+                {% elif tipo_reporte == 'cliente'%}
+                <form action="{% url 'fruver-reportecliente' 'rangofecha' %}" method="POST" id="fechas">
+                    {% csrf_token %}
+                    <span style="font-weight: bold;">Seleccione un rango de fechas:</span><br>
+                    <span style="color:black" font-size="1.2rem">Desde:</span> <input type="date" name="start" id="start" min="2022-01-01" max="2022-12-30" required>&nbsp;
+                    <span style="color:black" font-size="1.2rem">Hasta:</span> <input type="date" name="end" id="end" min="2022-01-02" max="2022-12-31" required><br>
+                    <span style="font-weight: bold;">Seleccione un cliente:</span><br>
+                    <select name="customer" id="customer" required>
+                        {% for cliente in clientes %}
+                            <option value="{{cliente.id}}">{{cliente.nombre_usuario}} {{cliente.apellido_usuario}}</option>
+                        {% endfor %}
+                    </select>
+                </form>
+                {% elif tipo_reporte == 'gastos' %}
+                <form action="{% url 'fruver-reportegastos' 'rangofecha' %}" method="POST" id="fechas">
+                    {% csrf_token %}
+                    <p style="font-weight: bold;">Seleccione un rango de fechas:</p>
+                    <span style="color:black" font-size="1.2rem">Desde:</span> <input type="date" name="start" id="start" min="2022-01-01" max="2022-12-30" required>&nbsp;
+                    <span style="color:black" font-size="1.2rem">Hasta:</span> <input type="date" name="end" id="end" min="2022-01-02" max="2022-12-31" required><br>
+                </form>
+                {% endif %}
+            </div>
+            <button type="submit" class="filtros" form="fechas">Generar Reporte por Fechas</button>
+            {% if tipo_reporte == 'ventas' %}
+                <p>Genere un informe de ventas para un rango de fechas.</p>
+            {% elif tipo_reporte == 'cliente' %}
+                <p>Genere un informe de ventas por cliente para un rango de fechas.</p>
+            {% elif tipo_reporte == 'gastos' %}
+                <p>Genere un informe de gastos para un rango de fechas.</p>
+            {% endif %}
+        </div>
+    </container><br>
+{% endblock content %}
+
+<!-- muestra mensaje desde la view cuando se guardan los datos -->
+{% block messages %}
+    {% for message in messages %}
+        <script>
+            Swal.fire({
+                "title": "Cuenta Actualizada",
+                "text": "{{message}}",
+                "icon": "success",
+                "confirmButtonColor": "green"
+            })
+        </script>
+    {% endfor %}
+{% endblock messages %}

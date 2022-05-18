@@ -1,0 +1,50 @@
+{% extends "Home/mainmenu.html" %} <!-- hereda formato (header y footer en este caso) de template mainmenu.html -->
+{% load static %} <!-- carga la carpeta static para acceder a los archivos que estén dentro de ella -->
+
+{% block title %} Fruver - Reportes {% endblock title %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'Reportes/styles/reportes.css' %}"> <!-- referencia a la plantilla .css que corresponda -->
+{% endblock stylesheet %}
+
+{% block content %} <!-- agrega las sgtes. líneas de código dentro del bloque a la plantilla -->
+    <h1>Módulo de Reportes</h1>
+    <h2>Seleccione el tipo de reporte que desea generar.</h2>
+    <container class="container1" >
+        <div class="box1">
+            <div class="box1-1">
+                <img class="submenuicon" src="{% static 'Reportes/images/sales.png' %}" alt="Ventas globales" width="120" height="120"/>
+                <a class="submenulink" href="{% url 'fruver-elegirfecha' 'ventas' %}">Reporte de Ventas</a>
+            </div>
+            <p>Genere un informe de ventas globales semanal, mensual, o por un rango de fechas requerido.</p>
+        </div>
+        <div class="box2">
+            <div class="box2-1">
+                <img class="submenuicon" src="{% static 'Reportes/images/customers.png' %}" alt="Ventas por cliente" width="120" height="120"/>
+                <a class="submenulink" href="{% url 'fruver-elegirfecha' 'cliente' %}">Ventas por Cliente</a>
+            </div>
+            <p>Genere un informe de ventas por cliente semanal, mensual, o por un rango de fechas requerido.</p>
+        </div>
+        <div class="box3">
+            <div class="box3-1">
+                <img class="submenuicon" src="{% static 'Reportes/images/expenses.png' %}" alt="Gastos" width="120" height="120"/>
+                <a class="submenulink" href="{% url 'fruver-elegirfecha' 'gastos' %}">Reporte de Gastos</a>
+            </div>
+            <p>Genere un informe de gastos semanal, mensual, o por un rango de fechas requerido.</p>
+        </div>
+    </container><br>
+{% endblock content %}
+
+<!-- muestra mensaje desde la view cuando se guardan los datos -->
+{% block messages %}
+    {% for message in messages %}
+        <script>
+            Swal.fire({
+                "title": "Cuenta Actualizada",
+                "text": "{{message}}",
+                "icon": "success",
+                "confirmButtonColor": "green"
+            })
+        </script>
+    {% endfor %}
+{% endblock messages %}

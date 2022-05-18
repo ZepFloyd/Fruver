@@ -18,16 +18,25 @@
             <form action="{% url 'fruver-filtrarsemana' %}" method="POST">
                 {% csrf_token %}
                 <input type="week" name="week" id="week" min="2022-W01" max="2022-W52" required><br>
-                <button type="submit" class="filtros">Ver por semana</button>
+                <button type="submit" class="filtros">Ver semana</button>
             </form>
         </div>
         <div class="estados">
             <img src="{% static 'Gastos/images/mes.png' %}" alt="Ver por mes" width="65" height="65"/>
-            <a href="#"><button type="button" class="filtros">Ver por mes</button></a>
+            <form action="{% url 'fruver-filtrarmes' %}" method="POST">
+                {% csrf_token %}
+                <input type="month" name="month" id="month" min="2022-01" max="2022-12" required><br>
+                <button type="submit" class="filtros">Ver mes</button>
+            </form>
         </div>
         <div class="estados">
             <img src="{% static 'Gastos/images/calendario.png' %}" alt="Rango personalizado" width="65" height="65"/>
-            <a href="#"><button type="button" class="filtros">Rango personalizado</button></a>
+            <form action="{% url 'fruver-filtrarfechas' %}" method="POST">
+                {% csrf_token %}
+                <span style="color:white" font-size="1.2rem">Inicio:</span> <input type="date" name="start" id="start" min="2022-01-01" max="2022-12-30" required>&nbsp;
+                <span style="color:white" font-size="1.2rem">Fin:</span> <input type="date" name="end" id="end" min="2022-01-02" max="2022-12-31" required><br>
+                <button type="submit" class="filtros">Ver rango de fechas</button>
+            </form>
         </div>
     </div>
     <div class="container1">
