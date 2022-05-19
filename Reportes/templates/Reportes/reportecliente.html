@@ -11,7 +11,7 @@
     <h1 class="info">Reporte de Ventas por Cliente</h1>
     <div class="contenidos">
         <section class="cliente">
-            <h2 id="subtitle1">Cliente {{customer.nombre_usuario}} {{customer.apellido_usuario}}<br>
+            <h2 id="subtitle1">Cliente: {{customer.nombre_usuario}} {{customer.apellido_usuario}}<br>
             Para el período del {{inicio}} al {{fin}}</h2>
             <div class="datos">
                 <div class="cash">
@@ -42,5 +42,26 @@
     </div>
     <section class="volver">
         <a href="{% url 'fruver-elegirfecha' 'cliente' %}"><button type="button">Volver a Selección de Fechas</button></a>
+        <button type="submit" form="pdf">Generar Documento PDF</button>
+        <form action="{% url 'fruver-pdfreporte' 'cliente' %}" method="POST" id="pdf">
+            {% csrf_token %}
+            <input type="hidden" name="title" value="Reporte de Ventas por Cliente">
+            <input type="hidden" name="customer" value="Cliente: {{customer.nombre_usuario}} {{customer.apellido_usuario}}">
+            <input type="hidden" name="subtitle" value="Para el período del {{inicio}} al {{fin}}">
+            <input type="hidden" name="cash-title" value="Pagos en Efectivo">
+            <input type="hidden" name="cash-quantity" value="Cantidad de Pagos en Efectivo: {{cantidad_efectivo}}">
+            <input type="hidden" name="cash-amount" value="Monto de Pagos en Efectivo: ${{total_efectivo}}">
+            <input type="hidden" name="cash-percentage" value="Proporción de Pagos en Efectivo: %{{porcentaje_efectivo}}">
+            <input type="hidden" name="transfer-title" value="Pagos con Transferencia">
+            <input type="hidden" name="transfer-quantity" value="Cantidad de Transferencias: {{cantidad_transferencias}}">
+            <input type="hidden" name="transfer-amount" value="Monto de Transferencias: ${{total_transferencias}}">
+            <input type="hidden" name="transfer-percentage" value="Proporción de Transferencias: %{{porcentaje_transferencias}}">
+            <input type="hidden" name="card-title" value="Pagos con Tarjeta de Crédito/Débito">
+            <input type="hidden" name="card-quantity" value="Cantidad de Pagos con Tarjeta: {{cantidad_tarjetas}}">
+            <input type="hidden" name="card-amount" value="Monto de Pagos con Tarjeta: ${{total_tarjetas}}">
+            <input type="hidden" name="card-percentage" value="Proporción de Pagos con Tarjeta: %{{porcentaje_tarjetas}}">
+            <input type="hidden" name="period-transactions" value="Cantidad de Transacciones del Período: {{cantidad_ventas}}">
+            <input type="hidden" name="period-total" value="Total Ventas del período: ${{total_ventas}}">
+        </form>
     </section>
 {% endblock content %}

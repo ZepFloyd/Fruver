@@ -34,17 +34,3 @@
         </div>
     </container><br>
 {% endblock content %}
-
-<!-- muestra mensaje desde la view cuando se guardan los datos -->
-{% block messages %}
-    {% for message in messages %}
-        <script>
-            Swal.fire({
-                "title": "Cuenta Actualizada",
-                "text": "{{message}}",
-                "icon": "success",
-                "confirmButtonColor": "green"
-            })
-        </script>
-    {% endfor %}
-{% endblock messages %}

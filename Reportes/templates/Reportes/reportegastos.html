@@ -25,5 +25,17 @@
     </div>
     <section class="volver">
         <a href="{% url 'fruver-elegirfecha' 'gastos' %}"><button type="button">Volver a Selección de Fechas</button></a>
+        <button type="submit" form="pdf">Generar Documento PDF</button>
+        <form action="{% url 'fruver-pdfreporte' 'gastos' %}" method="POST" id="pdf">
+            {% csrf_token %}
+            <input type="hidden" name="title" value="Reporte de Gastos">
+            <input type="hidden" name="subtitle" value="Para el período del {{inicio}} al {{fin}}">
+            <input type="hidden" name="fruits" value="Total Gasto en Frutas: ${{total_frutas}}">
+            <input type="hidden" name="vegetables" value="Total Gasto en Verduras: ${{total_verduras}}">
+            <input type="hidden" name="bags" value="Total Gasto en Bolsas: ${{total_bolsas}}">
+            <input type="hidden" name="products-expenses" value="Total Gasto de Productos: ${{total_gastoproductos}}">
+            <input type="hidden" name="other-expenses" value="Total Otros Gastos: ${{total_otrosgastos}}">
+            <input type="hidden" name="period-total" value="Total Gastos del período: ${{total_gastos}}">
+        </form>
     </section>
 {% endblock content %}

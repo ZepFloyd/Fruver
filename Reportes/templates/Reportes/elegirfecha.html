@@ -139,7 +139,8 @@
                 <p>Genere un informe de gastos para un rango de fechas.</p>
             {% endif %}
         </div>
-    </container><br>
+        <a href="/reportes"><button type="button">Volver a Reportes</button></a>
+    </container>
 {% endblock content %}
 
 <!-- muestra mensaje desde la view cuando se guardan los datos -->
@@ -147,10 +148,10 @@
     {% for message in messages %}
         <script>
             Swal.fire({
-                "title": "Cuenta Actualizada",
+                "title": "Sin Registros",
                 "text": "{{message}}",
-                "icon": "success",
-                "confirmButtonColor": "green"
+                "icon": "warning",
+                "confirmButtonColor": "goldenrod"
             })
         </script>
     {% endfor %}

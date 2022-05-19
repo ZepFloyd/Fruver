@@ -173,11 +173,13 @@ h4 {
 #update-status {
     width: 9.5rem;
     margin: 0.5rem 0rem;
+    padding: 0rem;
 }
 
 #view-details {
     width: 7rem;
     margin: 0.5rem 0rem;
+    padding: 0rem;
 }
 
 button {
@@ -208,3 +210,4 @@ button:disabled {
     cursor: auto;
     color: grey;
    }
+

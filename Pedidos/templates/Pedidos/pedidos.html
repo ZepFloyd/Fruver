@@ -91,7 +91,7 @@
                             {% endif %}
                         </div>
                         <a href="{% url 'fruver-detallepedido' pedido.id %}" id="view-details"><button type="button">Ver Detalle</button></a>
-                        <a href="#" onclick="actualizarPedido({{ pedido.id }})" id="update-status"><button type="button">Actualizar Estado</button></a>
+                        <a href="#" onclick="actualizarPedido({{ pedido.id }})" id="update-status"><button type="button">Cambiar Estado</button></a>
                     </div>
                 {% endfor %}
             </div>      

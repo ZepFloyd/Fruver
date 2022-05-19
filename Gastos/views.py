@@ -68,7 +68,7 @@ def editargasto(request, id_gasto):
     
 
 
-#Editar gasto de productos
+#Eliminar gasto de productos
 @login_required(login_url='fruver-acceso')
 def eliminargasto(request, id_gasto):
     #instanciamos al usuario actual y verificamos que sea staff, si no lo es, se le redirige a la página principal
@@ -118,19 +118,24 @@ def detalleotrosgastos(request, id_gastoproductos):
 
     gasto_productos = GastoProductos.objects.filter(pk=id_gastoproductos)
     product_expenses = GastoProductos.objects.get(pk=id_gastoproductos)
-    otros_gastos = OtroGasto.objects.filter(main_gasto=product_expenses.id)    
-    context = {'gasto_productos': gasto_productos, 'otros_gastos': otros_gastos}
-    return render(request, 'Gastos/detalleotrosgastos.html', context)
+    otros_gastos = OtroGasto.objects.filter(main_gasto=product_expenses.id)
+    if not otros_gastos :
+        messages.warning(request, 'No existen otros gastos asociados a esta fecha')
+        return redirect('fruver-gastos')
+    else:   
+        context = {'gasto_productos': gasto_productos, 'otros_gastos': otros_gastos}
+        return render(request, 'Gastos/detalleotrosgastos.html', context)
 
 
 
-#Filtra gastos por semana
+#Filtra gastos por semana, mes o por un rango de fechas
 @login_required(login_url='fruver-acceso')
-def filtrarsemana(request):
+def filtrargastos(request):
     #instanciamos al usuario actual y verificamos que sea staff, si no lo es, se le redirige a la página principal
     current_user = request.user
     if current_user.is_staff != 1:
         return redirect('fruver-home')
+    #validamos si el post pide un filtro de gastos por semana
     if request.method == 'POST' and request.POST.get('week') != None:
         year_week = request.POST.get("week") #recibe un string con el formato '2022-W11' desde el input week del html
         semana = year_week.rsplit("-W") #separamos el string year_week, generando una lista con 2 items tipo string: el año y el número de la semana
@@ -139,36 +144,12 @@ def filtrarsemana(request):
         domingo = datetime.strptime(semana[0]+"-"+semana[1]+'-0', "%Y-%W-%w")
         #hacemos query sobre los registros cuya fecha esté en el rango lunes - domingo de la semana requerida y ordenamos el dataset según fecha
         gastos = GastoProductos.objects.filter(fecha_gasto__range=[lunes, domingo]).order_by('fecha_gasto')
-    otros_gastos = OtroGasto.objects.all()
-    form = FormularioGastoProductos()
-    form2 = FormularioOtroGasto()
-    if request.method == 'POST' and request.POST.get('monto_frutas') != None:
-        form = FormularioGastoProductos(request.POST)
-        frutas = int(request.POST.get('monto_frutas'))
-        verduras = int(request.POST.get('monto_verduras'))
-        bolsas = int(request.POST.get('monto_bolsas'))
-        fecha = request.POST.get('fecha')
-        if form.is_valid():
-            form.instance.fecha_gasto = fecha
-            form.instance.total_gastoproductos = frutas + verduras + bolsas
-            form.instance.total_dia = frutas + verduras + bolsas
-            form.instance.vendedor = current_user
-            form.save()
-            messages.success(request, '¡Los gastos del día '+fecha+' han sido registrados con éxito!')
+        #si no hay gastos, enviamos un mensaje al usuario informando que no existen registros, y redirijimos a la página de todos gastos
+        if not gastos:
+            messages.warning(request, 'No existen registros para el período consultado')
             return redirect('fruver-gastos')
-    context = {'form': form, 'form2': form2, 'gastos': gastos, 'otros_gastos': otros_gastos}
-    return render(request, 'Gastos/gastos.html', context)
-
-
-
-#Filtra gastos por mes
-@login_required(login_url='fruver-acceso')
-def filtrarmes(request):
-    #instanciamos al usuario actual y verificamos que sea staff, si no lo es, se le redirige a la página principal
-    current_user = request.user
-    if current_user.is_staff != 1:
-        return redirect('fruver-home')
-    if request.method == 'POST' and request.POST.get('month') != None:
+    #validamos si el post pide un filtro de gastos por mes
+    elif request.method == 'POST' and request.POST.get('month') != None:
         year_month = request.POST.get("month") #recibe un string con el formato '2022-05' desde el input month del html
         mes = year_month.rsplit("-") #separamos el string year_month, generando una lista con 2 items tipo string: el año y el número del mes
         #pasamos el año y el número del mes para generar 2 formatos de fecha válidos, inicio y fin de mes, para usarlos en el rango del query.
@@ -186,40 +167,21 @@ def filtrarmes(request):
                 fin = datetime.strptime(mes[0]+"-"+mes[1]+'-29', "%Y-%m-%d")    
         #hacemos query sobre los registros cuya fecha esté en el rango inicio y fin de del mes requerido y ordenamos el dataset según fecha
         gastos = GastoProductos.objects.filter(fecha_gasto__range=[inicio, fin]).order_by('fecha_gasto')
-    otros_gastos = OtroGasto.objects.all()
-    form = FormularioGastoProductos()
-    form2 = FormularioOtroGasto()
-    if request.method == 'POST' and request.POST.get('monto_frutas') != None:
-        form = FormularioGastoProductos(request.POST)
-        frutas = int(request.POST.get('monto_frutas'))
-        verduras = int(request.POST.get('monto_verduras'))
-        bolsas = int(request.POST.get('monto_bolsas'))
-        fecha = request.POST.get('fecha')
-        if form.is_valid():
-            form.instance.fecha_gasto = fecha
-            form.instance.total_gastoproductos = frutas + verduras + bolsas
-            form.instance.total_dia = frutas + verduras + bolsas
-            form.instance.vendedor = current_user
-            form.save()
-            messages.success(request, '¡Los gastos del día '+fecha+' han sido registrados con éxito!')
+        #si no hay gastos, enviamos un mensaje al usuario informando que no existen registros, y redirijimos a la página de todos gastos
+        if not gastos:
+            messages.warning(request, 'No existen registros para el período consultado')
             return redirect('fruver-gastos')
-    context = {'form': form, 'form2': form2, 'gastos': gastos, 'otros_gastos': otros_gastos}
-    return render(request, 'Gastos/gastos.html', context)
-
-
-
-#Filtra gastos por rango personalizado de fecha
-@login_required(login_url='fruver-acceso')
-def filtrarfechas(request):
-    #instanciamos al usuario actual y verificamos que sea staff, si no lo es, se le redirige a la página principal
-    current_user = request.user
-    if current_user.is_staff != 1:
-        return redirect('fruver-home')
-    if request.method == 'POST' and request.POST.get('start') != None and request.POST.get('end') != None:
+    #validamos si acaso el post pide un filtro de gastos por rango de fechas
+    elif request.method == 'POST' and request.POST.get('start') != None and request.POST.get('end') != None:
         inicio = request.POST.get("start") #recibe un string con el formato '2022-01-01' desde el input start del html
         fin = request.POST.get("end") #recibe un string con el formato '2022-01-01' desde el input end del html
         #hacemos query sobre los registros cuya fecha esté en el rango inicio - fin y ordenamos el dataset según fecha
         gastos = GastoProductos.objects.filter(fecha_gasto__range=[inicio, fin]).order_by('fecha_gasto')
+        #si no hay gastos, enviamos un mensaje al usuario informando que no existen registros, y redirijimos a la página de todos gastos
+        if not gastos:
+            messages.warning(request, 'No existen registros para el período consultado')
+            return redirect('fruver-gastos')
+    #luego de ejecutar el filtro solicitado por el usuario, instanciamos otros gastos y formularios para operar el resto de funcionalidades del módulo si así se requiere
     otros_gastos = OtroGasto.objects.all()
     form = FormularioGastoProductos()
     form2 = FormularioOtroGasto()
@@ -239,3 +201,5 @@ def filtrarfechas(request):
             return redirect('fruver-gastos')
     context = {'form': form, 'form2': form2, 'gastos': gastos, 'otros_gastos': otros_gastos}
     return render(request, 'Gastos/gastos.html', context)
+
+

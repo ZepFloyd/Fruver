@@ -7,7 +7,7 @@
 .container0 {
     display: flex;
     flex-flow: row wrap;
-    margin: 2rem 2.7rem 0.5rem;
+    margin: 0.5rem 2.7rem 0.5rem;
     justify-content: space-evenly;
     align-items: center;
     background-color: rgb(117, 117, 117);
@@ -28,7 +28,7 @@
 .container1 {
     display: flex;
     flex-flow: column wrap;
-    margin: 1rem 2.7rem;
+    margin: 0.5rem 2.7rem 1rem;
     justify-content: center;
     align-items: center;
     background-color: rgb(184, 184, 184);
