@@ -1,0 +1,75 @@
+{% extends "Home/mainmenu.html" %} <!-- hereda formato (header y footer en este caso) de template base.html -->
+{% load static %}
+
+{% block title %} Fruver - Administrar Productos {% endblock title %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'Productos/styles/adminproductos.css' %}"> <!-- referencia a la plantilla .css que corresponda -->
+{% endblock stylesheet %}
+
+{% block content %} <!-- agrega las sgtes. líneas de código dentro del bloque a la plantilla -->
+    <h1>Productos registrados para la venta en línea</h1>
+    <section class="funciones" >
+        <!-- botones con varias funcionalidades-->
+        <div class="estados">
+            <img src="{% static 'Productos/images/function/return.png' %}" alt="Agregar nuevo producto" width="70" height="70" style="margin:0.5rem 1.5rem 0rem;"><br>
+            <a href="/productos"><button type="button">Volver a Menú de Productos</button></a>
+        </div>
+        <div class="estados">
+            <img src="{% static 'Productos/images/function/add.png' %}" alt="Agregar nuevo producto" width="70" height="70" style="margin:0.5rem 1.5rem 0rem;"><br>
+            <a href="{% url 'fruver-agregarproducto' tipo_producto %}"><button type="button">Añadir Nuevo Producto</button></a>
+        </div>
+    </section>
+    <section class="productoss" >
+        <!-- iteramos sobre el diccionario que llega desde la view para acceder a los atributos de cada objeto Producto del tipo Fruta -->
+        {% for producto in productos %}
+            <div class="producto">
+                <div class="caja1">
+                    <!-- Producto: nombre, precio, stock, categoría, descripción, botón para agregar al carrito -->
+                    <img src="{{producto.imagen_producto.url}}" alt={{producto.nombre_producto}} width="150" height="150">
+                    <h3>{{producto.nombre_producto}}<br>1 {{producto.modo_venta}}</h3> <!-- nombre y modo de venta -->
+                </div>
+                <div class="caja2">
+                    <h4>Precio:<br>${{producto.precio_producto}}{% if producto.modo_venta == 'Kg'%}/Kg{% elif producto.modo_venta == 'Unidad'%}/unid.{% endif %}</h4>
+                    {% if producto.stock_producto == 0 %}
+                        <h4 style="color: firebrick">Sin Stock</h4>
+                    {% elif producto.stock_producto > 0 %}
+                        <h4>Stock:<br>{{producto.stock_producto}} {% if producto.modo_venta == 'Kg'%}Kg{% elif producto.modo_venta == 'Unidad'%}unid.{% endif %}</h4>
+                    {% endif %}
+                    <h4>Categoría:<br>{{producto.tipo_producto}}</h4>
+                </div>
+                <div class="caja3">
+                    <h4>Descripción:</h4>
+                    <span>{{producto.descripcion_producto}}</span>
+                    <form action="{% url 'fruver-editarproducto' producto.id %}" method="POST">
+                        {% csrf_token %}
+                        <!-- input para aumentar o disminuir Kg/unidades -->
+                        <input type="hidden" value={{producto.imagen_producto.url}} name="image">
+                        <!-- Botón para agregar productos al carrito -->
+                        <div class="shoppingcart">
+                            <img src="{% static 'Productos/images/function/editar.png' %}" alt="Editar producto" width="70" height="70" style="margin:1rem 1.5rem;"><br>
+                            <button type="submit" class="addcart">Editar Datos</button>
+                            <img src="{% static 'Productos/images/function/delete.png' %}" alt="Editar producto" width="70" height="70" style="margin:1rem 1.5rem;"><br>
+                            <a href="#" onclick="eliminarProducto({{ producto.id }})"><button type="button">Eliminar Producto</button></a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    </section>
+    <!-- archivo javascript que maneja la eliminación de un producto -->
+    <script src="{% static 'Productos/scripts/productos.js' %}"></script>
+{% endblock content %}
+
+
+{% block messages %}
+        {% for message in messages %}
+            <script>
+                Swal.fire({
+                    "title": "{{message}}",
+                    "text": "Ya puede visualizar el producto al realizar compras.",
+                    "icon": "success",
+                    "confirmButtonColor": "green"
+                })
+            </script>
+        {% endfor %}
+{% endblock messages %}

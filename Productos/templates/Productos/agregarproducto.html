@@ -1,0 +1,25 @@
+{% extends "Home/mainmenu.html" %} <!-- hereda formato (header y footer en este caso) de template mainmenu.html -->
+{% load static %} <!-- carga la carpeta static para acceder a los archivos que estén dentro de ella -->
+
+{% block title %} Fruver - Agregar Producto {% endblock title %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'Productos/styles/agregarproducto.css' %}"> <!-- referencia a la plantilla .css que corresponda -->
+{% endblock stylesheet %}
+
+{% block content %} <!-- agrega las sgtes. líneas de código dentro del bloque a la plantilla -->
+    <h1>Nuevo Productos</h1>
+    <h2>Llene los siguientes campos con los datos del producto, y presione el botón Guardar:</h2>
+    <container class="container1" >
+        <div class="caja1">
+            <form action="" method="POST" id="productform" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form.as_p}}
+            </form>
+            <div class="caja1-1">
+                <button type="submit" form="productform">Guardar</button>
+                <a href="{% url 'fruver-adminproductos' tipo_producto %}"><button type="button">Cancelar</button></a>
+            </div>
+        </div>
+    </container><br>
+{% endblock content %}

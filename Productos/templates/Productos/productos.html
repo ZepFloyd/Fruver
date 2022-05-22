@@ -1,0 +1,29 @@
+{% extends "Home/mainmenu.html" %} <!-- hereda formato (header y footer en este caso) de template mainmenu.html -->
+{% load static %} <!-- carga la carpeta static para acceder a los archivos que estén dentro de ella -->
+
+{% block title %} Fruver - Productos {% endblock title %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'Productos/styles/productos.css' %}"> <!-- referencia a la plantilla .css que corresponda -->
+{% endblock stylesheet %}
+
+{% block content %} <!-- agrega las sgtes. líneas de código dentro del bloque a la plantilla -->
+    <h1>Módulo de Productos</h1>
+    <h2>Seleccione el tipo de producto que desea administrar:</h2>
+    <container class="container1" >
+        <div class="box1">
+            <div class="box1-1">
+                <img class="submenuicon" src="{% static 'Productos/images/function/fruits.png' %}" alt="Frutas" width="120" height="120"/>
+                <a class="submenulink" href="{% url 'fruver-adminproductos' 'Fruta' %}">Frutas</a>
+            </div>
+            <p>Agregue una nueva fruta para la venta en línea, o modifique los datos ya existentes en el registro de frutas.</p>
+        </div>
+        <div class="box2">
+            <div class="box2-1">
+                <img class="submenuicon" src="{% static 'Productos/images/function/vegetables.png' %}" alt="Verduras" width="120" height="120"/>
+                <a class="submenulink" href="{% url 'fruver-adminproductos' 'Verdura' %}">Verduras</a>
+            </div>
+            <p>Agregue una nueva verdura para la venta en línea, o modifique los datos ya existentes en el registro de verduras.</p>
+        </div>
+    </container><br>
+{% endblock content %}

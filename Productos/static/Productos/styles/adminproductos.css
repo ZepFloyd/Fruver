@@ -1,0 +1,109 @@
+main {
+    background-color: rgb(184, 184, 184);
+    border: solid 0.2rem azure;
+    text-align: center;
+    color: black;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+/*título Administración de productos*/
+h1 {
+    background-color: rgb(3, 68, 112);
+    color: white;
+    margin: 0rem;
+    text-shadow: 1px 1px 1px black;
+    width: 100%;
+}
+
+/*div para almacenar los links con las listas de pedidos según su estado*/
+.funciones {
+    display: flex;
+    flex-flow: row wrap;
+    margin: 2rem 2.7rem 0.5rem;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: rgb(117, 117, 117);
+    border: solid 0.2rem azure;
+    border-radius: 1rem;
+    width: 88%;
+}
+
+
+/*cuerpo de página con listado de productos, ordenados en filas*/
+.productoss {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+/*producto individual, contenido interno ordenado en fila (box1, box, box3)*/
+.producto {
+    background-color: rgb(255, 255, 245);
+    width: 50rem;
+    height: 18rem;
+    margin: 0.5rem;
+    display: flex;
+    border: solid 0.2rem rgb(61, 61, 61);
+    border-radius: 1rem;
+    padding: 0.5rem;
+}
+
+/*3 items internos de .producto, c/u ordenado en columna*/
+.caja1 {
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.caja2 {
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.caja3 {
+    margin: 1rem 1rem;
+    font-size: 1rem;
+}
+
+/*div para imagen y boton añadir carrito*/
+.shoppingcart {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/*botón editar datos*/
+button {
+    background-color: rgb(238, 238, 238);
+    margin: 0.3rem;
+    border: none;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 2rem;
+    color: rgb(3, 68, 112);
+    border: solid 0.1rem grey;
+    cursor: pointer;
+   }
+   
+button:active {
+    color: white;
+    transform: translateY(0.2rem);
+   }
+   
+button:hover:not(:disabled) {
+    background: rgb(3, 68, 112);
+    color: white;
+    border: solid 0.1rem white;
+    text-shadow: 0.2rem #b4b7bc;
+   }
+   
+button:disabled {
+    cursor: auto;
+    color: grey;
+   }
+

@@ -161,9 +161,9 @@ def filtrargastos(request):
             fin = datetime.strptime(mes[0]+"-"+mes[1]+'-30', "%Y-%m-%d")
         elif mes[1] == '02':
             #verificamos si el año es bisiesto o no con el módulo calendar de python, y fijamos el día en 28 o 29 según corresponda
-            if calendar.is_leap(int(mes[0])) == False:
+            if calendar.isleap(int(mes[0])) == False:
                 fin = datetime.strptime(mes[0]+"-"+mes[1]+'-28', "%Y-%m-%d")
-            elif calendar.is_leap(int(mes[0])) == True:
+            elif calendar.isleap(int(mes[0])) == True:
                 fin = datetime.strptime(mes[0]+"-"+mes[1]+'-29', "%Y-%m-%d")    
         #hacemos query sobre los registros cuya fecha esté en el rango inicio y fin de del mes requerido y ordenamos el dataset según fecha
         gastos = GastoProductos.objects.filter(fecha_gasto__range=[inicio, fin]).order_by('fecha_gasto')
