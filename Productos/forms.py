@@ -25,7 +25,7 @@ class FormularioProducto(forms.ModelForm):
 
         widgets = {
             'tipo_producto': forms.Select(choices=TIPO_PRODUCTO_CHOICES, attrs={'class': 'form-control'}),
-            'modo_venta': forms.RadioSelect(choices=MODO_VENTA_CHOICES, attrs={'class': 'form-control'})
+            'modo_venta': forms.Select(choices=MODO_VENTA_CHOICES, attrs={'class': 'form-control'})
         }
 
         

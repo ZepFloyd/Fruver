@@ -8,13 +8,30 @@
 {% endblock stylesheet %}
 
 {% block content %} <!-- agrega las sgtes. líneas de código dentro del bloque a la plantilla -->
-    <h1>Nuevo Productos</h1>
-    <h2>Llene los siguientes campos con los datos del producto, y presione el botón Guardar:</h2>
+    <h1>Añadir Producto</h1>
+    <h4>Llene los siguientes campos con los datos del producto, luego presione el botón Guardar para registrar el producto.<br>
+        Este aparecerá disponible en el módulo de productos para ser editado, y en la sección de ventas para ser agregado a un pedido.
+    </h4>
     <container class="container1" >
         <div class="caja1">
             <form action="" method="POST" id="productform" enctype="multipart/form-data">
                 {% csrf_token %}
-                {{form.as_p}}
+                <br>
+                <label for="nombre_producto">Nombre del Producto:</label>
+                {{form.nombre_producto}}<br><br>
+                <label for="tipo_producto">Tipo de Producto:</label>
+                {{form.tipo_producto}}<br><br>
+                <label for="modo_venta">Modo de Venta:</label>
+                {{form.modo_venta}}<br><br>
+                <label for="precio_producto">Precio:</label>
+                {{form.precio_producto}}<br><br>
+                <label for="stock_producto">Stock:</label>
+                {{form.stock_producto}}<br><br>
+                <label for="descripcion_producto">Descripción:</label><br>
+                {{form.descripcion_producto}}<br>
+                <label for="imagen_producto">Imagen del Producto:</label><br>
+                <span style="font-size: 0.8rem">Se recomienda una imagen de altura y ancho iguales. Ej: 500x500 píxels.</span><br>
+                {{form.imagen_producto}}<br><br>
             </form>
             <div class="caja1-1">
                 <button type="submit" form="productform">Guardar</button>
@@ -23,3 +40,24 @@
         </div>
     </container><br>
 {% endblock content %}
+
+
+<!-- accedemos al atributo errors de la clase Form (viene con Django). Este atributo es un diccionario,
+    cuyas keys son el nombre del campo dónde ocurrió el error, y los values son c/u una lista de strings que representan los errores,
+    ya que cada campo podría tener más de 1 tipo de error -->
+    {% block messages %}
+    {% if form.errors %}
+        {% for error in form.errors.values %}
+            {% for message in error %}
+                <script>
+                    Swal.fire({
+                            "title": "Error",
+                            "text": "{{message}}",
+                            "icon": "error",
+                            "confirmButtonColor": "firebrick"
+                    })
+                </script>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+{% endblock messages %}

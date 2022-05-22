@@ -2,11 +2,16 @@
 .container1 {
     display: flex;
     flex-flow: row wrap;
-    margin: 2rem 4rem;
+    margin: 0.5rem 4rem;
     justify-content: center;
     align-items: center;
     background-color: rgb(184, 184, 184);
     border: solid 0.2rem azure;
+}
+
+/*instrucciones para añadir el nuevo producto*/
+h1, h4 {
+    margin: 0.5rem;
 }
 
 /*divs para los submenús*/
@@ -28,6 +33,7 @@
     justify-content: center;
     align-items: center;
 }
+
 
 /*botón editar datos*/
 button {

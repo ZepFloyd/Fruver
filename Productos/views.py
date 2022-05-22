@@ -46,7 +46,7 @@ def agregarproducto(request, tipo_producto):
 
     form = FormularioProducto()
     if request.method == 'POST':
-        form = FormularioProducto(request.POST)
+        form = FormularioProducto(request.POST, request.FILES)
         tipo_producto = request.POST.get('tipo_producto')
         if form.is_valid():
             form.save()
