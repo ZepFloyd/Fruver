@@ -65,15 +65,29 @@ def editarproducto(request, id_producto):
     current_user = request.user
     if current_user.is_staff != 1:
         return redirect('fruver-home')
-    return render(request, 'Productos/productos.html')
+
+    producto = Producto.objects.get(pk=id_producto)
+    form = FormularioProducto(request.POST or None, request.FILES or None, instance=producto)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            messages.success(request, '¡Los cambios fueron guardados con éxito!')
+            return redirect('/productos/editarproducto/'+id_producto)
+    
+    context = {'form': form, 'producto': producto}
+    return render(request, 'Productos/editarproducto.html', context)
 
 
 
 #Edita datos de Productos
 @login_required(login_url='fruver-acceso')
-def eliminarproducto(request, id_producto):
+def eliminarproducto(request, id_producto, tipo_producto):
     #instanciamos al usuario actual y verificamos que sea staff, si no lo es, se le redirige a la página principal
     current_user = request.user
     if current_user.is_staff != 1:
         return redirect('fruver-home')
-    return render(request, 'Productos/productos.html')
+
+    producto = Producto.objects.get(pk=id_producto)
+    producto.delete()
+    messages.success(request, 'El producto ha sido eliminado correctamente.')
+    return redirect('/productos/adminproductos/'+tipo_producto)

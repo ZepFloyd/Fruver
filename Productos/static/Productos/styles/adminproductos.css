@@ -68,7 +68,7 @@ h1 {
     font-size: 1rem;
 }
 
-/*div para imagen y boton añadir carrito*/
+/*div para imagen y botones de editar datos y eliminar productos*/
 .shoppingcart {
     display: flex;
     flex-flow: row wrap;

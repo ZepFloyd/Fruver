@@ -11,8 +11,17 @@
     <section class="funciones" >
         <!-- botones con varias funcionalidades-->
         <div class="estados">
-            <img src="{% static 'Productos/images/function/return.png' %}" alt="Agregar nuevo producto" width="70" height="70" style="margin:0.5rem 1.5rem 0rem;"><br>
+            <img src="{% static 'Productos/images/function/return.png' %}" alt="Volver a menú" width="70" height="70" style="margin:0.5rem 1.5rem 0rem;"><br>
             <a href="/productos"><button type="button">Volver a Menú de Productos</button></a>
+        </div>
+        <div class="estados">
+            {% if tipo_producto == 'Fruta' %}
+                <img src="{% static 'Productos/images/function/vegetables.png' %}" alt="Otros productos" width="70" height="70" style="margin:0.5rem 1.5rem 0rem;"/><br>
+                <a href="{% url 'fruver-adminproductos' 'Verdura' %}"><button type="button">Ir a Verduras</button></a>
+            {% elif tipo_producto == 'Verdura' %}
+                <img src="{% static 'Productos/images/function/fruits.png' %}" alt="Otros productos" width="70" height="70" style="margin:0.5rem 1.5rem 0rem;"/><br>
+                <a href="{% url 'fruver-adminproductos' 'Fruta' %}"><button type="button">Ir a Frutas</button></a>
+            {% endif %}
         </div>
         <div class="estados">
             <img src="{% static 'Productos/images/function/add.png' %}" alt="Agregar nuevo producto" width="70" height="70" style="margin:0.5rem 1.5rem 0rem;"><br>
@@ -40,18 +49,12 @@
                 <div class="caja3">
                     <h4>Descripción:</h4>
                     <span>{{producto.descripcion_producto}}</span>
-                    <form action="{% url 'fruver-editarproducto' producto.id %}" method="POST">
-                        {% csrf_token %}
-                        <!-- input para aumentar o disminuir Kg/unidades -->
-                        <input type="hidden" value={{producto.imagen_producto.url}} name="image">
-                        <!-- Botón para agregar productos al carrito -->
-                        <div class="shoppingcart">
-                            <img src="{% static 'Productos/images/function/editar.png' %}" alt="Editar producto" width="70" height="70" style="margin:1rem 1.5rem;"><br>
-                            <button type="submit" class="addcart">Editar Datos</button>
-                            <img src="{% static 'Productos/images/function/delete.png' %}" alt="Editar producto" width="70" height="70" style="margin:1rem 1.5rem;"><br>
-                            <a href="#" onclick="eliminarProducto({{ producto.id }})"><button type="button">Eliminar Producto</button></a>
-                        </div>
-                    </form>
+                    <div class="shoppingcart">
+                        <img src="{% static 'Productos/images/function/editar.png' %}" alt="Editar producto" width="70" height="70" style="margin:1rem 1.5rem;"><br>
+                        <a href="{% url 'fruver-editarproducto' producto.id %}"><button type="button">Editar Datos</button></a>
+                        <img src="{% static 'Productos/images/function/delete.png' %}" alt="Editar producto" width="70" height="70" style="margin:1rem 1.5rem;"><br>
+                        <a href="#" onclick="eliminarProducto({{ producto.id }},'{{tipo_producto}}')"><button type="button">Eliminar Producto</button></a>
+                    </div>
                 </div>
             </div>
         {% endfor %}
@@ -66,7 +69,6 @@
             <script>
                 Swal.fire({
                     "title": "{{message}}",
-                    "text": "Ya puede visualizar el producto al realizar compras, y editar sus datos desde el Módulo de Productos.",
                     "icon": "success",
                     "confirmButtonColor": "green"
                 })

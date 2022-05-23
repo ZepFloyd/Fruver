@@ -149,5 +149,5 @@ def editarvendedor(request, usuario_id):
 def eliminarvendedor(request, usuario_id):
     usuario = Usuario.objects.get(pk=usuario_id)
     usuario.delete()
-    messages.success(request,'El usuario ha sido eliminado')
+    messages.success(request,'El usuario ha sido eliminado correctamente.')
     return redirect('fruver-gestionarvendedor')

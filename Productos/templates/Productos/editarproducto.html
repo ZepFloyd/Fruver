@@ -1,0 +1,75 @@
+{% extends "Home/mainmenu.html" %} <!-- hereda formato (header y footer en este caso) de template mainmenu.html -->
+{% load static %} <!-- carga la carpeta static para acceder a los archivos que estén dentro de ella -->
+
+{% block title %} Fruver - Editar Producto {% endblock title %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'Productos/styles/editarproducto.css' %}"> <!-- referencia a la plantilla .css que corresponda -->
+{% endblock stylesheet %}
+
+{% block content %} <!-- agrega las sgtes. líneas de código dentro del bloque a la plantilla -->
+    <h1>Editar Producto</h1>
+    <h4>Edite los campos requeridos a continuación, luego presione el botón Guardar para registrar los cambios del producto.<br>
+        Estos aparecerán reflejados inmediatamente al visualizarlo, tanto en el módulo de productos, como en la sección de ventas.
+    </h4>
+    <container class="container1" >
+        <div class="caja1">
+            <form action="" method="POST" id="productform" enctype="multipart/form-data">
+                {% csrf_token %}
+                <br>
+                <label for="nombre_producto">Nombre del Producto:</label>
+                {{form.nombre_producto}}<br><br>
+                <label for="tipo_producto">Tipo de Producto:</label>
+                {{form.tipo_producto}}<br><br>
+                <label for="modo_venta">Modo de Venta:</label>
+                {{form.modo_venta}}<br><br>
+                <label for="precio_producto">Precio:</label>
+                {{form.precio_producto}}<br><br>
+                <label for="stock_producto">Stock:</label>
+                {{form.stock_producto}}<br><br>
+                <label for="descripcion_producto">Descripción:</label><br>
+                {{form.descripcion_producto}}<br>
+                <label for="imagen_producto">Imagen del Producto:</label><br>
+                <span style="font-size: 0.8rem">Se recomienda una imagen de altura y ancho iguales. Ej: 500x500 píxels.</span><br>
+                <span style="font-size: 0.8rem">Vista rápida de imagen actual:</span><br>
+                <img src="{{producto.imagen_producto.url}}" alt={{producto.nombre_producto}} width="150" height="150"><br>
+                {{form.imagen_producto}}<br><br>
+            </form>
+            <div class="caja1-1">
+                <button type="submit" form="productform">Guardar</button>
+                <a href="{% url 'fruver-adminproductos' producto.tipo_producto %}"><button type="button">Volver a Productos</button></a>
+            </div>
+        </div>
+    </container><br>
+{% endblock content %}
+
+
+{% block messages %}
+    {% for message in messages %}
+        <script>
+            Swal.fire({
+                "title": "{{message}}",
+                "text": "Puede seguir editando el producto, o volver a la sección anterior.",
+                "icon": "success",
+                "confirmButtonColor": "green"
+            })
+        </script>
+    {% endfor %}
+    <!-- accedemos al atributo errors de la clase Form (viene con Django). Este atributo es un diccionario,
+    cuyas keys son el nombre del campo dónde ocurrió el error, y los values son c/u una lista de strings que representan los errores,
+    ya que cada campo podría tener más de 1 tipo de error -->
+    {% if form.errors %}
+        {% for error in form.errors.values %}
+            {% for message in error %}
+                <script>
+                    Swal.fire({
+                            "title": "Error",
+                            "text": "{{message}}",
+                            "icon": "error",
+                            "confirmButtonColor": "firebrick"
+                    })
+                </script>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+{% endblock messages %}

@@ -1,0 +1,66 @@
+/*container con los submenús y botones de cta. bancaria y creación de vendedor*/
+.container1 {
+    display: flex;
+    flex-flow: row wrap;
+    margin: 0.5rem 4rem;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(184, 184, 184);
+    border: solid 0.2rem azure;
+}
+
+/*instrucciones para añadir el nuevo producto*/
+h1, h4 {
+    margin: 0.5rem;
+}
+
+/*divs para los submenús*/
+.caja1 {
+    margin: 1rem;
+    width: 30%;
+    height: 30%;
+    background-color: whitesmoke;
+    border: solid 0.2rem rgb(61, 61, 61);
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.caja1-1 {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/*botón editar datos*/
+button {
+    background-color: rgb(238, 238, 238);
+    margin: 0.3rem;
+    border: none;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 2rem;
+    color: rgb(3, 68, 112);
+    border: solid 0.1rem grey;
+    cursor: pointer;
+   }
+   
+button:active {
+    color: white;
+    transform: translateY(0.2rem);
+   }
+   
+button:hover:not(:disabled) {
+    background: rgb(3, 68, 112);
+    color: white;
+    border: solid 0.1rem white;
+    text-shadow: 0.2rem #b4b7bc;
+   }
+   
+button:disabled {
+    cursor: auto;
+    color: grey;
+   }
