@@ -1,7 +1,7 @@
 
 
 /*función para eliminar un producto de la base de datos*/
-function eliminarProducto(id, tipo_producto) {
+function suprimirProducto(id, tipo_producto) {
     Swal.fire({
         "title":"¿Realmente desea eliminar este producto?",
         "text":"Recuerde que esta acción no se puede deshacer",
@@ -13,7 +13,7 @@ function eliminarProducto(id, tipo_producto) {
     })
     .then(function(result) {
         if(result.isConfirmed) {
-            window.location.href = "/productos/eliminarproducto/"+id+"/"+tipo_producto
+            window.location.href = "/productos/suprimirproducto/"+id+"/"+tipo_producto
         }
     })
 }

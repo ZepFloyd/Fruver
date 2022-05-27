@@ -13,28 +13,28 @@ from datetime import datetime, timedelta
 #ver frutas a la venta
 def frutas(request):
     #Hacemos query sobre todas las ocurrencias de la tabla Producto, para iterar sobre ellas en el template
-    frutas = Producto.objects.filter(tipo_producto='Fruta')
+    frutas = Producto.objects.filter(tipo_producto='Fruta', stock_producto__gt=0) #__gt filtra por stock greater than 0
     context = {'frutas': frutas}
     return render(request, 'Pedidos/frutas.html', context)
 
 #Muestra las frutas filtradas según el criterio seleccionado
 def filtrarfrutas(request):
     orden = request.POST.get('ordenar')
-    frutas = Producto.objects.filter(tipo_producto='Fruta').order_by(orden)
+    frutas = Producto.objects.filter(tipo_producto='Fruta', stock_producto__gt=0).order_by(orden)
     context = {'frutas': frutas}
     return render(request, 'Pedidos/frutas.html', context)
 
 #ver verduras a la venta
 def verduras(request):
     #Hacemos query sobre todas las ocurrencias de la tabla Producto, para iterar sobre ellas en el template
-    verduras = Producto.objects.filter(tipo_producto='Verdura')
+    verduras = Producto.objects.filter(tipo_producto='Verdura', stock_producto__gt=0) #__gt filtra por stock greater than 0
     context = {'verduras': verduras}
     return render(request, 'Pedidos/verduras.html', context)
 
 #Muestra las verduras filtradas según el criterio seleccionado
 def filtrarverduras(request):
     orden = request.POST.get('ordenar')
-    verduras = Producto.objects.filter(tipo_producto='Verdura').order_by(orden)
+    verduras = Producto.objects.filter(tipo_producto='Verdura', stock_producto__gt=0).order_by(orden)
     context = {'verduras': verduras}
     return render(request, 'Pedidos/verduras.html', context)
 
@@ -159,7 +159,7 @@ def pedidos(request):
     if current_user.is_staff != 1:
         return redirect('fruver-home')
     #Hacemos query sobre todas las ocurrencias de la tabla Pedido, para iterar sobre ellas en el template
-    pedidos = Pedido.objects.all()
+    pedidos = Pedido.objects.all().order_by('-fecha_pedido')
     #Hacemos query sobre el objeto vinculado con la llave foránea de tabla Pedido, en este caso, su atributo cliente se corresponde con tabla Usuario,
     # por lo que será posible acceder al nombre y resto de datos del cliente que hizo el pedido  
     clientes = Pedido.objects.select_related()  

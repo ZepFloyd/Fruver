@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import *
 from .models import *
+from Pedidos.models import *
 
 # Create your views here.
 
@@ -36,9 +37,9 @@ def adminproductos(request, tipo_producto):
 
 
 
-#Agrega nuevos Productos
+#Crea nuevos Productos
 @login_required(login_url='fruver-acceso')
-def agregarproducto(request, tipo_producto):
+def crearproducto(request, tipo_producto):
     #instanciamos al usuario actual y verificamos que sea staff, si no lo es, se le redirige a la página principal
     current_user = request.user
     if current_user.is_staff != 1:
@@ -54,7 +55,7 @@ def agregarproducto(request, tipo_producto):
             return redirect('/productos/adminproductos/'+tipo_producto)
     
     context = {'form': form, 'tipo_producto': tipo_producto}
-    return render(request, 'Productos/agregarproducto.html', context)
+    return render(request, 'Productos/crearproducto.html', context)
 
 
 
@@ -81,13 +82,23 @@ def editarproducto(request, id_producto):
 
 #Edita datos de Productos
 @login_required(login_url='fruver-acceso')
-def eliminarproducto(request, id_producto, tipo_producto):
+def suprimirproducto(request, id_producto, tipo_producto):
     #instanciamos al usuario actual y verificamos que sea staff, si no lo es, se le redirige a la página principal
     current_user = request.user
     if current_user.is_staff != 1:
         return redirect('fruver-home')
 
+    #Obtenemos el productp a eliminar haciendo un query con la id del producto
     producto = Producto.objects.get(pk=id_producto)
-    producto.delete()
-    messages.success(request, 'El producto ha sido eliminado correctamente.')
-    return redirect('/productos/adminproductos/'+tipo_producto)
+    #Verificamos si el producto está incluido en algún pedido, haciendo query en la tabla DetallePedido, 
+    # en donde la columna "producto" tenga ocurrencias del producto que queremos eliminar
+    detalle = DetallePedido.objects.filter(producto=id_producto)
+    #Si hay ocurrencias, es decir, si el producto está contenido en alguno de los pedidos hechos por clientes, no eliminamos e informamos al usuario de ello
+    if detalle:
+        messages.warning(request, 'Acción de Riesgo')
+        return redirect('/productos/adminproductos/'+tipo_producto)
+    #Si el producto no está en ningún pedido, eliminamos
+    else:
+        producto.delete()
+        messages.success(request, 'El producto ha sido eliminado correctamente.')
+        return redirect('/productos/adminproductos/'+tipo_producto)

@@ -25,7 +25,7 @@
         </div>
         <div class="estados">
             <img src="{% static 'Productos/images/function/add.png' %}" alt="Agregar nuevo producto" width="70" height="70" style="margin:0.5rem 1.5rem 0rem;"><br>
-            <a href="{% url 'fruver-agregarproducto' tipo_producto %}"><button type="button">Añadir Nuevo Producto</button></a>
+            <a href="{% url 'fruver-crearproducto' tipo_producto %}"><button type="button">Añadir Nuevo Producto</button></a>
         </div>
     </section>
     <section class="productoss" >
@@ -50,10 +50,10 @@
                     <h4>Descripción:</h4>
                     <span>{{producto.descripcion_producto}}</span>
                     <div class="shoppingcart">
-                        <img src="{% static 'Productos/images/function/editar.png' %}" alt="Editar producto" width="70" height="70" style="margin:1rem 1.5rem;"><br>
+                        <img src="{% static 'Productos/images/function/editar.png' %}" alt="Editar producto" width="70" height="70" style="margin:1rem 1rem;"><br>
                         <a href="{% url 'fruver-editarproducto' producto.id %}"><button type="button">Editar Datos</button></a>
-                        <img src="{% static 'Productos/images/function/delete.png' %}" alt="Editar producto" width="70" height="70" style="margin:1rem 1.5rem;"><br>
-                        <a href="#" onclick="eliminarProducto({{ producto.id }},'{{tipo_producto}}')"><button type="button">Eliminar Producto</button></a>
+                        <img src="{% static 'Productos/images/function/delete.png' %}" alt="Editar producto" width="70" height="70" style="margin:1rem 1rem;"><br>
+                        <a href="#" onclick="suprimirProducto({{ producto.id }},'{{tipo_producto}}')"><button type="button">Eliminar Producto</button></a>
                     </div>
                 </div>
             </div>
@@ -66,12 +66,23 @@
 
 {% block messages %}
         {% for message in messages %}
-            <script>
-                Swal.fire({
-                    "title": "{{message}}",
-                    "icon": "success",
-                    "confirmButtonColor": "green"
-                })
-            </script>
+            {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                <script>
+                    Swal.fire({
+                        "title": "{{message}}",
+                        "icon": "success",
+                        "confirmButtonColor": "green"
+                    })
+                </script>
+            {% elif message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+                <script>
+                    Swal.fire({
+                        "title": "{{message}}",
+                        "text":"Este producto está incluido en uno o más pedidos, por lo que no se recomienda su eliminación de la base de datos. Puede poner el stock en 0 para que no se muestre en la sección de ventas.",
+                        "icon": "warning",
+                        "confirmButtonColor": "goldenrod"
+                    })
+                </script>
+            {% endif %}
         {% endfor %}
 {% endblock messages %}
