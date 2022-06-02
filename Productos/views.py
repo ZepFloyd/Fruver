@@ -2,6 +2,9 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from datetime import datetime
+import locale
+from django.db.models import Count
 from .forms import *
 from .models import *
 from Pedidos.models import *
@@ -102,3 +105,78 @@ def suprimirproducto(request, id_producto, tipo_producto):
         producto.delete()
         messages.success(request, 'El producto ha sido eliminado correctamente.')
         return redirect('/productos/adminproductos/'+tipo_producto)
+
+
+
+#Muestra estadísticas de los productos
+@login_required(login_url='fruver-acceso')
+def estadisticaproducto(request):
+    #instanciamos al usuario actual y verificamos que sea staff, si no lo es, se le redirige a la página principal
+    current_user = request.user
+    if current_user.is_staff != 1:
+        return redirect('fruver-home')
+
+    locale.setlocale(locale.LC_TIME, 'es_ES') #Seteamos el formato de fecha para mostrarse en idioma español
+    mes = datetime.now() #Obtenemos la fecha actual
+    mes = mes.strftime('%B de %Y') #Damos formato a la fecha para mostrar solo el nombre del mes
+
+    frutas = {}
+    verduras = {}
+    queryset = DetallePedido.objects.all().order_by('producto')
+
+    for registro in queryset:
+        #Si el tipo de producto es una fruta
+        if registro.producto.tipo_producto == 'Fruta':
+            #Si la fruta no se encuentra aún incluida en nuestro diccionario, la incluimos usando el id como llave, y una lista de 2 items: cantidades y montos vendidos
+            if registro.producto.nombre_producto not in frutas.keys():
+                cantidad = 0
+                monto = 0
+                frutas[registro.producto.nombre_producto] = [cantidad + registro.cantidad_producto, monto + registro.subtotal]
+            #Si la fruta ya se encuentra en el diccionario, sólo actualizamos la cantidad y el monto
+            elif registro.producto.nombre_producto in frutas.keys():
+                cantidad = frutas[registro.producto.nombre_producto][0]
+                monto = frutas[registro.producto.nombre_producto][1]
+                frutas[registro.producto.nombre_producto] = [cantidad + registro.cantidad_producto, monto + registro.subtotal]
+        #Si el tipo de producto es una verdura
+        elif registro.producto.tipo_producto == 'Verdura':
+            #Si la verdura no se encuentra aún incluida en nuestro diccionario, la incluimos usando el id como llave, y una lista de 2 items: cantidades y montos vendidos
+            if registro.producto.nombre_producto not in verduras.keys():
+                cantidad = 0
+                monto = 0
+                verduras[registro.producto.nombre_producto] = [cantidad + registro.cantidad_producto, monto + registro.subtotal]
+            #Si la verdura ya se encuentra en el diccionario, sólo actualizamos la cantidad y el monto
+            elif registro.producto.nombre_producto in verduras.keys():
+                cantidad = verduras[registro.producto.nombre_producto][0]
+                monto = verduras[registro.producto.nombre_producto][1]
+                verduras[registro.producto.nombre_producto] = [cantidad + registro.cantidad_producto, monto + registro.subtotal]
+    
+    frutadata = []
+    frutalabels = []
+    for name, quantity in frutas.items():
+        frutalabels.append(name)
+        frutadata.append(quantity[0])
+    frutamax = max(frutadata)
+    for key, value in frutas.items():
+        for elemento in value:
+            if elemento == frutamax:
+                nom = key
+                quantite = elemento
+                somme = frutas[nom][1]
+
+
+    verduradata = []
+    verduralabels = []
+    for name, quantity in verduras.items():
+        verduralabels.append(name)
+        verduradata.append(quantity[0])
+    verdumax = max(verduradata)
+    for key, value in verduras.items():
+        for elemento in value:
+            if elemento == verdumax:
+                namae = key
+                ryou = elemento
+                goukei = verduras[namae][1]
+
+    context = {'mes': mes, 'frutadata': frutadata, 'frutalabels': frutalabels, 'verduradata': verduradata, 'verduralabels': verduralabels, 
+    'nom':nom, 'quantite':quantite, 'somme': somme, 'namae':namae, 'ryou':ryou, 'goukei':goukei}    
+    return render(request, 'Productos/estadisticaproducto.html', context)

@@ -7,5 +7,6 @@ urlpatterns = [
     path('crearproducto/<tipo_producto>', views.crearproducto, name='fruver-crearproducto'), #Página para crear nuevos Productos
     path('editarproducto/<id_producto>', views.editarproducto, name='fruver-editarproducto'), #Página para editar datos de Productos
     path('suprimirproducto/<id_producto>/<tipo_producto>', views.suprimirproducto, name='fruver-suprimirproducto'), #Elimina Productos de la base de datos
+    path('estadisticaproducto/', views.estadisticaproducto, name='fruver-estadisticaproducto'), #Muestra estadísticas de los productos
     #path('mainmenu/', views.mainmenu, name='fruver-mainmenu'), #Menú principal para vendedor
 ]

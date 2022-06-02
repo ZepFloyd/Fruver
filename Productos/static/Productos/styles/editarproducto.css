@@ -35,6 +35,23 @@ h1, h4 {
 }
 
 
+ul {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+li {
+    list-style-type: none;
+    display: inline-block;
+    padding-right: 10%;
+    width: auto;
+    margin-right: 0.5%;
+    padding-left: 0;
+    margin-left: 0;
+    margin: 1em 0;
+}
+
+
 /*botón editar datos*/
 button {
     background-color: rgb(238, 238, 238);

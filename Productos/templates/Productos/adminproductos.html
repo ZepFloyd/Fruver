@@ -35,7 +35,14 @@
                 <div class="caja1">
                     <!-- Producto: nombre, precio, stock, categoría, descripción, botón para agregar al carrito -->
                     <img src="{{producto.imagen_producto.url}}" alt={{producto.nombre_producto}} width="150" height="150">
-                    <h3>{{producto.nombre_producto}}<br>1 {{producto.modo_venta}}</h3> <!-- nombre y modo de venta -->
+                    <span style="font-size: 1.2rem; font-weight: bold;">
+                        {{producto.nombre_producto}}<br>1 {{producto.modo_venta}}<br><!-- nombre y modo de venta -->
+                        {% if producto.is_active is True %}
+                        <span style="font-size: 1rem; font-weight: bold;">Estado: <span style="color: forestgreen; font-weight: bold;">Activo</span></span>
+                        {% elif producto.is_active is False %}
+                        <span style="font-size: 1rem; font-weight: bold;">Estado: <span style="color: firebrick; font-weight: bold;">Inactivo</span></span>
+                        {% endif %}
+                    </span>
                 </div>
                 <div class="caja2">
                     <h4>Precio:<br>${{producto.precio_producto}}{% if producto.modo_venta == 'Kg'%}/Kg{% elif producto.modo_venta == 'Unidad'%}/unid.{% endif %}</h4>
@@ -47,7 +54,7 @@
                     <h4>Categoría:<br>{{producto.tipo_producto}}</h4>
                 </div>
                 <div class="caja3">
-                    <h4>Descripción:</h4>
+                    <h4 class="desc">Descripción:</h4>
                     <span>{{producto.descripcion_producto}}</span>
                     <div class="shoppingcart">
                         <img src="{% static 'Productos/images/function/editar.png' %}" alt="Editar producto" width="70" height="70" style="margin:1rem 1rem;"><br>
@@ -78,7 +85,7 @@
                 <script>
                     Swal.fire({
                         "title": "{{message}}",
-                        "text":"Este producto está incluido en uno o más pedidos, por lo que no se recomienda su eliminación de la base de datos. Puede poner el stock en 0 para que no se muestre en la sección de ventas.",
+                        "text":"Este producto está incluido en uno o más pedidos, por lo que no se recomienda su eliminación de la base de datos. Si lo desea, puede colocar el estado del producto en inactivo para que no se muestre en la sección de ventas.",
                         "icon": "warning",
                         "confirmButtonColor": "goldenrod"
                     })

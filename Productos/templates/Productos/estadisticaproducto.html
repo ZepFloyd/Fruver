@@ -1,0 +1,82 @@
+{% extends "Home/mainmenu.html" %} <!-- hereda formato (header y footer en este caso) de template mainmenu.html -->
+{% load static %} <!-- carga la carpeta static para acceder a los archivos que estén dentro de ella -->
+
+{% block title %} Fruver - Estadísticas de Productos {% endblock title %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'Productos/styles/estadisticaproducto.css' %}"> <!-- referencia a la plantilla .css que corresponda -->
+{% endblock stylesheet %}
+
+{% block content %}
+    <h1 class="info">Estadísticas de Productos</h1>
+    <div class="contenidos">
+        <h2 id="subtitle1">Productos más vendidos a {{mes}}</h2>
+        <section class="cliente">
+            <h3 id="subtitle2">Frutas</h3>
+            <div class="datos">
+                <div class="cash">
+                    <h4>Detalle de las transacciones</h4>
+                    <p>Producto más vendido: {{nom}}</p>
+                    <p>Unidades/Kg vendidos: {{quantite}}</p>
+                    <p>Monto vendido: ${{somme}}</p>
+                </div>
+                <div style="width: 70%;">
+                    <canvas id="fruta-piechart"></canvas>
+                </div>
+            </div>
+            <h3 id="subtitle3">Verduras</h3>
+            <div class="datos">
+                <div style="width: 70%;">
+                    <canvas id="verdura-piechart"></canvas>
+                </div>
+                <div class="cash">
+                    <h4>Detalle de las transacciones</h4>
+                    <p>Producto más vendido: {{namae}}</p>
+                    <p>Unidades/Kg vendidos: {{ryou}}</p>
+                    <p>Monto vendido: ${{goukei}}</p>
+                </div>
+            </div>
+        </section>
+    </div>
+    <section class="volver">
+        <a href="{% url 'fruver-productos' %}"><button type="button">Volver a Menú de Frutas</button></a>
+    </section>
+
+    <!-- Se integra la librería de javascript Chart.js para generar los gráficos de productos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+
+    <script>
+        const ctx = document.getElementById('fruta-piechart');
+        const ctx2 = document.getElementById('verdura-piechart');
+
+        const myChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: {{ frutalabels|safe }},
+            datasets: [{
+            label: 'Frutas',
+            data: {{ frutadata|safe }},
+            backgroundColor: ['BurlyWood', 'CadetBlue', 'CornflowerBlue', 'OliveDrab', 'IndianRed', 'PaleGoldenRod'],
+            fill: true,
+            borderWidth: 1,
+            }]
+        },
+        });
+
+        const myChart2 = new Chart(ctx2, {
+        type: 'doughnut',
+        data: {
+            labels: {{ verduralabels|safe }},
+            datasets: [{
+            label: 'Verduras',
+            data: {{ verduradata|safe }},
+            backgroundColor: ['BurlyWood', 'CadetBlue', 'CornflowerBlue', 'OliveDrab', 'IndianRed', 'PaleGoldenRod'],
+            fill: true,
+            borderWidth: 1,
+            }]
+        },
+        });
+    </script>
+
+{% endblock content %}

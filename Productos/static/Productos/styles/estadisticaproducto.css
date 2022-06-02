@@ -3,85 +3,87 @@ main {
     border: solid 0.2rem azure;
     text-align: center;
     color: black;
-    display: flex;
-    flex-flow: column wrap;
-    justify-content: center;
-    align-items: center;
 }
 
-/*título Administración de productos*/
+/*título Carrito*/
 h1 {
     background-color: rgb(3, 68, 112);
     color: white;
-    margin: 0rem;
+    margin-top: 0rem;
     text-shadow: 1px 1px 1px black;
+}
+
+
+/*contenedor para resumen de productos y datos del cliente, ordenados en fila*/
+.contenidos {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0rem;
+}
+
+#subtitle1 {
+    margin: 0rem 1rem 1rem;
     width: 100%;
 }
 
-/*div para almacenar los links con las listas de pedidos según su estado*/
-.funciones {
-    display: flex;
-    flex-flow: row wrap;
-    margin: 2rem 2.7rem 0.5rem;
-    justify-content: space-evenly;
-    align-items: center;
-    background-color: rgb(117, 117, 117);
-    border: solid 0.2rem azure;
-    border-radius: 1rem;
-    width: 88%;
+/*Títulos resumen de productos y datos de cliente*/
+#subtitle2, #subtitle3 {
+    margin: 1.4rem 1rem;
+    width: 100%;
 }
 
 
-/*cuerpo de página con listado de productos, ordenados en filas*/
-.productoss {
+/*resumen con datos del cliente y del pedido, ordenados en columnas*/
+.cliente {
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
     align-items: center;
-}
-
-/*producto individual, contenido interno ordenado en fila (box1, box, box3)*/
-.producto {
+    width: 80%;
     background-color: rgb(255, 255, 245);
-    width: 50rem;
-    height: 18rem;
-    margin: 0.5rem;
-    display: flex;
     border: solid 0.2rem rgb(61, 61, 61);
     border-radius: 1rem;
-    padding: 0.5rem;
 }
 
-/*3 items internos de .producto, c/u ordenado en columna*/
-.caja1 {
-    display: flex;
-    flex-flow: column wrap;
-}
-
-.caja2 {
-    display: flex;
-    flex-flow: column wrap;
-}
-
-.caja3 {
-    margin: 1rem 1rem;
-    font-size: 1rem;
-}
-
-.desc {
-    margin: 0rem;
-}
-
-/*div para imagen y botones de editar datos y eliminar productos*/
-.shoppingcart {
+.datos {
     display: flex;
     flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
+    width: 75%;
+    font-size: 1.1rem;
+}
+
+.cash {
+    display: flex;
+    flex-flow: column wrap;
     justify-content: center;
     align-items: center;
+} 
+
+
+/*datos del cliente*/
+p {
+    margin: 0.1rem 0rem;
+}
+
+/*monto total del pedido*/
+#total {
+    font-size: 1.3rem;
+    font-weight: bold;
 }
 
 
-/*botón editar datos*/
+/*container del botón volver a pedidos*/
+.volver {
+    width: 100%;
+    background-color: rgb(184, 184, 184);
+}
+
+
 button {
     background-color: rgb(238, 238, 238);
     margin: 0.3rem;
@@ -110,4 +112,3 @@ button:disabled {
     cursor: auto;
     color: grey;
    }
-
