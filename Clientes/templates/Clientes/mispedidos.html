@@ -1,38 +1,15 @@
-{% extends "Home/mainmenu.html" %} <!-- hereda formato (header y footer en este caso) de template mainmenu.html -->
+{% extends "Home/base.html" %} <!-- hereda formato (header y footer en este caso) de template base.html -->
 {% load static %} <!-- carga la carpeta static para acceder a los archivos que estén dentro de ella -->
 
-{% block title %} Fruver - Pedidos {% endblock title %}
-
+{% block title %} Fruver - Mis Pedidos {% endblock title %}
 {% block stylesheet %}
-<link rel="stylesheet" href="{% static 'Pedidos/styles/pedidos.css' %}"> <!-- referencia a la plantilla .css que corresponda -->
+<link rel="stylesheet" href="{% static 'Clientes/styles/mispedidos.css' %}"> <!-- referencia a la plantilla .css que corresponda -->
 {% endblock stylesheet %}
 
-{% block content %}
+{% block content %} <!-- agrega las sgtes. líneas de código dentro del bloque a la plantilla -->
     <h1 class="info">Registro de Pedidos</h1>
-    <h2 class="info">Gestione el estado de los pedidos de clientes</h2>
-    <p class="info">Para acceder a los pedidos según su estado, seleccione una de las opciones que se muestran a continuación:</p>
-    <div class="container0">
-        <div class="estados">
-            <img src="{% static 'Pedidos/images/status/todos.png' %}" alt="Ver todos" width="65" height="65"/>
-            <a href="{% url 'fruver-pedidos' %}"><button type="button" class="filtros">Todos los Pedidos</button></a>
-        </div>
-        <div class="estados">
-            <img src="{% static 'Pedidos/images/status/recibido.png' %}" alt="Ver recibidos" width="65" height="65"/>
-            <a href="{% url 'fruver-filtrarpedidos' 'Recibido' %}"><button type="button" class="filtros">Pedidos Recibidos</button></a>
-        </div>
-        <div class="estados">
-            <img src="{% static 'Pedidos/images/status/armado.png' %}" alt="Ver armados" width="65" height="65"/>
-            <a href="{% url 'fruver-filtrarpedidos' 'Armado' %}"><button type="button" class="filtros">Pedidos Armados</button></a>
-        </div>
-        <div class="estados">
-            <img src="{% static 'Pedidos/images/status/despachado.png' %}" alt="Ver despachados" width="65" height="65"/>
-            <a href="{% url 'fruver-filtrarpedidos' 'Despachado' %}"><button type="button" class="filtros">Pedidos Despachados</button></a>
-        </div>
-        <div class="estados">
-            <img src="{% static 'Pedidos/images/status/pagado.png' %}" alt="Ver pagados" width="65" height="65"/>
-            <a href="{% url 'fruver-filtrarpedidos' 'Pagado' %}"><button type="button" class="filtros">Pedidos Pagados</button></a>
-        </div>
-    </div>
+    <h2 class="info">En esta sección puede ver la información detallada de sus pedidos.</h2>
+    <p class="info">Para acceder al detalle de un pedido, presione el botón Ver Productos del Pedido, al costado del pedido cuyo detalle desea ver.</p>
     <div class="container1">
         <div class="fila-titulos">
             <div class="titulo-columnas" id="cliente">
@@ -90,37 +67,11 @@
                                 <p id="status-icon" style="background-color:forestgreen;">{{pedido.estado_pedido}}</p>
                             {% endif %}
                         </div>
-                        <a href="{% url 'fruver-detallepedido' pedido.id %}" id="view-details"><button type="button">Ver Detalle</button></a>
-                        <a href="#" onclick="actualizarPedido({{ pedido.id }})" id="update-status"><button type="button">Cambiar Estado</button></a>
+                        <a href="{% url 'fruver-mipedido' pedido.id %}" id="view-details"><button type="button">Ver Productos del Pedido</button></a>
                     </div>
                 {% endfor %}
             </div>      
         </div>
     </div>
-    <script src="{% static 'Pedidos/scripts/actualizarpedido.js' %}"></script>
 {% endblock content %}
 
-
-
-<!-- block para mensajes y alertas pop-up -->
-{% block messages %}
-    {% for message in messages %}
-        {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
-            <script>
-                Swal.fire({
-                        "title": "{{message}}",
-                        "icon": "success",
-                        "confirmButtonColor": "green"
-                })
-            </script>
-        {% elif message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
-            <script>
-                Swal.fire({
-                        "title": "{{message}}",
-                        "icon": "warning",
-                        "confirmButtonColor": "goldenrod"
-                })
-            </script>
-        {% endif %}
-    {% endfor %}
-{% endblock messages %}

@@ -1,0 +1,208 @@
+main {
+    background-color: lightgoldenrodyellow;
+    border: solid 0.2rem azure;
+    text-align: center;
+    color: black;
+}
+
+/*título Frutas*/
+h1 {
+    background-color: goldenrod;
+    color: white;
+    margin-top: 0rem;
+    text-shadow: 1px 1px 1px black;
+}
+
+
+/*titulo y texto de informacion*/
+.info {
+    margin: 0.1rem
+}
+
+/*divs para cada icono de estado con su botón*/
+.estados {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5rem 2rem 0rem;
+}
+
+/*div para almacenar y centrar el container con los pedidos y los botones*/
+.container1 {
+    display: flex;
+    flex-flow: column wrap;
+    margin: 1rem 2.7rem;
+    justify-content: center;
+    align-items: center;
+    background-color: lightgoldenrodyellow;
+    width: 95%;
+}
+
+/*div para almacenar los titulos de las columnas, ordenados en fila*/
+.fila-titulos {
+    margin: 1rem 1rem 0rem;
+    background-color: rgb(255, 255, 245);
+    border: solid 0.2rem goldenrod;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 95%;
+}
+
+/*div para cada columna dentro del div fila-titulos*/
+.titulo-columnas {
+    margin: 0.5rem 1.5rem;
+    width: 10rem;
+}
+
+/*se ajusta la anchura de los títulos de columna individualmente para que se alineen con las lista de pedidos*/
+#cliente {
+    width: 12rem;
+}
+
+#domicilio {
+    width: 14rem;
+}
+
+#comunax {
+    width: 12rem;
+}
+
+#valor {
+    width: 6.5rem;
+}
+
+#pago {
+    width: 9.5rem;
+}
+
+#fecha {
+    width: 7.5rem;
+}
+
+#estado {
+    width: 5.5rem;
+}
+
+/*etiquetas para los nombres de las columnas de la tabla*/
+h4 {
+    font-weight: bold;
+    margin: 0;
+}
+
+/*tabla con el listado de pedidos*/
+.lista-pedidos {
+    margin: 0.5rem 1rem 0.5rem;
+    background-color: rgb(255, 255, 245);
+    border: solid 0.2rem goldenrod;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    width: 95%;
+}
+
+/*filas dentro de la lista para cada pedido que exista en el registro, ordenadas en columnas*/
+.fila-datos {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+}
+
+/*fila individual con datos ordenados horizontalmente*/
+.datos {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: center;
+    width: 100%;
+}
+
+.datos:hover {
+    background-color: lightgrey;
+}
+
+/*divs individuales para cada dato de los pedidos*/
+.datospedido {
+    margin: 0.01rem 1rem;
+    width: 9rem;
+}
+
+/*se agranda el ancho del campo para los datos de los pedidos, ya que si son muy largos podrían solaparse con el siguiente dato*/
+#name {
+    width: 13rem;
+}
+
+#address {
+    width: 15rem;
+}
+
+#cartier {
+    width: 13rem;
+}
+
+#payment {
+    width: 11.5rem;
+}
+
+#amount {
+    width: 7rem;
+}
+
+#date {
+    width: 8rem;
+    height: 3rem;
+    font-size: 0.7rem;
+}
+
+#status {
+    width: 7rem;
+}
+
+/*ícono del estado de un pedido, en colores*/
+#status-icon {
+    color: whitesmoke;
+    text-shadow: 1px 1px 1px black;
+    border-radius: 0.5rem;
+    padding: 0.2rem;
+}
+
+/*boton ver detalles*/
+#view-details {
+    width: 18rem;
+    margin: 0.5rem 0rem;
+    padding: 0rem;
+}
+
+/*botón para ver detall del pedido*/
+button {
+    padding: 1em 1.5em;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.09rem;
+    font-weight: 500;
+    color: #000;
+    background-color: rgb(221, 221, 221);
+    border: solid 0.1rem grey;
+    border-radius: 2rem;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+   }
+   
+button:hover {
+    background-color: olivedrab;
+    box-shadow: 0px 15px 20px rgba(85, 107, 47, 0.5);
+    color: #fff;
+    transform: translateY(-7px);
+   }
+   
+button:active {
+    transform: translateY(-1px);
+   }

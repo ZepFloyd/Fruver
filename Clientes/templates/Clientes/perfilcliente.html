@@ -1,0 +1,75 @@
+{% extends "Home/base.html" %} <!-- hereda formato (header y footer en este caso) de template base.html -->
+{% load static %} <!-- carga la carpeta static para acceder a los archivos que estén dentro de ella -->
+
+{% block title %} Fruver - Perfil de Cliente {% endblock title %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'Clientes/styles/perfilcliente.css' %}"> <!-- referencia a la plantilla .css que corresponda -->
+{% endblock stylesheet %}
+
+{% block content %} <!-- agrega las sgtes. líneas de código dentro del bloque a la plantilla -->
+    <h1>Perfil de Cliente {{usuario.nombre_usuario}} {{usuario.apellido_usuario}}</h1>
+    <h3>En esta sección puede ver y modificar sus datos personales, y visualizar información de sus pedidos.</h3>
+    <container class="container1" >
+        <div class="box1">
+            <div class="box1-1">
+                <a class="submenulink" href="#">Datos de la Cuenta</a>
+            </div>
+            <h4>Nombre: {{ usuario.nombre_usuario }} {{ usuario.apellido_usuario }}</h4>
+            <h4>Dirección: {{ usuario.domicilio_usuario }}</h4>
+            <h4>Comuna: {{ usuario.comuna }}</h4>
+            <h4>Teléfono: {{ usuario.telefono_usuario }}</h4>
+            <h4>E-mail: {{ usuario.email_usuario }}</h4>
+            <h4>Pedidos: {{ cantidad }}</h4>
+        </div>
+        <div class="container2">
+            <div class="box2">
+                <div class="box2-1">
+                    <img class="submenuicon" src="{% static 'Clientes/images/orders.png' %}" alt="Mis Pedidos" width="120" height="120"/>
+                    <a class="submenulink" href="{% url 'fruver-mispedidos' %}">Mis Pedidos</a>
+                </div>
+                <p>Revise la información, el detalle y el estado de los pedidos realizados a la fecha.</p>
+            </div>
+            <div class="box3">
+                <div class="box3-1">
+                    <img class="submenuicon" src="{% static 'Clientes/images/edit.png' %}" alt="Actualizar datos" width="120" height="120"/>
+                    <a class="submenulink" href="{% url 'fruver-actualizardatos' %}">Actualizar Datos</a>
+                </div>
+                <p>Edite sus datos personales: nombre, apellido, teléfono, e-mail, dirección o comuna.</p>
+            </div>
+        </div>
+    </container><br>
+{% endblock content %}
+
+<!-- esta URL muestra 2 tipos de mensajes, info cuando el usuario cierra sesión, y éxito cuando el usuario es redirigido desde el login -->
+<!-- con el for loop se recorren los mensajes que llegan desde la views.acceso, y con el control de flujo if se determina si el mensaje es de info o éxito -->
+{% block messages %}
+    {% for message in messages %}
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+            <script>
+                Swal.fire({
+                        "title": "{{message}}",
+                        "icon": "success",
+                        "confirmButtonColor": "green"
+                })
+            </script>
+        {% elif message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+            <script>
+                Swal.fire({
+                        "title": "{{message}}",
+                        "text": "¡Nos vemos!",
+                        "icon": "info",
+                        "confirmButtonColor": "royalblue"
+                })
+            </script>
+        {% elif message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+            <script>
+                Swal.fire({
+                    "title": "{{message}}",
+                    "text":"Primero debe cerrar la sesión actual",
+                    "icon": "warning",
+                    "confirmButtonColor": "goldenrod"
+                })
+            </script>
+        {% endif %}
+    {% endfor %}
+{% endblock messages %}

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'Productos.apps.ProductosConfig', #Productos app
     'Gastos.apps.GastosConfig', #Gastos app
     'Reportes.apps.ReportesConfig', #Reportes app
+    'Clientes.apps.ClientesConfig', #Clientes app
     'django_cleanup.apps.CleanupConfig', #Librería de Python para borrar archivos sin uso almacenados en MEDIA_ROOT
 ]
 

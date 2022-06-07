@@ -1,0 +1,46 @@
+{% extends "Home/mainmenu.html" %} <!-- hereda formato (header y footer en este caso) de template mainmenu.html -->
+{% load static %} <!-- carga la carpeta static para acceder a los archivos que estén dentro de ella -->
+
+{% block title %} Fruver - Editar Cliente {% endblock title %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'Clientes/styles/editarcliente.css' %}"> <!-- referencia a la plantilla .css que corresponda -->
+{% endblock stylesheet %}
+
+{% block content %} <!-- agrega las sgtes. líneas de código dentro del bloque a la plantilla -->
+    <h1>Editar datos de Cliente</h1>
+    <h2>Actualice los datos del cliente según lo requiera.<br>
+        La contraseña de una cuenta es inmutable, si desea cambiarla, debe crear un nuevo usuario y eliminar el anterior.
+    </h2>
+    <div class="alignment"> <!-- div para centrar el databox en la página -->
+        <div class="databox"> <!-- div que almacena los inputs y el botón de login -->
+            <h3>Ingrese los datos que desea actualizar:</h3><br>
+            <form action="" method="post" > <!-- method="post" enctype="application/x-www-form-urlencoded" -->
+                {% csrf_token %}
+                <label for="firstname">Nombre:</label><br>
+                <!-- campo para el nombre -->
+                {{form.nombre_usuario}}<br>
+                <label for="lastname">Apellido:</label><br>
+                <!-- campo para el apellido -->
+                {{form.apellido_usuario}}<br>
+                <label for="address">Dirección:</label><br>
+                <!-- campo para la dirección del usuario -->
+                {{form.domicilio_usuario}}<br>
+                <label for="email">E-mail:</label><br>
+                <!-- campo para el correo electrónico -->
+                {{form.email_usuario}}<br>
+                <label for="phone">Teléfono:</label><br>
+                <!-- campo para el teléfono del usuario -->
+                {{form.telefono_usuario}}<br>
+                <label for="comuna">Comuna:</label><br>
+                <!-- lista desplegable (combobox) para seleccionar comuna dentro de la provincia de santiago -->
+                {{form.comuna}}<br>
+                <label for="is_active">Estado de cuenta:</label><br>
+                <!-- campo para el estado de la cuenta de usuario -->
+                {{form.is_active}}
+                <button type="submit" id="submit">Guardar Datos</button>
+            </form>
+            <a href="/clientes"><button type="button" id="cancel">Cancelar</button></a>
+        </div>
+    </div><br>
+{% endblock content %}

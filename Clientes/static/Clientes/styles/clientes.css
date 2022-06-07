@@ -1,0 +1,149 @@
+/*titulo y texto de informacion*/
+.info {
+    margin: 0.1rem
+}
+
+/*div para almacenar y centrar el container con los vendedores y los botones*/
+.container1 {
+    display: flex;
+    flex-flow: column wrap;
+    margin: 2rem 2.7rem;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(184, 184, 184);
+    border: solid 0.2rem azure;
+    width: 95%;
+}
+
+/*div para almacenar los titulos de las columnas, ordenados en fila*/
+.fila-titulos {
+    margin: 1rem 1rem 0rem;
+    background-color: whitesmoke;
+    border: solid 0.2rem rgb(61, 61, 61);
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 95%;
+}
+
+/*div para cada columna dentro del div fila-titulos*/
+.titulo-columnas {
+    margin: 0.5rem 1.5rem;
+    width: 10rem;
+}
+
+/*se ajusta la anchura de los títulos de columna individualmente para que se alineen con las lista de vendedores*/
+#nombre {
+    width: 9rem;
+}
+
+#apellido {
+    width: 7rem;
+}
+
+#correo {
+    width: 25rem;
+}
+
+#telefono {
+    width: 6.5rem;
+}
+
+#domicilio {
+    width: 13.5rem;
+}
+
+#comunax {
+    width: 9.5rem;
+}
+
+/*etiquetas para los nombres de las columnas de la tabla*/
+h4 {
+    font-weight: bold;
+    margin: 0;
+}
+
+/*tabla con el listado de vendedores*/
+.lista-vendedores {
+    margin: 0.5rem 1rem 0.5rem;
+    background-color: whitesmoke;
+    border: solid 0.2rem rgb(61, 61, 61);
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    width: 95%;
+}
+
+/*filas dentro de la lista para cada vendedor que exista en el registro, ordenadas en columnas*/
+.fila-datos {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+}
+
+/*fila individual con datos ordenados horizontalmente*/
+.datos {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+.datos:hover {
+    background-color: lightgrey;
+}
+
+/*divs individuales para cada dato de los vendedores*/
+.datosvendedor {
+    margin: 0.01rem 1rem;
+    width: 9rem;
+}
+
+/*se agranda el ancho del campo para el email de los vendedores, ya que si el email es muy largo podría solaparse con el siguiente dato*/
+#emailvendedor {
+    width: 25rem;
+}
+
+#domiciliovendedor {
+    width: 13rem;
+}
+
+#comunavendedor {
+    width: 12rem;
+}
+
+/* From uiverse.io by @aasisodiya */
+button {
+    background-color: rgb(238, 238, 238);
+    margin: 0.3rem;
+    border: none;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 2rem;
+    color: rgb(3, 68, 112);
+    border: solid 0.1rem grey;
+    cursor: pointer;
+   }
+   
+button:active {
+    color: white;
+    transform: translateY(0.2rem);
+   }
+   
+button:hover:not(:disabled) {
+    background: rgb(3, 68, 112);
+    color: white;
+    border: solid 0.1rem white;
+    text-shadow: 0.2rem #b4b7bc;
+   }
+   
+button:disabled {
+    cursor: auto;
+    color: grey;
+   }

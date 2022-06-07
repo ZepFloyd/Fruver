@@ -1,0 +1,106 @@
+{% extends "Home/mainmenu.html" %} <!-- hereda formato (header y footer en este caso) de template mainmenu.html -->
+{% load static %} <!-- carga la carpeta static para acceder a los archivos que estén dentro de ella -->
+
+{% block title %} Fruver - Clientes {% endblock title %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'Clientes/styles/clientes.css' %}"> <!-- referencia a la plantilla .css que corresponda -->
+{% endblock stylesheet %}
+
+{% block content %} <!-- agrega las sgtes. líneas de código dentro del bloque a la plantilla -->
+    <h1 class="info">Registro de Clientes</h1>
+    <h2 class="info">Gestione las cuentas de clientes de Fruver</h2>
+    <div class="container1">
+        <div class="fila-titulos">
+            <div class="titulo-columnas" id="nombre">
+                <h4>Nombre</h4>
+            </div>
+            <div class="titulo-columnas" id="apellido">
+                <h4>Apellido</h4>
+            </div>
+            <div class="titulo-columnas" id="correo">
+                <h4>E-mail</h4>
+            </div>
+            <div class="titulo-columnas" id="telefono">
+                <h4>Telefono</h4>
+            </div>
+            <div class="titulo-columnas" id="domicilio">
+                <h4>Domicilio</h4>
+            </div>
+            <div class="titulo-columnas" id="comunax">
+                <h4>Comuna</h4>
+            </div>
+        </div>
+        <div class="lista-vendedores">
+            <div class="fila-datos">
+                {% for cliente in clientes %}
+                    <div class="datos">
+                        <div class="datosvendedor">
+                            <p> {{ cliente.nombre_usuario }}</p>
+                        </div>
+                        <div class="datosvendedor">
+                            <p> {{ cliente.apellido_usuario }}</p>
+                        </div>
+                        <div class="datosvendedor" id="emailvendedor" >
+                            <p> {{ cliente.email_usuario }}</p>
+                        </div>
+                        <div class="datosvendedor">
+                            <p> {{ cliente.telefono_usuario }}</p>
+                        </div>
+                        <div class="datosvendedor" id="domiciliovendedor">
+                            <p> {{ cliente.domicilio_usuario }}</p>
+                        </div>
+                        <div class="datosvendedor" id="comunavendedor" >
+                            <p> {{ cliente.comuna}}</p>
+                        </div>
+                        <a href="{% url 'fruver-editarcliente' cliente.id %}"><button type="button">Editar datos</button></a>
+                        <a href="#" onclick="eliminarCliente({{ cliente.id }})"><button type="button">Eliminar cliente</button></a>
+                    </div>
+                {% endfor %}
+            </div>      
+        </div>
+        <button type="button" id="crearvendedor">Crear nuevo vendedor</button> <!-- muestra pop up para ingresar datos y crear nuevo vendedor -->
+    </div>
+    <script src="{% static 'Clientes/scripts/clientes.js' %}"></script>
+{% endblock content %}
+
+
+<!-- block para mensajes y alertas pop-up -->
+{% block messages %}
+    {% for message in messages %}
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+            <script>
+                Swal.fire({
+                    "title": "{{message}}",
+                    "icon": "success",
+                    "confirmButtonColor": "green"
+                })
+            </script>
+        {% elif message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+            <script>
+                Swal.fire({
+                    "title": "{{message}}",
+                    "text":"Este cliente posee uno o más pedidos, por lo que no se recomienda su eliminación de la base de datos. Si lo desea, puede colocar su estado en inactivo para inhabilitar el uso de la cuenta.",
+                    "icon": "warning",
+                    "confirmButtonColor": "goldenrod"
+                })
+            </script>
+        {% endif %}
+    {% endfor %}
+    <!-- accedemos al atributo errors de la clase Form (viene con Django). Este atributo es un diccionario,
+    cuyas keys son el nombre del campo dónde ocurrió el error, y los values son c/u una lista de strings que representan los errores,
+    ya que cada campo podría tener más de 1 tipo de error -->
+    {% if form.errors %}
+        {% for error in form.errors.values %}
+            {% for message in error %}
+                <script>
+                    Swal.fire({
+                        "title": "{{message}}",
+                        "icon": "error",
+                        "confirmButtonColor": "firebrick"
+                    })
+                </script>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+{% endblock messages %}

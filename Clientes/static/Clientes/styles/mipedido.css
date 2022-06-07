@@ -1,0 +1,129 @@
+main {
+    background-color: lightgoldenrodyellow;
+    border: solid 0.2rem azure;
+    text-align: center;
+    color: black;
+}
+
+/*título Carrito*/
+h1 {
+    background-color: goldenrod;
+    color: white;
+    margin-top: 0rem;
+    text-shadow: 1px 1px 1px black;
+}
+
+
+/*contenedor para resumen de productos y datos del cliente, ordenados en fila*/
+.contenidos {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0rem;
+}
+
+
+/*Títulos resumen de productos y datos de cliente*/
+#subtitle1 {
+    margin: 0.2rem 10rem;
+}
+
+/*Títulos resumen de productos y datos de cliente*/
+#subtitle2 {
+    margin: 1rem 28rem;
+}
+
+/*resumen con datos del cliente y del pedido, ordenados en columnas*/
+.cliente {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    background-color: rgb(255, 255, 245);
+    border: solid 0.2rem goldenrod;
+    border-radius: 1rem;
+}
+
+.datos {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    font-size: 1.1rem;
+}
+
+
+/*datos del cliente*/
+p {
+    margin: 0.4rem
+}
+
+/*monto total del pedido*/
+#total {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+
+/*resumen con listado de productos, ordenados en filas*/
+.products {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    width: 65%;
+}
+
+/*producto individual, contenido interno ordenado en fila (box1, box, box3)*/
+.producto {
+    background-color: rgb(255, 255, 245);
+    margin: 0.5rem;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 0.4rem;
+    border: solid 0.2rem goldenrod;
+    border-radius: 1rem;
+    font-size: 0.8rem;
+}
+
+
+/*container del botón volver a pedidos*/
+.volver {
+    width: 100%;
+    background-color: lightgoldenrodyellow;
+}
+
+
+/*botón para volver a mis pedidos*/
+button {
+    padding: 1em 1.5em;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.09rem;
+    font-weight: 500;
+    color: #000;
+    background-color: rgb(221, 221, 221);
+    border: solid 0.1rem grey;
+    border-radius: 2rem;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+   }
+   
+button:hover {
+    background-color: olivedrab;
+    box-shadow: 0px 15px 20px rgba(85, 107, 47, 0.5);
+    color: #fff;
+    transform: translateY(-7px);
+   }
+   
+button:active {
+    transform: translateY(-1px);
+   }

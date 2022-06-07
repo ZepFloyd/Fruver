@@ -1,0 +1,95 @@
+main {
+    background-color: lightgoldenrodyellow;
+    border: solid 0.2rem azure;
+    text-align: center;
+    color: black;
+    
+}
+
+/*título Frutas*/
+h1 {
+    background-color: goldenrod;
+    color: white;
+    margin-top: 0rem;
+    text-shadow: 1px 1px 1px black;
+}
+
+/*container con los submenús y botones de cta. bancaria y creación de vendedor*/
+.alignment {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+/*divs para los submenús*/
+.databox {
+    margin: 1rem;
+    width: 30%;
+    height: 40%;
+    background-color: rgb(255, 255, 245);
+    border: solid 0.2rem goldenrod;
+    border-radius: 1rem;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+label {
+    margin: 0rem;
+}
+
+/*formato para el radioselect del estado de cuenta*/
+ul {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+li {
+    list-style-type: none;
+    display: inline-block;
+    padding-right: 10%;
+    width: auto;
+    margin-right: 0.5%;
+    padding-left: 0;
+    margin-left: 0;
+    margin: 1em 0;
+}
+
+/*div para almacenar los botones*/
+.botones {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+/*botones guardar y cancelar*/
+button {
+    margin: 1.5rem;
+    padding: 1em 1.5em;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.09rem;
+    font-weight: 500;
+    color: #000;
+    background-color: rgb(221, 221, 221);
+    border: solid 0.1rem grey;
+    border-radius: 2rem;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+   }
+   
+button:hover {
+    background-color: olivedrab;
+    box-shadow: 0px 15px 20px rgba(85, 107, 47, 0.5);
+    color: #fff;
+    transform: translateY(-7px);
+   }
+   
+button:active {
+    transform: translateY(-1px);
+   }

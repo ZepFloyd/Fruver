@@ -37,6 +37,10 @@
                 </div>
                 {% if user.is_authenticated %}
                     <div class="link4">
+                        <img src="{% static 'Home/images/navbar/profile.png' %}" alt="Mi Perfil" width="65" height="65">
+                        <a class="logout" href="/clientes/perfilcliente">Mi Perfil</a>
+                    </div>
+                    <div class="link4">
                         <img src="{% static 'Home/images/navbar/exit.png' %}" alt="Cerrar sesión" width="65" height="65">
                         <a class="logout" href="/salir">Cerrar Sesión</a>
                     </div>
