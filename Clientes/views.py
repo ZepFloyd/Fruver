@@ -11,7 +11,7 @@ from datetime import datetime, timedelta
 
 
 
-#Gestionar a los clientes, crear nuevo, actualizar, eliminar
+#Gestionar a los clientes, actualizar, eliminar
 @login_required(login_url='fruver-acceso')
 def clientes(request):
     #instanciamos al usuario actual y verificamos que sea staff, si no lo es, se le redirige a la página principal

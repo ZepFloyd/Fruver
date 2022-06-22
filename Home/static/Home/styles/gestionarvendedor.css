@@ -185,7 +185,7 @@ button:disabled {
     color: white;
     border-radius: 0.3rem;
     width: 60%;
-    height: 50%;
+    height: 70%;
     display: flex;
     flex-flow: row wrap;
     justify-content: center;

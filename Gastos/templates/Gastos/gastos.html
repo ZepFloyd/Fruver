@@ -103,7 +103,7 @@
                     <div class="popup-otrogasto" id="{{gasto.id}}">
                         <div class="mainbox">
                             <div class="gastobox">
-                                <h3 class="nuevo-gasto-titulo">Ingrese el detalle del gasto</h3><br><br><br>
+                                <h3 class="nuevo-gasto-titulo">Ingrese el detalle del gasto</h3><br>
                                 <form action="{% url 'fruver-ingresarotrosgastos' gasto.id %}" method="POST">
                                     {% csrf_token %}
                                     <label for="nombre_otrogasto">Nombre del gasto:</label><br>
@@ -131,7 +131,7 @@
     <div class="popup-creargasto">
         <div class="mainbox">
             <div class="gastobox">
-                <h3 class="nuevo-gasto-titulo">Ingrese los gastos de productos</h3><br><br><br>
+                <h3 class="nuevo-gasto-titulo">Ingrese los gastos de productos</h3><br>
                 <form action="" method="POST">
                     {% csrf_token %}
                     <label for="fecha">Fecha de gastos:</label><br>

@@ -20,7 +20,7 @@
                     <p>Gasto en verduras: ${{gasto.monto_verduras}}</p>
                     <p>Gasto en Bolsas: ${{gasto.monto_bolsas}}</p>
                     <p>Subtotal: ${{gasto.total_gastoproductos}}</p>
-                    <p>Cantidad Otros Gastos: {{gasto.otros_gastos}} gastos asociados</p>
+                    <p>Cantidad Otros Gastos: {{gasto.otros_gastos}} gasto(s) asociado(s)</p>
                     <p>Total Otros Gastos: ${{gasto.total_otrosgastos}}</p>
                     <p>Total del Día: ${{gasto.total_dia}}</p>
                 {% endfor %}
@@ -35,10 +35,11 @@
                     </div>
                     <div class="caja2">
                         {{detalle.nombre_otrogasto}}<br>
-                        {{detalle.monto_otrogasto}}<br> 
+                        ${{detalle.monto_otrogasto}}<br> 
                         {{detalle.descripcion_otrogasto}}<br> 
                         <p>Ingresado por: {{detalle.vendedor}}</p>
                         <p>El {{detalle.fecha_otrogasto}}</p>
+                        <a href="#" id="delete" onclick="eliminarOtroGasto({{ detalle.id }})"><button type="button">Eliminar</button></a>
                     </div>
                 </div>
             {% endfor %}
@@ -47,5 +48,7 @@
     <section class="volver">
         <a href="/gastos"><button type="button">Volver a Gastos</button></a>
     </section>
+    <!-- Se añade el script gastos.js para manejar la elimiación de registros de otros gastos -->
+    <script src="{% static 'Gastos/scripts/gastos.js' %}"></script>  
 {% endblock content %}
 

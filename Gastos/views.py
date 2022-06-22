@@ -128,6 +128,31 @@ def detalleotrosgastos(request, id_gastoproductos):
 
 
 
+#Elimina otros gastos asociados a una fecha
+@login_required(login_url='fruver-acceso')
+def eliminarotrogasto(request, id_otrogasto):
+    #instanciamos al usuario actual y verificamos que sea staff, si no lo es, se le redirige a la página principal
+    current_user = request.user
+    if current_user.is_staff != 1:
+        return redirect('fruver-home')
+
+    #Instanciamos el otros gasto que se requiere eliminar
+    otrogasto = OtroGasto.objects.get(pk=id_otrogasto)
+    #Instanciamos el gasto de productos al que el otro gasto se encuentra asociado
+    gasto = GastoProductos.objects.get(pk=otrogasto.main_gasto.id)
+    #Quitamos el otro gasto que se quiere eliminar del registro del gasto principal, restando -1 a la cantidad de otros gastos y
+    #restando el valor del gasto a eliminar del total de otros gastos y del total del día
+    gasto.otros_gastos -= 1
+    gasto.total_otrosgastos -= otrogasto.monto_otrogasto
+    gasto.total_dia -= otrogasto.monto_otrogasto
+    gasto.save()
+    #Por último, eliminamos el registro de otros gastos
+    otrogasto.delete()
+    messages.success(request,'El registro del otro gasto asociado ha sido eliminado')
+    return redirect('fruver-gastos')
+
+
+
 #Filtra gastos por semana, mes o por un rango de fechas
 @login_required(login_url='fruver-acceso')
 def filtrargastos(request):

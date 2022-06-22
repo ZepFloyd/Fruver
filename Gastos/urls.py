@@ -8,5 +8,6 @@ urlpatterns = [
     path('eliminargasto/<id_gasto>', views.eliminargasto, name='fruver-eliminargasto'), #Elimina un registro de gasto de productos
     path('ingresarotrosgastos/<id_gasto>', views.ingresarotrosgastos, name='fruver-ingresarotrosgastos'), #Ingresa otros gastos
     path('detalleotrosgastos/<id_gastoproductos>', views.detalleotrosgastos, name='fruver-detalleotrosgastos'), #Muestra el detalle de otros gastos asociados a una fecha
+    path('eliminarotrogasto/<id_otrogasto>', views.eliminarotrogasto, name='fruver-eliminarotrogasto'), #Elimina un registro de otros gastos
 ]
 
