@@ -14,8 +14,12 @@
     (seleccione una fecha, y luego presione el botón para ejecutar el filtro):</p>
     <div class="container0">
         <div class="estados">
+            <img src="{% static 'Gastos/images/add.png' %}" alt="Añadir nuevo" width="65" height="65"/>
+            <button type="button" id="creargasto">Añadir nuevo gasto</button> <!-- muestra pop up para ingresar datos y crear nueva fila de gasto productos -->
+        </div>
+        <div class="estados">
             <img src="{% static 'Gastos/images/allgastos.png' %}" alt="Ver todos" width="65" height="65"/>
-            <a href="{% url 'fruver-gastos' %}"><button type="button" class="filtros">Todos los Gastos</button></a>
+            <a href="{% url 'fruver-gastos' %}"><button type="button" class="filtros">Ver todos los gastos</button></a>
         </div>
         <div class="estados">
             <img src="{% static 'Gastos/images/semana.png' %}" alt="Ver por semana" width="65" height="65"/>
@@ -42,9 +46,6 @@
                 <button type="submit" class="filtros">Ver rango de fechas</button>
             </form>
         </div>
-    </div>
-    <div class="button-container">
-        <button type="button" id="creargasto">Añadir Registro de Gastos</button> <!-- muestra pop up para ingresar datos y crear nueva fila de gasto productos -->
     </div>
     <div class="container1">
         <div class="fila-titulos">
@@ -142,9 +143,9 @@
                     {{form.monto_verduras}}<br><br>
                     <label for="monto_bolsas">Gasto en bolsas:</label><br>
                     {{form.monto_bolsas}}<br><br><br><br>
-                    <!-- botón para registrar al usuario en el sistema -->
+                    <!-- botón para registrar un nuevo gasto de productos -->
                     <button type="submit" id="submit">Añadir Gastos</button>
-                    <!-- botón para cancelar la creación de usuario vendedor -->
+                    <!-- botón para cancelar la creación del nuevo registro de gastos -->
                     <button type="button" id="cancelar-creargasto">Cancelar</button>
                 </form>
             </div>

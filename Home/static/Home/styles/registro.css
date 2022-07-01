@@ -21,7 +21,7 @@ main {
     background: rgb(218, 214, 165);
     border: solid 0.2rem azure;
     width: 45rem;
-    height: 22rem;
+    height: 28rem;
     display: flex;
     flex-flow: row wrap;
     justify-content: center;

@@ -1,7 +1,6 @@
 from django.db import models
 
 
-
 class GastoProductos(models.Model):
     fecha_gasto = models.DateField(auto_now_add=False)
     monto_frutas = models.IntegerField(default=0)

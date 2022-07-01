@@ -10,7 +10,8 @@ main {
 .container1 {
     display: flex;
     position: relative;
-    left: 9%;
+    align-items: center;
+    justify-content: center;
 }
 
 /*divs para los 4 pasos*/
@@ -19,4 +20,11 @@ main {
     width: 20%;
     height: 20%;
     background-color: rgb(255, 255, 245);
+}
+
+/*imagen con detalles de los servicios de delivery*/
+#details {
+    align-items: center;
+    justify-content: center;
+    margin-right: 6.6rem;
 }

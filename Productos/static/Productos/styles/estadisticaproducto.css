@@ -1,3 +1,4 @@
+
 main {
     background-color: rgb(184, 184, 184);
     border: solid 0.2rem azure;
@@ -46,12 +47,13 @@ h1 {
     background-color: rgb(255, 255, 245);
     border: solid 0.2rem rgb(61, 61, 61);
     border-radius: 1rem;
+    margin-bottom: 2rem;
 }
 
 .datos {
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     width: 75%;
     font-size: 1.1rem;

@@ -15,6 +15,7 @@ from django.http import FileResponse
 from reportlab.pdfgen import canvas
 
 
+
 #Módulo de Reportes
 @login_required(login_url='fruver-acceso')
 def reportes(request):
@@ -22,21 +23,20 @@ def reportes(request):
     current_user = request.user
     if current_user.is_staff != 1:
         return redirect('fruver-home')
-
-    context = {}
-    return render(request, 'Reportes/reportes.html', context)
+    return render(request, 'Reportes/reportes.html')
 
 
 
-#Página para seleccionar la fecha requerida para el reporte
+#Página para seleccionar la fecha requerida para el reporte, y el cliente cuando se requiera
 @login_required(login_url='fruver-acceso')
 def elegirfecha(request, tipo_reporte):
     #instanciamos al usuario actual y verificamos que sea staff, si no lo es, se le redirige a la página principal
     current_user = request.user
     if current_user.is_staff != 1:
         return redirect('fruver-home')
-
+    #Obtenemos un dataset con todos los clientes registrados y los ordenamos por nombre, esto se mostrará en una lista para seleccionar un cliente
     clientes = Usuario.objects.filter(is_staff=0).order_by('nombre_usuario')
+    #Pasamos al return el tipo_reporte, que servirá para mostrar diferentes opciones en el template html dependiendo del tipo de reporte requerido
     context = {'tipo_reporte': tipo_reporte, 'clientes': clientes}
     return render(request, 'Reportes/elegirfecha.html', context)
 
@@ -49,7 +49,6 @@ def reporteventas(request, periodo):
     current_user = request.user
     if current_user.is_staff != 1:
         return redirect('fruver-home')
-
     #filtramos los registros en función del período: semana, mes o rango de fechas
     if periodo=='semana':
         year_week = request.POST.get("week") #recibe un string con el formato '2022-W11' desde el input week del html
@@ -86,15 +85,16 @@ def reporteventas(request, periodo):
         fin = datetime.strptime(end, '%Y-%m-%d')
 
     #Validamos que existan registros para el período consultado
-    #Si no hay registros, enviamos un mensaje para informar al usuario y redirijimos a la selección de fecha
+    #Si no hay registros, enviamos un mensaje para informar al usuario y redirigimos a la selección de fecha
     if not ventas:
         messages.warning(request, 'No existen ventas registradas para el período consultado.')
         return redirect('/reportes/elegirfecha/'+'ventas')
-    #Si hay registros realizamos los cálculos para generar el reporte
+    #Si hay registros, realizamos los cálculos para generar el reporte
     else:    
-        #calculamos el total de ventas
+        #calculamos el total de ventas con 2 variables, una para el monto total, y otra para la cantidad
         total_ventas = 0
         cantidad_ventas = 0
+        #Recorremos el dataset de pedidos con un ciclo for, y vamos sumando los montos y las cantidades en la variable correspondiente
         for venta in ventas:
             total_ventas = total_ventas + venta.monto_pedido
             cantidad_ventas = cantidad_ventas + 1
@@ -108,6 +108,7 @@ def reporteventas(request, periodo):
         total_tarjetas = 0
         cantidad_tarjetas = 0
         porcentaje_tarjetas = 0.0
+        #Recorremos el dataset de pedidos, y los filtramos según el medio de pago registrado 
         for venta in ventas:
             if venta.medio_pago == 'Efectivo':
                 total_efectivo = total_efectivo + venta.monto_pedido
@@ -121,7 +122,7 @@ def reporteventas(request, periodo):
                 total_tarjetas = total_tarjetas + venta.monto_pedido
                 cantidad_tarjetas = cantidad_tarjetas + 1
                 porcentaje_tarjetas = "{:.2f}".format((cantidad_tarjetas*100)/cantidad_ventas)
-
+        #Por último, damos formato a las fechas de inicio y fin según el período seleccionado, para mostrarlas en el template html
         inicio = inicio.strftime("%d-%m-%Y")
         fin = fin.strftime("%d-%m-%Y")
         context = {'inicio': inicio, 'fin': fin, 'ventas': ventas, 'total_ventas': total_ventas, 'cantidad_ventas':cantidad_ventas,
@@ -139,10 +140,10 @@ def reportecliente(request, periodo):
     current_user = request.user
     if current_user.is_staff != 1:
         return redirect('fruver-home')
-
+    #Obtenemos el id del cliente desde el html mediante el POST recibido
     id = int(request.POST.get('customer'))
+    #Luego instanciamos al cliente cuyo id corresponda al de la variable id recién declarada
     customer = Usuario.objects.get(pk=id)
-
     #filtramos los registros en función del período: semana, mes o rango de fechas
     if periodo=='semana':
         year_week = request.POST.get("week") #recibe un string con el formato '2022-W11' desde el input week del html
@@ -179,15 +180,16 @@ def reportecliente(request, periodo):
         fin = datetime.strptime(end, '%Y-%m-%d')
     
     #Validamos que existan registros para el período consultado
-    #Si no hay registros, enviamos un mensaje para informar al usuario y redirijimos a la selección de fecha
+    #Si no hay registros, enviamos un mensaje para informar al usuario y redirigimos a la selección de fecha
     if not ventas:
         messages.warning(request, 'El cliente no registra ventas para el período consultado.')
         return redirect('/reportes/elegirfecha/'+'cliente')
     #Si hay registros realizamos los cálculos para generar el reporte
     else:  
-        #calculamos el total de ventas
+        #calculamos el total de ventas con 2 variables, una para el monto total, y otra para la cantidad
         total_ventas = 0
         cantidad_ventas = 0
+        #Recorremos el dataset de pedidos con un ciclo for, y vamos sumando los montos y las cantidades en la variable correspondiente
         for venta in ventas:
             total_ventas = total_ventas + venta.monto_pedido
             cantidad_ventas = cantidad_ventas + 1
@@ -201,6 +203,7 @@ def reportecliente(request, periodo):
         total_tarjetas = 0
         cantidad_tarjetas = 0
         porcentaje_tarjetas = 0.0
+        #Recorremos el dataset de pedidos, y los filtramos según el medio de pago registrado 
         for venta in ventas:
             if venta.medio_pago == 'Efectivo':
                 total_efectivo = total_efectivo + venta.monto_pedido
@@ -214,7 +217,7 @@ def reportecliente(request, periodo):
                 total_tarjetas = total_tarjetas + venta.monto_pedido
                 cantidad_tarjetas = cantidad_tarjetas + 1
                 porcentaje_tarjetas = "{:.2f}".format((cantidad_tarjetas*100)/cantidad_ventas)
-
+        #Por último, damos formato a las fechas de inicio y fin según el período seleccionado, para mostrarlas en el template html
         inicio = inicio.strftime("%d-%m-%Y")
         fin = fin.strftime("%d-%m-%Y")
         context = {'customer': customer, 'inicio': inicio, 'fin': fin, 'ventas': ventas, 'total_ventas': total_ventas, 'cantidad_ventas':cantidad_ventas,
@@ -232,7 +235,6 @@ def reportegastos(request, periodo):
     current_user = request.user
     if current_user.is_staff != 1:
         return redirect('fruver-home')
-
     #filtramos los registros en función del período: semana, mes o rango de fechas
     if periodo=='semana':
         year_week = request.POST.get("week") #recibe un string con el formato '2022-W11' desde el input week del html
@@ -269,7 +271,7 @@ def reportegastos(request, periodo):
         fin = datetime.strptime(end, '%Y-%m-%d')
 
     #Validamos que existan registros para el período consultado
-    #Si no hay registros, enviamos un mensaje para informar al usuario y redirijimos a la selección de fecha
+    #Si no hay registros, enviamos un mensaje para informar al usuario y redirigimos a la selección de fecha
     if not gastos:
         messages.warning(request, 'No existen gastos registrados para el período consultado.')
         return redirect('/reportes/elegirfecha/'+'gastos')
@@ -282,6 +284,7 @@ def reportegastos(request, periodo):
         total_gastoproductos = 0
         total_otrosgastos = 0
         total_gastos = 0
+        #Mediante un ciclo for, recorremos el dataset de gastos, y vamos sumando cada uno de los datos necesarios para el reporte
         for gasto in gastos:
             total_frutas = total_frutas + gasto.monto_frutas
             total_verduras = total_verduras + gasto.monto_verduras
@@ -289,7 +292,7 @@ def reportegastos(request, periodo):
             total_gastoproductos = total_gastoproductos + gasto.total_gastoproductos
             total_otrosgastos = total_otrosgastos + gasto.total_otrosgastos
             total_gastos = total_gastos + gasto.total_dia
-
+        #Por último, damos formato a las fechas de inicio y fin según el período seleccionado, para mostrarlas en el template html
         inicio = inicio.strftime("%d-%m-%Y")
         fin = fin.strftime("%d-%m-%Y")
         context = {'inicio': inicio, 'fin': fin, 'gastos': gastos,
@@ -299,7 +302,7 @@ def reportegastos(request, periodo):
 
 
 
-#Genera documento reporteventas.pdf
+#Genera documento de reporte en formato .pdf
 @login_required(login_url='fruver-acceso')
 def pdfreporte(request, tipo_reporte):
     #instanciamos al usuario actual y verificamos que sea staff, si no lo es, se le redirige a la página principal
@@ -314,7 +317,7 @@ def pdfreporte(request, tipo_reporte):
     reporte = canvas.Canvas(buffer)
 
     if tipo_reporte == 'ventas' or tipo_reporte == 'cliente':
-        #obtenemos los datos para el reporte a través del POST recibido desde reporteventas.html 
+        #obtenemos los datos para el reporte a través del POST recibido desde el template html 
         titulo = request.POST.get('title')
         if tipo_reporte == 'cliente':
             cliente = request.POST.get('customer')
@@ -335,7 +338,7 @@ def pdfreporte(request, tipo_reporte):
         periodo_total = request.POST.get('period-total')
         # Draw things on the PDF. Here's where the PDF generation happens.
         # See the ReportLab documentation for the full list of functionality.
-        #Una hoja A4 está constituida por 595.2 puntos de ancho (width) y 841.8 puntos de alto (height)
+        # Una hoja A4 está constituida por 595.2 puntos de ancho (width) y 841.8 puntos de alto (height)
         if tipo_reporte == 'ventas':
             reporte.drawString(238.08, 820, titulo)
         elif tipo_reporte == 'cliente':
@@ -365,7 +368,7 @@ def pdfreporte(request, tipo_reporte):
         reporte.drawString(20, 400, periodo_transacciones)
         reporte.drawString(20, 380, periodo_total)
     elif tipo_reporte == 'gastos':
-        #obtenemos los datos para el reporte a través del POST recibido desde reporteventas.html 
+        #obtenemos los datos para el reporte a través del POST recibido desde el template html 
         titulo = request.POST.get('title')
         subtitulo = request.POST.get('subtitle')
         frutas = request.POST.get('fruits')
@@ -376,7 +379,7 @@ def pdfreporte(request, tipo_reporte):
         periodo_total = request.POST.get('period-total')
         # Draw things on the PDF. Here's where the PDF generation happens.
         # See the ReportLab documentation for the full list of functionality.
-        #Una hoja A4 está constituida por 595.2 puntos de ancho (width) y 841.8 puntos de alto (height)
+        # Una hoja A4 está constituida por 595.2 puntos de ancho (width) y 841.8 puntos de alto (height)
         reporte.drawString(238.08, 820, titulo)
         reporte.drawString(148.8, 800, subtitulo)
         reporte.drawString(20, 780, '------------------------------------------------------------------------------------------------------------------------------------------')

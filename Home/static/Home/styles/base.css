@@ -65,6 +65,18 @@ header a:hover {
     align-items: center;
 }
 
+/*datos de la empresa en el footer*/
+.datosempresa {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+footer a {
+    margin: 0rem 5rem;
+}
+
 
 footer {
     background-color: rgb(61, 112, 3);
