@@ -15,7 +15,7 @@
     <div class="alignment"> <!-- div para centrar el databox en la página -->
         <div class="databox"> <!-- div que almacena los inputs y el botón de login -->
             <h3>Rellene los campos a continuación:</h3><br>
-            <form action="" method="post" > <!-- method="post" enctype="application/x-www-form-urlencoded" -->
+            <form action="" method="POST" > <!-- method="post" enctype="application/x-www-form-urlencoded" -->
                 {% csrf_token %}
                 <label for="name">Ingrese su nombre y apellido</label><br>
                 <!-- campo para el nombre -->
@@ -30,7 +30,7 @@
                 {{form.numero_cuenta}}<br><br>
                 <label for="email">Ingrese su correo electrónico</label><br>
                 {{form.email}}<br><br>
-                <!-- <p>Última modificación hecha por:<br>{{cuenta.vendedor.nombre_usuario}} {{cuenta.vendedor.apellido_usuario}} el {{fecha}} a las {{hora}} hrs.</p> -->
+                <p>Última modificación hecha por:<br>{{cuenta.vendedor.nombre_usuario}} {{cuenta.vendedor.apellido_usuario}}</p><!-- el {{fecha}} a las {{hora}} hrs. -->
                 <button type="submit" id="submit">Guardar Datos</button>
             </form>
             <a href="/mainmenu"><button type="button">Volver al menú principal</button></a>

@@ -218,7 +218,7 @@ button:disabled {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7);
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     display: flex;
@@ -226,6 +226,11 @@ button:disabled {
     align-items: center;
     display: none;
 }
+
+/*Desabilita la opción de agrandar o achicar los textarea inputs*/
+textarea {
+    resize: none;
+ }
 
 /*contenedor para el signupbox, así se lo puede alinear al centro de la página*/
 .mainbox {

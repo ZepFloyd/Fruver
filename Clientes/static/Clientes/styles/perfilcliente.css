@@ -13,6 +13,10 @@ h1 {
     text-shadow: 1px 1px 1px black;
 }
 
+/*Datos de la cuenta bancaria*/
+span {
+    font-size: 1.4rem;
+}
 
 /*container con los submenús y botones de cta. bancaria y creación de vendedor*/
 .container1 {
@@ -36,7 +40,7 @@ h1 {
 .box1 {
     margin: 1rem;
     width: 30%;
-    height: 30%;
+    height: 40%;
     background-color: rgb(255, 255, 245);
     border: solid 0.2rem goldenrod;
     border-radius: 1rem;
