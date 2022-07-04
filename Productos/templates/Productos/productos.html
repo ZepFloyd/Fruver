@@ -34,3 +34,25 @@
         </div>
     </container><br>
 {% endblock content %}
+
+{% block messages %}
+        {% for message in messages %}
+            {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                <script>
+                    Swal.fire({
+                        "title": "{{message}}",
+                        "icon": "success",
+                        "confirmButtonColor": "green"
+                    })
+                </script>
+            {% elif message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+                <script>
+                    Swal.fire({
+                        "title": "{{message}}",
+                        "icon": "warning",
+                        "confirmButtonColor": "goldenrod"
+                    })
+                </script>
+            {% endif %}
+        {% endfor %}
+{% endblock messages %}

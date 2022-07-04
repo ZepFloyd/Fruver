@@ -130,6 +130,10 @@ def estadisticaproducto(request):
     verduras = {}
     #Obtenemos un dataset con todos los productos incluidos en los pedidos registrados. Con esto sabremos qué productos se han vendido
     queryset = DetallePedido.objects.all().order_by('producto')
+    #Si no hay registros de ventas, informamos al usuario
+    if not queryset.exists():
+        messages.warning(request, 'No existen registros de ventas disponibles para generar estadísticas')
+        return redirect('fruver-productos')
     #Luego recorremos el dataset con un ciclo for para separar frutas y verduras
     for registro in queryset:
         #Si el tipo de producto es una fruta
