@@ -158,7 +158,7 @@ def hacerpedido(request):
     #Instanciamos el carrito y verificamos que contenga items, si no hay, se redirige al usuario a la página del carrito
     #Así evitamos que un usuario intente hacer un pedido con el carrito vacío, ingresando mediante la URL de hacerpedido
     cart = request.session.get('carrito')
-    if len(cart) == 0:
+    if cart is None:
         return redirect('fruver-carrito')
     #Instanciamos al usuario actual para crear el pedido, y también para acceder a sus atributos desde el template, lo pasamos al return dentro del diccionario 'context'
     current_user = request.user

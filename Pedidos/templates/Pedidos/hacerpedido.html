@@ -49,7 +49,10 @@
                     <p>Fecha Pedido: {{ fecha_pedido }} hrs.</p>
                 </div>
                 <div class="datospedidoright">
-                    <p>Fecha estimada de entrega:<br>{{ fecha_estimada }}</p>
+                    <p>Entrega estimada: {{ fecha_estimada }}</p>
+                    <p>IVA incluido: ${{ iva }}</p>
+                    <p>Subtotal: ${{ subtotal }}</p>                    
+                    <p>Costo de envío: ${{ costo_envio }}</p>
                     <h3>Total a Pagar: ${{total_pedido}}</h3>
                 </div>
             </div>
@@ -85,7 +88,7 @@
                     </div>
                 {% endfor %}
             </div>
-            {% if total_pedido > 0 %}
+            {% if subtotal > 0 %}
                 <button class="botonpedido" type="submit" form="payment"><span>Confirmar el Pedido</span></button>
             {% endif %}
         </section>
