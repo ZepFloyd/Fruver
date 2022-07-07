@@ -75,15 +75,15 @@ h1 {
 }
 
 #pago {
-    width: 9.5rem;
+    width: 9rem;
 }
 
 #fecha {
-    width: 7.5rem;
+    width: 7rem;
 }
 
 #estado {
-    width: 5.5rem;
+    width: 6rem;
 }
 
 /*etiquetas para los nombres de las columnas de la tabla*/
@@ -147,7 +147,7 @@ h4 {
 }
 
 #payment {
-    width: 11.5rem;
+    width: 10.5rem;
 }
 
 #amount {

@@ -51,6 +51,11 @@ li {
     margin: 1em 0;
 }
 
+/*Desabilita la opción de agrandar o achicar los textarea inputs*/
+textarea {
+    resize: none;
+ }
+
 
 /*botón editar datos*/
 button {

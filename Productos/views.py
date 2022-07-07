@@ -160,14 +160,17 @@ def estadisticaproducto(request):
                 cantidad = verduras[registro.producto.nombre_producto][0]
                 monto = verduras[registro.producto.nombre_producto][1]
                 verduras[registro.producto.nombre_producto] = [cantidad + registro.cantidad_producto, monto + registro.subtotal]
-    #Luego, declaramos 2 listas, una para datos y otra para etiquetas de los productos, las que utilizaremos para generar los gráficos con Chart.js
+    #Luego, declaramos 3 listas, una para cantidades, una para montos y otra para etiquetas de los productos, las que utilizaremos para generar los gráficos con Chart.js
     #Primero, las frutas
     frutadata = []
+    frutaventas = []
     frutalabels = []
-    #Con un ciclo for, recorremos el diccionario y añadimos el nombre del producto a la lista de etiquetas, la cantidad vendida a la lista de datos
+    #Con un ciclo for, recorremos el diccionario y añadimos el nombre del producto a la lista de etiquetas, la cantidad vendida a la lista de datos y los montos a frutaventas
+    #También convertimos los montos de miles (pesos) a unidades, para poder mostrarlos correctamente en conjunto con las cantidades dentro del mismo gráfico
     for name, quantity in frutas.items():
         frutalabels.append(name)
         frutadata.append(quantity[0])
+        frutaventas.append(round(quantity[1]*0.001, 2))
     #Con el método max() de Python, buscamos el valor más grande en la lista de datos. La mayor cantidad equivale al producto más vendido
     frutamax = max(frutadata)
     #Conociendo la fruta más vendida, recorremos el diccionario con un ciclo for para obtener su nombre y el monto vendido
@@ -179,13 +182,16 @@ def estadisticaproducto(request):
                 quantite = elemento
                 somme = frutas[nom][1]
     #Luego, realizamos las mismas operaciones para las verduras
-    #Declaramos una lista para los datos, y otra para las etiquetas
+    #Declaramos una lista para los datos, una para los montos y otra para las etiquetas
     verduradata = []
+    verduraventas = []
     verduralabels = []
-    #Con un ciclo for, recorremos el diccionario y añadimos el nombre del producto a la lista de etiquetas, la cantidad vendida a la lista de datos
+    #Con un ciclo for, recorremos el diccionario y añadimos el nombre del producto a la lista de etiquetas, la cantidad vendida a la lista de datos y los montos a verduraventas
+    #También convertimos los montos de miles (pesos) a unidades, para poder mostrarlos correctamente en conjunto con las cantidades dentro del mismo gráfico
     for name, quantity in verduras.items():
         verduralabels.append(name)
         verduradata.append(quantity[0])
+        verduraventas.append(round(quantity[1]*0.001, 2))
     #Con el método max() de Python, buscamos el valor más grande en la lista de datos. La mayor cantidad equivale al producto más vendido
     verdumax = max(verduradata)
     #Conociendo la verdura más vendida, recorremos el diccionario con un ciclo for para obtener su nombre y el monto vendido
@@ -197,6 +203,7 @@ def estadisticaproducto(request):
                 ryou = elemento
                 goukei = verduras[namae][1]
     #Por último, mediante el diccionario context, pasamos al return todas las variables y objetos necesarios para mostrar los datos y gráficos en la plantilla html
-    context = {'mes': mes, 'frutadata': frutadata, 'frutalabels': frutalabels, 'verduradata': verduradata, 'verduralabels': verduralabels, 
+    context = {'mes': mes, 'frutadata': frutadata, 'frutaventas': frutaventas, 'frutalabels': frutalabels,
+    'verduradata': verduradata, 'verduraventas': verduraventas, 'verduralabels': verduralabels, 
     'nom':nom, 'quantite':quantite, 'somme': somme, 'namae':namae, 'ryou':ryou, 'goukei':goukei}    
     return render(request, 'Productos/estadisticaproducto.html', context)
